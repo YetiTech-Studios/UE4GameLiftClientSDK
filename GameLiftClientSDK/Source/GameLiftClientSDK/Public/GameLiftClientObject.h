@@ -11,7 +11,7 @@
 #include "GameLiftClientObject.generated.h"
 
 
-UCLASS()
+UCLASS(BlueprintType)
 class GAMELIFTCLIENTSDK_API UGameLiftClientObject : public UObject
 {
 	GENERATED_BODY()
