@@ -14,6 +14,10 @@ This repository includes source files for the plugin as well as pre-built binari
 ### Sounds cool, I'm In! What should I do?
 If you are using Blueprint-Only project then open your project and add a dummy C++ class from File->New C++ class. This is required to generate project files.
 - Download or clone this repository into your **Project/Plugin** folder.
+- Add "GameLiftSDK" as a public dependency in your **ProjectName.Build.cs** file
+```csharp
+PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "GameLiftSDK" });
+```
 - Right click on your project file and select **Generate Visual Studio project files**.
 - Open your projects solution file (*.sln) and build your project.
 - Now if you start your project and go to **Edit->Plugins** you should see the GameLift Client SDK under **Installed->YetiTech Studios** category.
@@ -32,6 +36,7 @@ You can use this plugin either in Blueprints or C++. In any method, you must fir
 > **4.17 Users:** If you are getting an error message like in the below picture, make sure you select No. This is a bug in 4.17 and was resolved in 4.18.
 
 [![Imgur](https://i.imgur.com/u3ALYqV.png)](https://yetitechstudios.imgur.com/all/)
+
 More information here: https://issues.unrealengine.com/issue/UE-49007
 
 Header file.
