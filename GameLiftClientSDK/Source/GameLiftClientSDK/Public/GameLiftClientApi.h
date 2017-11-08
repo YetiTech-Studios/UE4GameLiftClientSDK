@@ -49,7 +49,9 @@ private:
 	Aws::GameLift::GameLiftClient* GameLiftClient;
 	FGameLiftGameSessionConfig SessionConfig;
 
-	static UGameLiftCreateGameSession* CreateGameSession(FGameLiftGameSessionConfig GameSessionProperties);
+	bool bIsUsingGameLiftLocal;
+
+	static UGameLiftCreateGameSession* CreateGameSession(FGameLiftGameSessionConfig GameSessionProperties, bool bIsGameLiftLocal);
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "GameLift CreateGameSession")

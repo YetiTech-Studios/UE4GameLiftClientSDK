@@ -14,6 +14,8 @@ void UGameLiftClientObject::Internal_InitGameLiftClientSDK(const FString& Access
 	ClientConfig.connectTimeoutMs = 10000;
 	ClientConfig.requestTimeoutMs = 10000;
 	ClientConfig.region = TCHAR_TO_UTF8(*Region);
+	
+	bIsUsingGameLiftLocal = bUsingGameLiftLocal;
 
 	// GameLiftLocal
 	if (bUsingGameLiftLocal)
@@ -42,7 +44,7 @@ UGameLiftClientObject* UGameLiftClientObject::CreateGameLiftObject(const FString
 UGameLiftCreateGameSession* UGameLiftClientObject::CreateGameSession(FGameLiftGameSessionConfig GameSessionProperties)
 {
 #if WITH_GAMELIFTCLIENTSDK
-	UGameLiftCreateGameSession* Proxy = UGameLiftCreateGameSession::CreateGameSession(GameSessionProperties);
+	UGameLiftCreateGameSession* Proxy = UGameLiftCreateGameSession::CreateGameSession(GameSessionProperties, bIsUsingGameLiftLocal);
 	Proxy->GameLiftClient = GameLiftClient;
 	return Proxy;
 #endif

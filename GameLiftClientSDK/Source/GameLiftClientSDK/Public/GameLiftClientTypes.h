@@ -73,6 +73,7 @@ public:
 
 	FORCEINLINE int32 GetMaxPlayers() const { return MaxPlayers; }
 	FORCEINLINE FString GetAliasID() const { return AliasID; }
+	FORCEINLINE FString GetGameLiftLocalFleetID() const { return "fleet-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"; }
 	FORCEINLINE TArray<FGameLiftGameSessionServerProperties> GetGameSessionProperties() const { return GameSessionProperties; }
 
 	FGameLiftGameSessionConfig()

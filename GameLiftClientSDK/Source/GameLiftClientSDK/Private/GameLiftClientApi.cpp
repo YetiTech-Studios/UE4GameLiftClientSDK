@@ -15,11 +15,12 @@
 #include <aws/core/http/HttpRequest.h>
 #endif
 
-UGameLiftCreateGameSession* UGameLiftCreateGameSession::CreateGameSession(FGameLiftGameSessionConfig GameSessionProperties)
+UGameLiftCreateGameSession* UGameLiftCreateGameSession::CreateGameSession(FGameLiftGameSessionConfig GameSessionProperties, bool bIsGameLiftLocal)
 {
 #if WITH_GAMELIFTCLIENTSDK
 	UGameLiftCreateGameSession* Proxy = NewObject<UGameLiftCreateGameSession>();
 	Proxy->SessionConfig = GameSessionProperties;
+	Proxy->bIsUsingGameLiftLocal = bIsGameLiftLocal;
 	return Proxy;
 #endif
 	return nullptr;
@@ -47,7 +48,15 @@ EActivateStatus UGameLiftCreateGameSession::Activate()
 		Aws::GameLift::Model::CreateGameSessionRequest GameSessionRequest;
 
 		GameSessionRequest.SetMaximumPlayerSessionCount(SessionConfig.GetMaxPlayers());
-		GameSessionRequest.SetAliasId(TCHAR_TO_UTF8(*SessionConfig.GetAliasID()));
+		
+		if (bIsUsingGameLiftLocal)
+		{
+			GameSessionRequest.SetFleetId(TCHAR_TO_UTF8(*SessionConfig.GetGameLiftLocalFleetID()));
+		}
+		else
+		{
+			GameSessionRequest.SetAliasId(TCHAR_TO_UTF8(*SessionConfig.GetAliasID()));
+		}
 
 		LOG_NORMAL("Setting Alias ID: " + SessionConfig.GetAliasID());
 		for (FGameLiftGameSessionServerProperties ServerSetting : SessionConfig.GetGameSessionProperties())

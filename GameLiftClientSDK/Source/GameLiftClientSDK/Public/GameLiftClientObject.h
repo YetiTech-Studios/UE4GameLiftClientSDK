@@ -20,6 +20,7 @@ private:
 
 #if WITH_GAMELIFTCLIENTSDK	
 	Aws::GameLift::GameLiftClient* GameLiftClient;
+	bool bIsUsingGameLiftLocal;
 #endif
 
 	void Internal_InitGameLiftClientSDK(const FString& AccessKey, const FString& Secret, const FString& Region, bool bUsingGameLiftLocal, int32 LocalPort);
