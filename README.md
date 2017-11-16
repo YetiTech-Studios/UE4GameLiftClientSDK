@@ -14,9 +14,9 @@ This repository includes source files for the plugin as well as pre-built binari
 ### Sounds cool, I'm In! What should I do?
 If you are using Blueprint-Only project then open your project and add a dummy C++ class from File->New C++ class. This is required to generate project files.
 - Download or clone this repository into your **Project/Plugin** folder.
-- Add "GameLiftSDK" as a public dependency in your **ProjectName.Build.cs** file
+- Add "GameLiftClientSDK" as a public dependency in your **ProjectName.Build.cs** file
 ```csharp
-PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "GameLiftSDK" });
+PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "GameLiftClientSDK" });
 ```
 - Right click on your project file and select **Generate Visual Studio project files**.
 - Open your projects solution file (*.sln) and build your project.
