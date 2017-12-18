@@ -10,9 +10,11 @@ public class CognitoIdentity : ModuleRules
 
 		PublicDependencyModuleNames.AddRange(new string[] { "Engine", "Core", "CoreUObject", "Engine", "InputCore" });
 
-		string ThirdPartyPath = System.IO.Path.Combine(ModuleDirectory, "../../ThirdParty");
+		string BaseDirectory = System.IO.Path.GetFullPath(System.IO.Path.Combine(ModuleDirectory, "..", ".."));
+        string ThirdPartyPath = System.IO.Path.Combine(BaseDirectory, "ThirdParty", "GameLiftClientSDK", Target.Platform.ToString());
+        bool bIsThirdPartyPathValid = System.IO.Directory.Exists(ThirdPartyPath);
 
-		if (System.IO.Directory.Exists(ThirdPartyPath))
+		if (bIsThirdPartyPathValid)
 		{
 			PublicLibraryPaths.Add(ThirdPartyPath);
 

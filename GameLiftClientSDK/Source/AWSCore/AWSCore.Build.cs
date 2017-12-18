@@ -11,9 +11,11 @@ public class AWSCore : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[] { "Engine", "Core", "CoreUObject", "Engine", "InputCore"});
 		PrivateDependencyModuleNames.AddRange(new string[] { });
 
-		string ThirdPartyPath = System.IO.Path.Combine(ModuleDirectory, "../../ThirdParty");
+		string BaseDirectory = System.IO.Path.GetFullPath(System.IO.Path.Combine(ModuleDirectory, "..", ".."));
+        string ThirdPartyPath = System.IO.Path.Combine(BaseDirectory, "ThirdParty", "GameLiftClientSDK", Target.Platform.ToString());
+        bool bIsThirdPartyPathValid = System.IO.Directory.Exists(ThirdPartyPath);
 
-		if (System.IO.Directory.Exists(ThirdPartyPath))
+		if (bIsThirdPartyPathValid)
 		{
 			PublicLibraryPaths.Add(ThirdPartyPath);
 			string AWSCoreLibFile = System.IO.Path.Combine(ThirdPartyPath, "aws-cpp-sdk-core.lib");
@@ -36,16 +38,15 @@ public class AWSCore : ModuleRules
 				throw new BuildException("aws-cpp-sdk-core.dll not found. Expected in this location: " + AWSCoreDLLFile);
 			}
 
-			string BinariesFolder = System.IO.Path.Combine(ModuleDirectory, "../../Binaries/Win64");
-
-			if (!Directory.Exists(BinariesFolder))
+			string BinariesDirectory = System.IO.Path.Combine(BaseDirectory, "Binaries", Target.Platform.ToString());
+			if (!Directory.Exists(BinariesDirectory))
 			{
-				Directory.CreateDirectory(BinariesFolder);
+				Directory.CreateDirectory(BinariesDirectory);
 			}
 
-			if (File.Exists(System.IO.Path.Combine(BinariesFolder, "aws-cpp-sdk-core.dll")) == false)
+			if (File.Exists(System.IO.Path.Combine(BinariesDirectory, "aws-cpp-sdk-core.dll")) == false)
 			{
-				File.Copy(System.IO.Path.Combine(ThirdPartyPath, "aws-cpp-sdk-core.dll"), System.IO.Path.Combine(BinariesFolder, "aws-cpp-sdk-core.dll"));
+				File.Copy(System.IO.Path.Combine(ThirdPartyPath, "aws-cpp-sdk-core.dll"), System.IO.Path.Combine(BinariesDirectory, "aws-cpp-sdk-core.dll"));
 			}
 		}
 	}

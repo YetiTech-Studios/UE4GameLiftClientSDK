@@ -15,14 +15,14 @@ void* FGameLiftClientSDKModule::CognitoIdentiryLibraryHandle = nullptr;
 void FGameLiftClientSDKModule::StartupModule()
 {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
-#if PLATFORM_WINDOWS
+#if PLATFORM_WINDOWS && PLATFORM_64BITS && WITH_GAMELIFTCLIENTSDK
 	LOG_NORMAL("Starting GameLiftClient Module...");
 	// Get the base directory of this plugin
 	const FString BaseDir = IPluginManager::Get().FindPlugin("GameLiftClientSDK")->GetBaseDir();
 	LOG_NORMAL(FString::Printf(TEXT("Base directory is %s"), *BaseDir));
 
 	// Add on the relative location of the third party dll and load it
-	const FString ThirdPartyDir = FPaths::Combine(*BaseDir, TEXT("ThirdParty"));
+	const FString ThirdPartyDir = FPaths::Combine(*BaseDir, TEXT("ThirdParty"), TEXT("GameLiftClientSDK"), TEXT("Win64"));
 	LOG_NORMAL(FString::Printf(TEXT("ThirdParty directory is %s"), *ThirdPartyDir));
 
 	TryLoadDependency(ThirdPartyDir, TEXT("aws-cpp-sdk-core"), AWSCoreLibraryHandle);
@@ -63,11 +63,11 @@ bool FGameLiftClientSDKModule::LoadDependency(const FString& Dir, const FString&
 
 	if (Handle == nullptr)
 	{		
-		LOG_ERROR(FString::Printf(TEXT("Dependency %s failed to load in directory %s"), *Name, *Dir));
+		LOG_ERROR(FString::Printf(TEXT("Dependency %s failed to load in directory %s"), *Lib, *Dir));
 		return false;
 	}
 
-	LOG_NORMAL(FString::Printf(TEXT("Dependency %s successfully loaded from directory %s"), *Name, *Dir));
+	LOG_NORMAL(FString::Printf(TEXT("Dependency %s successfully loaded from directory %s"), *Lib, *Dir));
 	return true;
 }
 

@@ -12,10 +12,11 @@ public class GameLiftClientSDK : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[] { "Engine", "Core", "CoreUObject", "Engine", "InputCore", "Projects", "AWSCore" });
 		
 		PublicIncludePaths.AddRange(new string[] {"GameLiftClientSDK/Public"});
-		PrivateIncludePaths.AddRange(new string[] {"GameLiftClientSDK/Private"});			
-		
-		string ThirdPartyPath = System.IO.Path.Combine(ModuleDirectory, "../../ThirdParty");
-		bool bIsThirdPartyPathValid = System.IO.Directory.Exists(ThirdPartyPath);
+		PrivateIncludePaths.AddRange(new string[] {"GameLiftClientSDK/Private"});
+
+        string BaseDirectory = System.IO.Path.GetFullPath(System.IO.Path.Combine(ModuleDirectory, "..", ".."));
+        string ThirdPartyPath = System.IO.Path.Combine(BaseDirectory, "ThirdParty", "GameLiftClientSDK", Target.Platform.ToString());
+        bool bIsThirdPartyPathValid = System.IO.Directory.Exists(ThirdPartyPath);
 		
 		if (bIsThirdPartyPathValid)
 		{
@@ -42,14 +43,14 @@ public class GameLiftClientSDK : ModuleRules
 				throw new BuildException("aws-cpp-sdk-gamelift.dll not found. Expected in this location: " + GameLiftDLLFile);
 			}
 
-			string BinariesFolder = System.IO.Path.Combine(ModuleDirectory, "../../Binaries/Win64");
-			if(!Directory.Exists(BinariesFolder))
+            string BinariesDirectory = System.IO.Path.Combine(BaseDirectory, "Binaries", Target.Platform.ToString());
+            if (!Directory.Exists(BinariesDirectory))
 			{
-				Directory.CreateDirectory(BinariesFolder);
+				Directory.CreateDirectory(BinariesDirectory);
 			}
-			if (File.Exists(System.IO.Path.Combine(BinariesFolder, "aws-cpp-sdk-gamelift.dll")) == false)
+			if (File.Exists(System.IO.Path.Combine(BinariesDirectory, "aws-cpp-sdk-gamelift.dll")) == false)
 			{
-				File.Copy(System.IO.Path.Combine(ThirdPartyPath, "aws-cpp-sdk-gamelift.dll"), System.IO.Path.Combine(BinariesFolder, "aws-cpp-sdk-gamelift.dll"));
+				File.Copy(System.IO.Path.Combine(ThirdPartyPath, "aws-cpp-sdk-gamelift.dll"), System.IO.Path.Combine(BinariesDirectory, "aws-cpp-sdk-gamelift.dll"));
 			}
 		}
 		else
