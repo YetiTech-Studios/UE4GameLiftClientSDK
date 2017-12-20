@@ -8,9 +8,7 @@
 
 #define LOCTEXT_NAMESPACE "FGameLiftClientSDKModule"
 
-void* FGameLiftClientSDKModule::AWSCoreLibraryHandle = nullptr;
 void* FGameLiftClientSDKModule::GameLiftClientSDKLibraryHandle = nullptr;
-void* FGameLiftClientSDKModule::CognitoIdentiryLibraryHandle = nullptr;
 
 void FGameLiftClientSDKModule::StartupModule()
 {
@@ -25,33 +23,24 @@ void FGameLiftClientSDKModule::StartupModule()
 	const FString ThirdPartyDir = FPaths::Combine(*BaseDir, TEXT("ThirdParty"), TEXT("GameLiftClientSDK"), TEXT("Win64"));
 	LOG_NORMAL(FString::Printf(TEXT("ThirdParty directory is %s"), *ThirdPartyDir));
 
-	TryLoadDependency(ThirdPartyDir, TEXT("aws-cpp-sdk-core"), AWSCoreLibraryHandle);
-	TryLoadDependency(ThirdPartyDir, TEXT("aws-cpp-sdk-gamelift"), GameLiftClientSDKLibraryHandle);
-	TryLoadDependency(ThirdPartyDir, TEXT("aws-cpp-sdk-cognito-identity"), CognitoIdentiryLibraryHandle);
+	static const FString GameLiftDLLName = "aws-cpp-sdk-gamelift";
+	const bool bDependencyLoaded = LoadDependency(ThirdPartyDir, GameLiftDLLName, GameLiftClientSDKLibraryHandle);
+	if (!bDependencyLoaded)
+	{
+		FFormatNamedArguments Arguments;
+		Arguments.Add(TEXT("Name"), FText::FromString(GameLiftDLLName));
+		FMessageDialog::Open(EAppMsgType::Ok, FText::Format(LOCTEXT("LoadDependencyError", "Failed to load {Name}."), Arguments));
+		FreeDependency(GameLiftClientSDKLibraryHandle);
+	}
 #endif
 }
 
 void FGameLiftClientSDKModule::ShutdownModule()
 {
 	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
-	// we call this function before unloading the module.
-
-	FreeDependency(AWSCoreLibraryHandle);
-	FreeDependency(GameLiftClientSDKLibraryHandle);
-	FreeDependency(CognitoIdentiryLibraryHandle);
-}
-
-bool FGameLiftClientSDKModule::TryLoadDependency(FString ThirdPartyDir, FString Name, void* Handle)
-{
-	const bool bDependencyLoaded = LoadDependency(ThirdPartyDir, Name, Handle);
-	if (!bDependencyLoaded)
-	{
-		FFormatNamedArguments Arguments;
-		Arguments.Add(TEXT("Name"), FText::FromString(Name));
-		FMessageDialog::Open(EAppMsgType::Ok, FText::Format(LOCTEXT("LoadDependencyError", "Failed to load {Name}."), Arguments));
-		FreeDependency(Handle);
-	}
-	return bDependencyLoaded;
+	// we call this function before unloading the module.	
+	FreeDependency(GameLiftClientSDKLibraryHandle);	
+	LOG_NORMAL("Shutting down GameLift Module...");
 }
 
 bool FGameLiftClientSDKModule::LoadDependency(const FString& Dir, const FString& Name, void*& Handle)

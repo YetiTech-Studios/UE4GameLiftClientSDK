@@ -15,9 +15,6 @@ public:
 private:
 	
 	static void* GameLiftClientSDKLibraryHandle;
-	static void* AWSCoreLibraryHandle;
-	static void* CognitoIdentiryLibraryHandle;
-	static bool TryLoadDependency(FString ThirdPartyDir, FString Name, void* Handle);
 	static bool LoadDependency(const FString& Dir, const FString& Name, void*& Handle);
 	static void FreeDependency(void*& Handle);
 };

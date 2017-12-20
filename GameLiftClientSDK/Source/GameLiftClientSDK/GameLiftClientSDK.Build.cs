@@ -9,7 +9,7 @@ public class GameLiftClientSDK : ModuleRules
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Engine", "Core", "CoreUObject", "Engine", "InputCore", "Projects", "AWSCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Engine", "Core", "CoreUObject", "InputCore", "Projects", "AWSCore" });
 		
 		PublicIncludePaths.AddRange(new string[] {"GameLiftClientSDK/Public"});
 		PrivateIncludePaths.AddRange(new string[] {"GameLiftClientSDK/Private"});
@@ -36,7 +36,8 @@ public class GameLiftClientSDK : ModuleRules
 			string GameLiftDLLFile = System.IO.Path.Combine(ThirdPartyPath, "aws-cpp-sdk-gamelift.dll");
 			if(File.Exists(GameLiftDLLFile))
 			{
-				RuntimeDependencies.Add(new RuntimeDependency(GameLiftDLLFile));
+                PublicDelayLoadDLLs.Add("aws-cpp-sdk-gamelift.dll");
+                RuntimeDependencies.Add(new RuntimeDependency(GameLiftDLLFile));
 			}
 			else
 			{

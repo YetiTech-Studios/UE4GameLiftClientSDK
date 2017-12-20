@@ -7,7 +7,7 @@
 #include "aws/core/client/ClientConfiguration.h"
 #include "aws/core/utils/Outcome.h"
 
-class AWSCoreModuleImpl : public IModuleInterface
+class FAWSCoreModule : public IModuleInterface
 {
 public:
 	void StartupModule();
@@ -15,4 +15,7 @@ public:
 
 private:
 	Aws::SDKOptions options;
+	static void* AWSCoreLibraryHandle;
+	static bool LoadDependency(const FString& Dir, const FString& Name, void*& Handle);
+	static void FreeDependency(void*& Handle);
 };

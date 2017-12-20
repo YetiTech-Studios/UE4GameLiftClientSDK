@@ -8,7 +8,7 @@ public class CognitoIdentity : ModuleRules
 		PrivateIncludePaths.AddRange(new string[] { "CognitoIdentity/Private" });
 		PublicIncludePaths.AddRange(new string[] { "CognitoIdentity/Public" });
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Engine", "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Engine", "Core", "CoreUObject", "InputCore", "Projects" });
 
 		string BaseDirectory = System.IO.Path.GetFullPath(System.IO.Path.Combine(ModuleDirectory, "..", ".."));
         string ThirdPartyPath = System.IO.Path.Combine(BaseDirectory, "ThirdParty", "GameLiftClientSDK", Target.Platform.ToString());
@@ -31,7 +31,8 @@ public class CognitoIdentity : ModuleRules
 			string CognitoDLLFile = System.IO.Path.Combine(ThirdPartyPath, "aws-cpp-sdk-cognito-identity.dll");
 			if (File.Exists(CognitoDLLFile))
 			{
-				RuntimeDependencies.Add(new RuntimeDependency(CognitoDLLFile));
+                PublicDelayLoadDLLs.Add("aws-cpp-sdk-cognito-identity.dll");
+                RuntimeDependencies.Add(new RuntimeDependency(CognitoDLLFile));
 			}
 			else
 			{

@@ -8,7 +8,7 @@ public class AWSCore : ModuleRules
 		PrivateIncludePaths.AddRange(new string[] { "AWSCore/Private" });
 		PublicIncludePaths.AddRange(new string[] { "AWSCore/Public" });
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Engine", "Core", "CoreUObject", "Engine", "InputCore"});
+		PublicDependencyModuleNames.AddRange(new string[] { "Engine", "Core", "CoreUObject", "InputCore", "Projects"});
 		PrivateDependencyModuleNames.AddRange(new string[] { });
 
 		string BaseDirectory = System.IO.Path.GetFullPath(System.IO.Path.Combine(ModuleDirectory, "..", ".."));
@@ -31,7 +31,8 @@ public class AWSCore : ModuleRules
 			string AWSCoreDLLFile = System.IO.Path.Combine(ThirdPartyPath, "aws-cpp-sdk-core.dll");
 			if (File.Exists(AWSCoreDLLFile))
 			{
-				RuntimeDependencies.Add(new RuntimeDependency(AWSCoreDLLFile));
+                PublicDelayLoadDLLs.Add("aws-cpp-sdk-core.dll");
+                RuntimeDependencies.Add(new RuntimeDependency(AWSCoreDLLFile));
 			}
 			else
 			{
