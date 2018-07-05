@@ -22,6 +22,30 @@ PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engi
 - Open your projects solution file (*.sln) and build your project.
 - Now if you start your project and go to **Edit->Plugins** you should see the GameLift Client SDK under **Installed->YetiTech Studios** category.
 
+#### Dealing with building error `C4577`
+
+If your build output throws some `C4577` errors when building your project after implementing the plugin, there is one thing you can do to work around it. Open the file [GameLiftClientSDK.Build.cs](https://github.com/YetiTech-Studios/UE4GameLiftClientSDK/blob/master/GameLiftClientSDK/Source/GameLiftClientSDK/GameLiftClientSDK.Build.cs#L9) located at `YourProject/Plugins/GameLiftClientSDK/Source/GameLiftClientSDK/` and after line 9, add the following code fragment:
+
+```cs
+bEnableExceptions = true;
+```
+
+The final code would look like this:
+
+```cs
+public class GameLiftClientSDK : ModuleRules
+{
+	public GameLiftClientSDK(ReadOnlyTargetRules Target) : base(Target)
+	{
+        	bEnableExceptions = true;
+
+		// ...
+	}
+}
+```
+
+Then, save the file and build your game again and probably you'll be fine.
+
 ### How to use GameLift Client Plugin
 You can use this plugin either in Blueprints or C++. In any method, you must first create the GameLift client before accessing it. This is done inside the **GameLiftObject**. After initializing the **GameLiftObject** you can access GameLift Client functions. **GameLiftObject** can be created from any Blueprint. For the sake of this tutorial we will do all this inside our custom [GameInstance](https://docs.unrealengine.com/latest/INT/API/Runtime/Engine/Engine/UGameInstance/index.html) class.
 #### Blueprints
