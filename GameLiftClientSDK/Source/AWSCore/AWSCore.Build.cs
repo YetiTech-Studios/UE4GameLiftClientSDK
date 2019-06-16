@@ -35,7 +35,7 @@ public class AWSCore : ModuleRules
 			if (File.Exists(AWSCoreDLLFile))
 			{
                 PublicDelayLoadDLLs.Add("aws-cpp-sdk-core.dll");
-                RuntimeDependencies.Add(new RuntimeDependency(AWSCoreDLLFile));
+                RuntimeDependencies.Add(AWSCoreDLLFile);
 			}
 			else
 			{
