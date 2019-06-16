@@ -35,7 +35,7 @@ public class CognitoIdentity : ModuleRules
 			if (File.Exists(CognitoDLLFile))
 			{
                 PublicDelayLoadDLLs.Add("aws-cpp-sdk-cognito-identity.dll");
-                RuntimeDependencies.Add(new RuntimeDependency(CognitoDLLFile));
+                RuntimeDependencies.Add(CognitoDLLFile);
 			}
 			else
 			{
