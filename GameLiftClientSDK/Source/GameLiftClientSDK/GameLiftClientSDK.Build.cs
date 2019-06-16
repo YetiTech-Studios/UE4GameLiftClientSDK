@@ -11,8 +11,8 @@ public class GameLiftClientSDK : ModuleRules
 
 		PublicDependencyModuleNames.AddRange(new string[] { "Engine", "Core", "CoreUObject", "InputCore", "Projects", "AWSCore" });
 		
-		PublicIncludePaths.AddRange(new string[] {"GameLiftClientSDK/Public"});
-		PrivateIncludePaths.AddRange(new string[] {"GameLiftClientSDK/Private"});
+		PrivateIncludePaths.Add(Path.Combine(ModuleDirectory, "Private"));
+        	PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Public"));
 
         string BaseDirectory = System.IO.Path.GetFullPath(System.IO.Path.Combine(ModuleDirectory, "..", ".."));
         string ThirdPartyPath = System.IO.Path.Combine(BaseDirectory, "ThirdParty", "GameLiftClientSDK", Target.Platform.ToString());
