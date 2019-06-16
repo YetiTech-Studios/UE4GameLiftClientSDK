@@ -20,7 +20,7 @@ public class GameLiftClientSDK : ModuleRules
 		
 		if (bIsThirdPartyPathValid)
 		{
-			Definitions.Add("WITH_GAMELIFTCLIENTSDK=1");
+			PublicDefinitions.Add("WITH_GAMELIFTCLIENTSDK=1");
 			PublicLibraryPaths.Add(ThirdPartyPath);
 
 			string GameLiftLibFile = System.IO.Path.Combine(ThirdPartyPath, "aws-cpp-sdk-gamelift.lib");			
@@ -56,7 +56,7 @@ public class GameLiftClientSDK : ModuleRules
 		}
 		else
 		{
-			Definitions.Add("WITH_GAMELIFTCLIENTSDK=0");
+			PublicDefinitions.Add("WITH_GAMELIFTCLIENTSDK=0");
 		}
 	}
 }
