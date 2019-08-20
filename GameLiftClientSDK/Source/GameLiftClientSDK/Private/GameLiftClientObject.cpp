@@ -70,3 +70,43 @@ UGameLiftCreatePlayerSession* UGameLiftClientObject::CreatePlayerSession(FString
 #endif
 	return nullptr;
 }
+
+UGameLiftDescribeGameSessionQueues* UGameLiftClientObject::DescribeGameSessionQueues(FString QueueName)
+{
+#if WITH_GAMELIFTCLIENTSDK
+	UGameLiftDescribeGameSessionQueues* Proxy = UGameLiftDescribeGameSessionQueues::DescribeGameSessionQueues(QueueName);
+	Proxy->GameLiftClient = GameLiftClient;
+	return Proxy;
+#endif
+	return nullptr;
+}
+
+UGameLiftSearchGameSessions* UGameLiftClientObject::SearchGameSessions(FString FleetId, FString AliasId, FString FilterExpression, FString SortExpression)
+{
+#if WITH_GAMELIFTCLIENTSDK
+	UGameLiftSearchGameSessions* Proxy = UGameLiftSearchGameSessions::SearchGameSessions(FleetId, AliasId, FilterExpression, SortExpression);
+	Proxy->GameLiftClient = GameLiftClient;
+	return Proxy;
+#endif
+	return nullptr;
+}
+
+UGameLiftStartGameSessionPlacement* UGameLiftClientObject::StartGameSessionPlacement(FString QueueName, int MaxPlayerCount, FString PlacementId)
+{
+#if WITH_GAMELIFTCLIENTSDK
+	UGameLiftStartGameSessionPlacement* Proxy = UGameLiftStartGameSessionPlacement::StartGameSessionPlacement(QueueName, MaxPlayerCount, PlacementId);
+	Proxy->GameLiftClient = GameLiftClient;
+	return Proxy;
+#endif
+	return nullptr;
+}
+
+UGameLiftDescribeGameSessionPlacement* UGameLiftClientObject::DescribeGameSessionPlacement(FString GameSessionPlacementId)
+{
+#if WITH_GAMELIFTCLIENTSDK
+	UGameLiftDescribeGameSessionPlacement* Proxy = UGameLiftDescribeGameSessionPlacement::DescribeGameSessionPlacement(GameSessionPlacementId);
+	Proxy->GameLiftClient = GameLiftClient;
+	return Proxy;
+#endif
+	return nullptr;
+}

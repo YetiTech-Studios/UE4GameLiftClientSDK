@@ -11,6 +11,32 @@ Epic Games announced [Amazon GameLift support for Unreal Engine 4](https://www.u
 
 This repository includes source files for the plugin as well as pre-built binaries of Core, GameLift and Cognito Identity from [AWS SDK for C++](https://github.com/aws/aws-sdk-cpp). To know the version of AWS, please check the VersionName in GameLiftClientSDK.uplugin.
 
+#### How to update the AWS binaries
+Since the AWSK SDK constantly changes, it may be beneficial to generate the binaries yourself and replace the ones currently in the plugin. To do this, go to the repository for the [AWS SDK for C++](https://github.com/aws/aws-sdk-cpp) and clone it. Then, run these commands in the AWS SDK directory and make sure the file path of your cloned repository isn't too long!
+```
+cmake -DBUILD_ONLY="core;gamelift;cognito-identity" -DCMAKE_BUILD_TYPE="release"
+msbuild INSTALL.vcxproj /p:Configuration=Release
+```
+Ignore the errors if you get any. Now go to the "bin" folder, then the "Release" folder, and copy the files, *aws-cpp-sdk-cognito-identity.dll*, *aws-cpp-sdk-core.dll*, and *aws-cpp-sdk-gamelift.dll* to a separate folder. After that, go back to the main directory, and go to the "aws-cpp-sdk-cognito-identity" folder, then the "Release" folder and copy the file, "*aws-cpp-sdk-cognito-identity.lib* to the folder with the dll files. Repeat this last step for the "aws-cpp-sdk-core" and aws-cpp-sdk-gamelift" folders. 
+
+Once those dll and lib files have been gathered, go to the cloned version of this repository, the GameLift Client SDK, and navigate to the GameLiftClientSDK -> ThirdParty -> GameLiftClientSDK -> Win64 folder and replace the dll and lib files with the ones you just made. Then edit the "GameLiftClientSDK.uplugin" file in the first/top GameLiftClientSDK folder and replace the "VersionName" with the version of AWS that you are using.
+```
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.7.157", <---- CHANGE THIS
+  "FriendlyName": "GameLift Client SDK",
+  "Description": "GameLift plugin for creating Game Sessions, Player Sessions etc.",
+  ...
+}
+```
+For Linux, navigate to the GameLiftClientSDK -> ThirdParty -> GameLiftClientSDK -> Linux folder and replace the same dll and lib files with the ones you just made. To replace the .so files, go back to the cloned AWS SDK repository, and delete these files: *CMakeCache.txt*, *.deps/CMakeCache.txt*, and the *.deps/build/src* folder. Go back to the top level of the directory and run these commands,
+```
+cmake -DBUILD_ONLY="core;gamelift;cognito-identity" -DCMAKE_BUILD_TYPE="release"
+sudo make install
+```
+Ignore the errors if you get any. Now, you will find a *libaws-cpp-sdk-cognito-identity.so* file in the "aws-cpp-sdk-cognito-identity" folder. Copy this .so file as well as the corresponding .so files from the "aws-cpp-sdk-core" and "aws-cpp-sdk-gamelift" folders. Go back to the Client SDK cloned repository and replace the .so files in the GameLiftClientSDK -> ThirdParty -> GameLiftClientSDK -> Linux folder with the ones you just generated.
+
 ### Sounds cool, I'm In! What should I do?
 If you are using Blueprint-Only project then open your project and add a dummy C++ class from File->New C++ class. This is required to generate project files.
 - Download or clone this repository into your **Project/Plugin** folder.
