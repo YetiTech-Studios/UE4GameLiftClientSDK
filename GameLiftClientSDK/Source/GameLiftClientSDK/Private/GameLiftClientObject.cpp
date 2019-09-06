@@ -1,6 +1,8 @@
 // Created by YetiTech Studios.
 
 #include "GameLiftClientObject.h"
+#include "GameLiftClientApi.h"
+#include "GameLiftClientGlobals.h"
 #include "aws/core/client/ClientConfiguration.h"
 
 
