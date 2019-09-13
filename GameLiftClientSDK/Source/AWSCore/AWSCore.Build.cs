@@ -22,28 +22,6 @@ public class AWSCore : ModuleRules
         {
             PublicLibraryPaths.Add(ThirdPartyPath);
 
-            // aws core
-            string AWSCoreLibFile = System.IO.Path.Combine(ThirdPartyPath, "aws-cpp-sdk-core.lib");
-            if (File.Exists(AWSCoreLibFile))
-            {
-                PublicAdditionalLibraries.Add(AWSCoreLibFile);
-            }
-            else
-            {
-                throw new BuildException("aws-cpp-sdk-core.lib not found. Expected in this location: " + AWSCoreLibFile);
-            }
-
-            string AWSCoreDLLFile = System.IO.Path.Combine(ThirdPartyPath, "aws-cpp-sdk-core.dll");
-            if (File.Exists(AWSCoreDLLFile))
-            {
-                PublicDelayLoadDLLs.Add("aws-cpp-sdk-core.dll");
-                RuntimeDependencies.Add(AWSCoreDLLFile);
-            }
-            else
-            {
-                throw new BuildException("aws-cpp-sdk-core.dll not found. Expected in this location: " + AWSCoreDLLFile);
-            }
-
             // dependencies
             string CommonLibFile = System.IO.Path.Combine(ThirdPartyPath, "aws-c-common.lib");
             if (File.Exists(CommonLibFile))
@@ -108,6 +86,28 @@ public class AWSCore : ModuleRules
                 throw new BuildException("aws-checksums.dll not found. Expected in this location: " + ChecksumsDLLFile);
             }
 
+            // aws core
+            string AWSCoreLibFile = System.IO.Path.Combine(ThirdPartyPath, "aws-cpp-sdk-core.lib");
+            if (File.Exists(AWSCoreLibFile))
+            {
+                PublicAdditionalLibraries.Add(AWSCoreLibFile);
+            }
+            else
+            {
+                throw new BuildException("aws-cpp-sdk-core.lib not found. Expected in this location: " + AWSCoreLibFile);
+            }
+
+            string AWSCoreDLLFile = System.IO.Path.Combine(ThirdPartyPath, "aws-cpp-sdk-core.dll");
+            if (File.Exists(AWSCoreDLLFile))
+            {
+                PublicDelayLoadDLLs.Add("aws-cpp-sdk-core.dll");
+                RuntimeDependencies.Add(AWSCoreDLLFile);
+            }
+            else
+            {
+                throw new BuildException("aws-cpp-sdk-core.dll not found. Expected in this location: " + AWSCoreDLLFile);
+            }
+
             // binaries
             string BinariesDirectory = System.IO.Path.Combine(BaseDirectory, "Binaries", Target.Platform.ToString());
             if (!Directory.Exists(BinariesDirectory))
@@ -115,10 +115,6 @@ public class AWSCore : ModuleRules
                 Directory.CreateDirectory(BinariesDirectory);
             }
 
-            if (File.Exists(System.IO.Path.Combine(BinariesDirectory, "aws-cpp-sdk-core.dll")) == false)
-            {
-                File.Copy(System.IO.Path.Combine(ThirdPartyPath, "aws-cpp-sdk-core.dll"), System.IO.Path.Combine(BinariesDirectory, "aws-cpp-sdk-core.dll"));
-            }
             if (File.Exists(System.IO.Path.Combine(BinariesDirectory, "aws-c-common.dll")) == false)
             {
                 File.Copy(System.IO.Path.Combine(ThirdPartyPath, "aws-c-common.dll"), System.IO.Path.Combine(BinariesDirectory, "aws-c-common.dll"));
@@ -130,6 +126,10 @@ public class AWSCore : ModuleRules
             if (File.Exists(System.IO.Path.Combine(BinariesDirectory, "aws-checksums.dll")) == false)
             {
                 File.Copy(System.IO.Path.Combine(ThirdPartyPath, "aws-checksums.dll"), System.IO.Path.Combine(BinariesDirectory, "aws-checksums.dll"));
+            }
+            if (File.Exists(System.IO.Path.Combine(BinariesDirectory, "aws-cpp-sdk-core.dll")) == false)
+            {
+                File.Copy(System.IO.Path.Combine(ThirdPartyPath, "aws-cpp-sdk-core.dll"), System.IO.Path.Combine(BinariesDirectory, "aws-cpp-sdk-core.dll"));
             }
         }
     }
