@@ -61,7 +61,7 @@ void FAWSCoreModule::StartupModule()
 	// aws core
 	static const FString CoreDLLName = "aws-cpp-sdk-core";
 	const bool bCoreDependencyLoaded = LoadDependency(ThirdPartyDir, CoreDLLName, AWSCoreLibraryHandle);
-
+	
 	if (bCoreDependencyLoaded == false)
 	{
 		FFormatNamedArguments Arguments;
@@ -70,7 +70,7 @@ void FAWSCoreModule::StartupModule()
 		FreeDependency(AWSCoreLibraryHandle);
 		return;
 	}
-
+	
 	Aws::InitAPI(options);
 	LOG_NORMAL("Aws::InitAPI called.");
 #endif
