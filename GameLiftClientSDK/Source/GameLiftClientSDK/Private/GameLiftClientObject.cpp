@@ -53,10 +53,10 @@ UGameLiftCreateGameSession* UGameLiftClientObject::CreateGameSession(FGameLiftGa
 	return nullptr;
 }
 
-UGameLiftDescribeGameSession* UGameLiftClientObject::DescribeGameSession(FString GameSessionID)
+UGameLiftDescribeGameSessionDetails* UGameLiftClientObject::DescribeGameSessionDetails(FString GameSessionID)
 {
 #if WITH_GAMELIFTCLIENTSDK
-	UGameLiftDescribeGameSession* Proxy = UGameLiftDescribeGameSession::DescribeGameSession(GameSessionID);
+	UGameLiftDescribeGameSessionDetails* Proxy = UGameLiftDescribeGameSessionDetails::DescribeGameSessionDetails(GameSessionID);
 	Proxy->GameLiftClient = GameLiftClient;
 	return Proxy;
 #endif

@@ -4,41 +4,6 @@
 
 #include "GameLiftClientTypes.generated.h"
 
-UENUM(BlueprintType)
-enum class EGameLiftGameSessionStatus : uint8
-{
-	STATUS_Activating		UMETA(DisplayName = "Activating"),
-	STATUS_Active			UMETA(DisplayName = "Active"),
-	STATUS_Error			UMETA(DisplayName = "Error"),
-	STATUS_NotSet			UMETA(DisplayName = "Not Set"),
-	STATUS_Terminating		UMETA(DisplayName = "Terminating"),
-	STATUS_Terminated		UMETA(DisplayName = "Terminated"),
-	STATUS_NoStatus			UMETA(Hidden)
-};
-
-UENUM(BlueprintType)
-enum class EGameLiftGameSessionPlacementStatus : uint8
-{
-	STATUS_Pending			UMETA(DisplayName = "Oending"),
-	STATUS_Fulfilled		UMETA(DisplayName = "Fulfilled"),
-	STATUS_TimedOut			UMETA(DisplayName = "Timed Out"),
-	STATUS_NotSet			UMETA(DisplayName = "Not Set"),
-	STATUS_Cancelled		UMETA(DisplayName = "Cancelled"),
-	STATUS_Failed			UMETA(DisplayName = "Failed"),
-	STATUS_NoStatus			UMETA(Hidden)
-};
-
-UENUM(BlueprintType)
-enum class EGameLiftPlayerSessionStatus : uint8
-{
-	STATUS_Reserved			UMETA(DisplayName = "Reserved"),
-	STATUS_Active			UMETA(DisplayName = "Active"),
-	STATUS_Completed		UMETA(DisplayName = "Completed"),
-	STATUS_NotSet			UMETA(DisplayName = "Not Set"),
-	STATUS_TimedOut			UMETA(DisplayName = "Timed Out"),
-	STATUS_NoStatus			UMETA(Hidden)
-};
-
 USTRUCT(Blueprintable, BlueprintType)
 struct FGameLiftGameSessionServerProperties
 {

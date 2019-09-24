@@ -53,14 +53,14 @@ public:
 	UGameLiftCreateGameSession* CreateGameSession(FGameLiftGameSessionConfig GameSessionProperties);
 
 	/**
-	* public UGameLiftClientObject::DescribeGameSession
+	* public UGameLiftClientObject::DescribeGameSessionDetails
 	* Retrieves the given game session.
 	* From the return value first bind both success and fail events and then call Activate to describe game session.
 	* @param GameSessionID [FString] Game Session ID. This can be obtained after a successful create game session.
-	* @return [UGameLiftDescribeGameSession*] Returns UGameLiftDescribeGameSession* Object.
+	* @return [UGameLiftDescribeGameSessionDetails*] Returns UGameLiftDescribeGameSessionDetails* Object.
 	**/
 	UFUNCTION(BlueprintCallable, Category = "GameLift Client Object")	
-	UGameLiftDescribeGameSession* DescribeGameSession(FString GameSessionID);
+	UGameLiftDescribeGameSessionDetails* DescribeGameSessionDetails(FString GameSessionID);
 
 	/**
 	* public UGameLiftClientObject::CreatePlayerSession
