@@ -93,7 +93,7 @@ private:
 	EGameLiftGameSessionStatus GetSessionState(const Aws::GameLift::Model::GameSessionStatus& Status);
 };
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FOnCreatePlayerSessionSuccess, const FString&, IPAddress, const FString&, Port, const FString&, PlayerSessionID, const int&, PlayerSessionStatus);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FOnCreatePlayerSessionSuccess, const FString&, IPAddress, const FString&, Port, const FString&, PlayerSessionID, const EGameLiftPlayerSessionStatus&, PlayerSessionStatus);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCreatePlayerSessionFailed, const FString&, ErrorMessage);
 UCLASS()
 class GAMELIFTCLIENTSDK_API UGameLiftCreatePlayerSession : public UObject
@@ -123,6 +123,7 @@ public:
 
 private:
 	void OnCreatePlayerSession(const Aws::GameLift::GameLiftClient* Client, const Aws::GameLift::Model::CreatePlayerSessionRequest& Request, const Aws::GameLift::Model::CreatePlayerSessionOutcome& Outcome, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& Context);
+	EGameLiftPlayerSessionStatus GetSessionState(const Aws::GameLift::Model::PlayerSessionStatus& Status);
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDescribeGameSessionQueuesSuccess, const TArray<FString>&, FleetARNs);
@@ -154,7 +155,6 @@ public:
 
 private:
 	void OnDescribeGameSessionQueues(const Aws::GameLift::GameLiftClient* Client, const Aws::GameLift::Model::DescribeGameSessionQueuesRequest& Request, const Aws::GameLift::Model::DescribeGameSessionQueuesOutcome& Outcome, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& Context);
-	
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSearchGameSessionsSuccess, const TArray<FString>&, GameSessionIds);
@@ -189,10 +189,9 @@ public:
 
 private:
 	void OnSearchGameSessions(const Aws::GameLift::GameLiftClient* Client, const Aws::GameLift::Model::SearchGameSessionsRequest& Request, const Aws::GameLift::Model::SearchGameSessionsOutcome& Outcome, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& Context);
-
 };
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnStartGameSessionPlacementSuccess, const FString&, GameSessionId, const FString&, PlacementId, const int&, Status);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnStartGameSessionPlacementSuccess, const FString&, GameSessionId, const FString&, PlacementId, const EGameLiftGameSessionPlacementStatus&, Status);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnStartGameSessionPlacementFailed, const FString&, ErrorMessage);
 UCLASS()
 class GAMELIFTCLIENTSDK_API UGameLiftStartGameSessionPlacement : public UObject
@@ -223,10 +222,10 @@ public:
 
 private:
 	void OnStartGameSessionPlacement(const Aws::GameLift::GameLiftClient* Client, const Aws::GameLift::Model::StartGameSessionPlacementRequest& Request, const Aws::GameLift::Model::StartGameSessionPlacementOutcome& Outcome, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& Context);
-
+	EGameLiftGameSessionPlacementStatus GetSessionState(const Aws::GameLift::Model::GameSessionPlacementState& Status);
 };
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnDescribeGameSessionPlacementSuccess, const FString&, GameSessionId, const FString&, PlacementId, const int&, Status);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnDescribeGameSessionPlacementSuccess, const FString&, GameSessionId, const FString&, PlacementId, const EGameLiftGameSessionPlacementStatus&, Status);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDescribeGameSessionPlacementFailed, const FString&, ErrorMessage);
 UCLASS()
 class GAMELIFTCLIENTSDK_API UGameLiftDescribeGameSessionPlacement : public UObject
@@ -255,5 +254,5 @@ public:
 
 private:
 	void OnDescribeGameSessionPlacement(const Aws::GameLift::GameLiftClient* Client, const Aws::GameLift::Model::DescribeGameSessionPlacementRequest& Request, const Aws::GameLift::Model::DescribeGameSessionPlacementOutcome& Outcome, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& Context);
-
+	EGameLiftGameSessionPlacementStatus GetSessionState(const Aws::GameLift::Model::GameSessionPlacementState& Status);
 };

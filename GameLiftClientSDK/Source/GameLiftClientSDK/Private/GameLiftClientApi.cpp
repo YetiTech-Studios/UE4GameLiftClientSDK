@@ -254,20 +254,8 @@ void UGameLiftCreatePlayerSession::OnCreatePlayerSession(const Aws::GameLift::Ga
 		const FString ServerPort = FString::FromInt(Outcome.GetResult().GetPlayerSession().GetPort());
 		const FString MyPlayerSessionID = FString(Outcome.GetResult().GetPlayerSession().GetPlayerSessionId().c_str());
 		Aws::GameLift::Model::PlayerSessionStatus Status = Outcome.GetResult().GetPlayerSession().GetStatus();
-		int PlayerSessionStatus = 0;
-		if (Status == Aws::GameLift::Model::PlayerSessionStatus::ACTIVE) {
-			PlayerSessionStatus = 2;
-		}
-		else if (Status == Aws::GameLift::Model::PlayerSessionStatus::RESERVED) {
-			PlayerSessionStatus = 1;
-		}
-		else if (Status == Aws::GameLift::Model::PlayerSessionStatus::COMPLETED) {
-			PlayerSessionStatus = -1;
-		}
-		else if(Status == Aws::GameLift::Model::PlayerSessionStatus::TIMEDOUT) {
-			PlayerSessionStatus = 0;
-		}
-		const int MyPlayerSessionStatus = PlayerSessionStatus;
+		const EGameLiftPlayerSessionStatus MyPlayerSessionStatus = GetSessionState(Status);
+
 		OnCreatePlayerSessionSuccess.Broadcast(ServerIpAddress, ServerPort, MyPlayerSessionID, MyPlayerSessionStatus);
 	}
 	else
@@ -277,6 +265,28 @@ void UGameLiftCreatePlayerSession::OnCreatePlayerSession(const Aws::GameLift::Ga
 		OnCreatePlayerSessionFailed.Broadcast(MyErrorMessage);
 	}
 #endif
+}
+
+EGameLiftPlayerSessionStatus UGameLiftCreatePlayerSession::GetSessionState(const Aws::GameLift::Model::PlayerSessionStatus& Status) {
+#if WITH_GAMELIFTCLIENTSDK
+	switch (Status)
+	{
+	case Aws::GameLift::Model::PlayerSessionStatus::NOT_SET:
+		return EGameLiftPlayerSessionStatus::STATUS_NotSet;
+	case Aws::GameLift::Model::PlayerSessionStatus::RESERVED:
+		return EGameLiftPlayerSessionStatus::STATUS_Reserved;
+	case Aws::GameLift::Model::PlayerSessionStatus::ACTIVE:
+		return EGameLiftPlayerSessionStatus::STATUS_Active;
+	case Aws::GameLift::Model::PlayerSessionStatus::COMPLETED:
+		return EGameLiftPlayerSessionStatus::STATUS_Completed;
+	case Aws::GameLift::Model::PlayerSessionStatus::TIMEDOUT:
+		return EGameLiftPlayerSessionStatus::STATUS_TimedOut;
+	default:
+		break;
+	}
+	checkNoEntry(); // This code block should never reach!
+#endif
+	return EGameLiftPlayerSessionStatus::STATUS_NoStatus; // Just a dummy return
 }
 
 UGameLiftDescribeGameSessionQueues* UGameLiftDescribeGameSessionQueues::DescribeGameSessionQueues(FString QueueName)
@@ -502,19 +512,9 @@ void UGameLiftStartGameSessionPlacement::OnStartGameSessionPlacement(const Aws::
 		const FString GameSessionId = Outcome.GetResult().GetGameSessionPlacement().GetGameSessionId().c_str();
 		const FString GameSessionPlacementId = Outcome.GetResult().GetGameSessionPlacement().GetPlacementId().c_str();
 		Aws::GameLift::Model::GameSessionPlacementState Status = Outcome.GetResult().GetGameSessionPlacement().GetStatus();
-		int GameSessionPlacementStatus = 0;
-		if (Status == Aws::GameLift::Model::GameSessionPlacementState::FULFILLED) {
-			GameSessionPlacementStatus = 1;
-		}
-		else if (Status == Aws::GameLift::Model::GameSessionPlacementState::PENDING) {
-			GameSessionPlacementStatus = 0;
-		}
-		else {
-			GameSessionPlacementStatus = -1;
-		}
+		const EGameLiftGameSessionPlacementStatus GameSessionPlacementStatus = GetSessionState(Status);
 
-		const int GameSessionPlacementStatusCopy = GameSessionPlacementStatus;
-		OnStartGameSessionPlacementSuccess.Broadcast(GameSessionId, GameSessionPlacementId, GameSessionPlacementStatusCopy);
+		OnStartGameSessionPlacementSuccess.Broadcast(GameSessionId, GameSessionPlacementId, GameSessionPlacementStatus);
 	}
 	else
 	{
@@ -523,6 +523,30 @@ void UGameLiftStartGameSessionPlacement::OnStartGameSessionPlacement(const Aws::
 		OnStartGameSessionPlacementFailed.Broadcast(MyErrorMessage);
 	}
 #endif
+}
+
+EGameLiftGameSessionPlacementStatus UGameLiftStartGameSessionPlacement::GetSessionState(const Aws::GameLift::Model::GameSessionPlacementState& Status) {
+#if WITH_GAMELIFTCLIENTSDK
+	switch (Status)
+	{
+	case Aws::GameLift::Model::GameSessionPlacementStatus::NOT_SET:
+		return EGameLiftGameSessionPlacementStatus::STATUS_NotSet;
+	case Aws::GameLift::Model::GameSessionPlacementStatus::PENDING:
+		return EGameLiftGameSessionPlacementStatus::STATUS_Pending;
+	case Aws::GameLift::Model::GameSessionPlacementStatus::FULFILLED:
+		return EGameLiftGameSessionPlacementStatus::STATUS_Fulfilled;
+	case Aws::GameLift::Model::GameSessionPlacementStatus::CANCELLED:
+		return EGameLiftGameSessionPlacementStatus::STATUS_Cancelled;
+	case Aws::GameLift::Model::GameSessionPlacementStatus::TIMED_OUT:
+		return EGameLiftGameSessionPlacementStatus::STATUS_TimedOut;
+	case Aws::GameLift::Model::GameSessionPlacementStatus::FAILED:
+		return EGameLiftGameSessionPlacementStatus::STATUS_Failed;
+	default:
+		break;
+	}
+	checkNoEntry(); // This code block should never reach!
+#endif
+	return EGameLiftGameSessionPlacementStatus::STATUS_NoStatus; // Just a dummy return
 }
 
 UGameLiftDescribeGameSessionPlacement* UGameLiftDescribeGameSessionPlacement::DescribeGameSessionPlacement(FString GameSessionPlacementId)
@@ -579,19 +603,9 @@ void UGameLiftDescribeGameSessionPlacement::OnDescribeGameSessionPlacement(const
 		const FString GameSessionId = Outcome.GetResult().GetGameSessionPlacement().GetGameSessionId().c_str();
 		const FString PlacementId = Outcome.GetResult().GetGameSessionPlacement().GetPlacementId().c_str();
 		Aws::GameLift::Model::GameSessionPlacementState Status = Outcome.GetResult().GetGameSessionPlacement().GetStatus();
-		int GameSessionPlacementStatus = 0;
-		if (Status == Aws::GameLift::Model::GameSessionPlacementState::FULFILLED) {
-			GameSessionPlacementStatus = 1;
-		}
-		else if (Status == Aws::GameLift::Model::GameSessionPlacementState::PENDING) {
-			GameSessionPlacementStatus = 0;
-		}
-		else {
-			GameSessionPlacementStatus = -1;
-		}
 
-		const int GameSessionPlacementStatusCopy = GameSessionPlacementStatus;
-		OnDescribeGameSessionPlacementSuccess.Broadcast(GameSessionId, PlacementId, GameSessionPlacementStatusCopy);
+		const EGameLiftGameSessionPlacementStatus GameSessionPlacementStatus = GetSessionState(Status);
+		OnDescribeGameSessionPlacementSuccess.Broadcast(GameSessionId, PlacementId, GameSessionPlacementStatus);
 	}
 	else
 	{
@@ -600,4 +614,28 @@ void UGameLiftDescribeGameSessionPlacement::OnDescribeGameSessionPlacement(const
 		OnDescribeGameSessionPlacementFailed.Broadcast(MyErrorMessage);
 	}
 #endif
+}
+
+EGameLiftGameSessionPlacementStatus UGameLiftDescribeGameSessionPlacement::GetSessionState(const Aws::GameLift::Model::GameSessionPlacementState& Status) {
+#if WITH_GAMELIFTCLIENTSDK
+	switch (Status)
+	{
+	case Aws::GameLift::Model::GameSessionPlacementStatus::NOT_SET:
+		return EGameLiftGameSessionPlacementStatus::STATUS_NotSet;
+	case Aws::GameLift::Model::GameSessionPlacementStatus::PENDING:
+		return EGameLiftGameSessionPlacementStatus::STATUS_Pending;
+	case Aws::GameLift::Model::GameSessionPlacementStatus::FULFILLED:
+		return EGameLiftGameSessionPlacementStatus::STATUS_Fulfilled;
+	case Aws::GameLift::Model::GameSessionPlacementStatus::CANCELLED:
+		return EGameLiftGameSessionPlacementStatus::STATUS_Cancelled;
+	case Aws::GameLift::Model::GameSessionPlacementStatus::TIMED_OUT:
+		return EGameLiftGameSessionPlacementStatus::STATUS_TimedOut;
+	case Aws::GameLift::Model::GameSessionPlacementStatus::FAILED:
+		return EGameLiftGameSessionPlacementStatus::STATUS_Failed;
+	default:
+		break;
+	}
+	checkNoEntry(); // This code block should never reach!
+#endif
+	return EGameLiftGameSessionPlacementStatus::STATUS_NoStatus; // Just a dummy return
 }
