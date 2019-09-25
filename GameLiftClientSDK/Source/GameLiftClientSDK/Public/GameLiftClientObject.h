@@ -50,7 +50,7 @@ public:
 	* @return [UGameLiftCreateGameSession*] Returns UGameLiftCreateGameSession* Object.
 	**/
 	UFUNCTION(BlueprintCallable, Category = "GameLift Client Object")	
-	UGameLiftCreateGameSession* CreateGameSession(FGameLiftGameSessionConfig GameSessionProperties);
+	UGameLiftCreateGameSession* CreateGameSession(FString FleetId, FString AliasId, int MaxPlayerCount);
 
 	/**
 	* public UGameLiftClientObject::DescribeGameSessionDetails

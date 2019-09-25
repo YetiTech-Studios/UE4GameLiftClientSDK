@@ -19,12 +19,13 @@
 #include <aws/core/http/HttpRequest.h>
 //#endif
 
-UGameLiftCreateGameSession* UGameLiftCreateGameSession::CreateGameSession(FGameLiftGameSessionConfig GameSessionProperties, bool bIsGameLiftLocal)
+UGameLiftCreateGameSession* UGameLiftCreateGameSession::CreateGameSession(FString FleetId, FString AliasId, int MaxPlayerCount)
 {
 #if WITH_GAMELIFTCLIENTSDK
 	UGameLiftCreateGameSession* Proxy = NewObject<UGameLiftCreateGameSession>();
-	Proxy->SessionConfig = GameSessionProperties;
-	Proxy->bIsUsingGameLiftLocal = bIsGameLiftLocal;
+	Proxy->FleetId = FleetId;
+	Proxy->AliasId = AliasId;
+	Proxy->MaxPlayerCount = MaxPlayerCount;
 	return Proxy;
 #endif
 	return nullptr;
@@ -51,19 +52,21 @@ EActivateStatus UGameLiftCreateGameSession::Activate()
 
 		Aws::GameLift::Model::CreateGameSessionRequest GameSessionRequest;
 
-		GameSessionRequest.SetMaximumPlayerSessionCount(SessionConfig.GetMaxPlayers());
+		GameSessionRequest.SetMaximumPlayerSessionCount(MaxPlayerCount);
 		
-		if (bIsUsingGameLiftLocal)
+		if (FleetId.Len() > 0)
 		{
-			GameSessionRequest.SetFleetId(TCHAR_TO_UTF8(*SessionConfig.GetGameLiftLocalFleetID()));
+			LOG_NORMAL("Setting Fleet Id " + FleetId);
+			GameSessionRequest.SetFleetId(TCHAR_TO_UTF8(*FleetId));
 		}
-		else
+		if (AliasId.Len() > 0)
 		{
-			GameSessionRequest.SetAliasId(TCHAR_TO_UTF8(*SessionConfig.GetAliasID()));
+			LOG_NORMAL("Setting Alias Id " + AliasId);
+			GameSessionRequest.SetAliasId(TCHAR_TO_UTF8(*AliasId));
 		}
 
-		LOG_NORMAL("Setting Alias ID: " + SessionConfig.GetAliasID());
-		for (FGameLiftGameSessionServerProperties ServerSetting : SessionConfig.GetGameSessionProperties())
+		// TODO: REDO THE WAY PROPERTIES ARE ADDED BELOW
+		/*for (FGameLiftGameSessionServerProperties ServerSetting : SessionConfig.GetGameSessionProperties())
 		{
 			LOG_NORMAL("********************************************************************");
 			Aws::GameLift::Model::GameProperty MapProperty;
@@ -71,7 +74,8 @@ EActivateStatus UGameLiftCreateGameSession::Activate()
 			MapProperty.SetValue(TCHAR_TO_UTF8(*ServerSetting.Value));
 			GameSessionRequest.AddGameProperties(MapProperty);
 			LOG_NORMAL(FString::Printf(TEXT("New GameProperty added. Key: (%s) Value: (%s)"), *ServerSetting.Key, *ServerSetting.Value));
-		}
+		}*/
+		// TODO: FIND A BETTER WAY TO PARAMETERIZE GAMELIFT LOCAL
 
 		Aws::GameLift::CreateGameSessionResponseReceivedHandler Handler;
 		Handler = std::bind(&UGameLiftCreateGameSession::OnCreateGameSession, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
@@ -91,8 +95,11 @@ void UGameLiftCreateGameSession::OnCreateGameSession(const Aws::GameLift::GameLi
 	if (Outcome.IsSuccess())
 	{
 		LOG_NORMAL("Received OnCreateGameSession with Success outcome.");
-		const FString GameSessionID = FString(Outcome.GetResult().GetGameSession().GetGameSessionId().c_str());
-		OnCreateGameSessionSuccess.Broadcast(GameSessionID);
+		const FString GameSessionID = Outcome.GetResult().GetGameSession().GetGameSessionId().c_str();
+		Aws::GameLift::Model::GameSessionStatus Status = Outcome.GetResult().GetGameSession().GetStatus();
+		const FString GameSessionStatus = Aws::GameLift::Model::GameSessionStatusMapper::GetNameForGameSessionStatus(Status).c_str();
+
+		OnCreateGameSessionSuccess.Broadcast(GameSessionID, GameSessionStatus);
 	}
 	else
 	{
@@ -163,6 +170,7 @@ void UGameLiftDescribeGameSessionDetails::OnDescribeGameSessionDetails(const Aws
 		const int MaxPlayerCount = Outcome.GetResult().GetGameSessionDetails().data()->GetGameSession().GetMaximumPlayerSessionCount();
 		Aws::GameLift::Model::PlayerSessionCreationPolicy CreationPolicy = Outcome.GetResult().GetGameSessionDetails().data()->GetGameSession().GetPlayerSessionCreationPolicy();
 		const FString PlayerSessionCreationPolicy = Aws::GameLift::Model::PlayerSessionCreationPolicyMapper::GetNameForPlayerSessionCreationPolicy(CreationPolicy).c_str();
+
 		OnDescribeGameSessionDetailsSuccess.Broadcast(MySessionID, MySessionStatus, CurrentPlayerCount, MaxPlayerCount, PlayerSessionCreationPolicy);
 	}
 	else
