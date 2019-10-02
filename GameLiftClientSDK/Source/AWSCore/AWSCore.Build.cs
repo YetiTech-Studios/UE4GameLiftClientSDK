@@ -1,5 +1,6 @@
 using UnrealBuildTool;
 using System.IO;
+using System.Diagnostics;
 
 public class AWSCore : ModuleRules
 {
@@ -27,9 +28,10 @@ public class AWSCore : ModuleRules
             }
             
             PublicLibraryPaths.Add(ThirdPartyPath);
-                
+            Trace.TraceInformation("test");
             if (Target.Platform == UnrealTargetPlatform.Linux)
             {
+                Trace.TraceInformation("linux");
                 // dependencies
                 string CommonSoFile = System.IO.Path.Combine(ThirdPartyPath, "libaws-c-common.so");
                 if (File.Exists(CommonSoFile))
