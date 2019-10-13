@@ -14,7 +14,10 @@ This repository includes source files for the plugin as well as pre-built binari
 #### How to update the AWS binaries
 Since the AWSK SDK constantly changes, it may be beneficial to generate the binaries yourself and replace the ones currently in the plugin. To do this, go to the repository for the [AWS SDK for C++](https://github.com/aws/aws-sdk-cpp) and clone it. Then, run these commands in the AWS SDK directory and make sure the file path of your cloned repository isn't too long!
 ```
-cmake -DBUILD_ONLY="core;gamelift;cognito-identity" -DCMAKE_BUILD_TYPE="release"
+cmake -G "Visual Studio VV YYYY Win64" -DBUILD_ONLY="core;gamelift;cognito-identity" -DCMAKE_BUILD_TYPE="release" 
+```
+VV is the version number, and YYYY is the year (for example "Visual Studio 15 2017 Win64"). If your target platform (not your host platform) is x86 (32-bit) then omit the "Win64" part of the command. 
+```
 msbuild INSTALL.vcxproj /p:Configuration=Release
 ```
 Ignore the errors if you get any. Now go to the "bin" folder, then the "Release" folder, and copy the files, *aws-cpp-sdk-cognito-identity.dll*, *aws-cpp-sdk-core.dll*, and *aws-cpp-sdk-gamelift.dll* to a separate folder. After that, go back to the main directory, and go to the "aws-cpp-sdk-cognito-identity" folder, then the "Release" folder and copy the file, "*aws-cpp-sdk-cognito-identity.lib* to the folder with the dll files. Repeat this last step for the "aws-cpp-sdk-core" and aws-cpp-sdk-gamelift" folders. 
