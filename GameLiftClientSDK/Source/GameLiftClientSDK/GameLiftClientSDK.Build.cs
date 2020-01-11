@@ -33,7 +33,7 @@ public class GameLiftClientSDK : ModuleRules
                 }
 
                 PublicDefinitions.Add("WITH_GAMELIFTCLIENTSDK=1");
-                PublicLibraryPaths.Add(ThirdPartyPath);
+                //PublicLibraryPaths.Add(ThirdPartyPath);
 
                 if (Target.Platform == UnrealTargetPlatform.Linux)
                 {

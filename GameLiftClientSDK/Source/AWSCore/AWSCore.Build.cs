@@ -30,7 +30,7 @@ public class AWSCore : ModuleRules
                 }
 
                 PublicDefinitions.Add("WITH_AWSCORE=1");
-                PublicLibraryPaths.Add(ThirdPartyPath);
+                //PublicLibraryPaths.Add(ThirdPartyPath);
                 if (Target.Platform == UnrealTargetPlatform.Linux)
                 {
                     // dependencies

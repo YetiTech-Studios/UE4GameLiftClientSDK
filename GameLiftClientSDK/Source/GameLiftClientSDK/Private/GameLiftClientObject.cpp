@@ -43,10 +43,10 @@ UGameLiftClientObject* UGameLiftClientObject::CreateGameLiftObject(const FString
 	return nullptr;
 }
 
-UGameLiftCreateGameSession* UGameLiftClientObject::CreateGameSession(FString FleetId, FString AliasId, int MaxPlayerCount)
+UGameLiftCreateGameSession* UGameLiftClientObject::CreateGameSession(const FGameLiftCreateGameSessionConfig& CreateGameSessionConfig)
 {
 #if WITH_GAMELIFTCLIENTSDK
-	UGameLiftCreateGameSession* Proxy = UGameLiftCreateGameSession::CreateGameSession(FleetId, AliasId, MaxPlayerCount);
+	UGameLiftCreateGameSession* Proxy = UGameLiftCreateGameSession::CreateGameSession(CreateGameSessionConfig);
 	Proxy->GameLiftClient = GameLiftClient;
 	return Proxy;
 #endif

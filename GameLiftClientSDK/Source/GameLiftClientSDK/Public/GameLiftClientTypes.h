@@ -4,20 +4,8 @@
 
 #include "GameLiftClientTypes.generated.h"
 
-USTRUCT(Blueprintable, BlueprintType)
-struct FGameLiftGameSessionServerProperties
-{
-	GENERATED_BODY()
-
-	UPROPERTY(BlueprintReadWrite)
-	FString Key;
-
-	UPROPERTY(BlueprintReadWrite)
-	FString Value;
-};
-
 USTRUCT(BlueprintType)
-struct FGameLiftGameSessionConfig
+struct FGameLiftCreateGameSessionConfig
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -25,7 +13,7 @@ private:
 
 	/* Maximum number of players that can be connected simultaneously to the game session. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	int32 MaxPlayers;
+	int MaxPlayerCount;
 
 	/* 
 	 * Unique identifier for an alias associated with the fleet to create a game session in.
@@ -35,38 +23,63 @@ private:
 	 * @See http://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateAlias.html
 	 * */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	FString AliasID;
+	FString AliasId;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	FString FleetId;
 
 	/* Set of developer-defined properties for a game session, formatted as a set of type:value pairs. 
 	 * These properties are included in the GameSession object, which is passed to the game server with a request to start a new game session */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	TArray<FGameLiftGameSessionServerProperties> GameSessionProperties;
+	TMap<FString, FString> GameProperties;
 
 public:
 
-	void SetMaxPlayers(int32 NewMaxPlayers)
+	void SetMaxPlayerCount(int Value)
 	{
-		MaxPlayers = NewMaxPlayers;
+		this->MaxPlayerCount = Value;
 	}
 
-	void SetAliasID(FString NewAliasID)
+	void SetAliasId(FString Value)
 	{
-		AliasID = NewAliasID;
+		this->AliasId = Value;
 	}
 
-	void SetGameSessionProperties(TArray<FGameLiftGameSessionServerProperties> NewProperties)
-	{
-		GameSessionProperties = NewProperties;
+	void SetFleetId(FString Value) {
+		this->FleetId = Value;
 	}
 
-	FORCEINLINE int32 GetMaxPlayers() const { return MaxPlayers; }
-	FORCEINLINE FString GetAliasID() const { return AliasID; }
-	FORCEINLINE FString GetGameLiftLocalFleetID() const { return "fleet-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"; }
-	FORCEINLINE TArray<FGameLiftGameSessionServerProperties> GetGameSessionProperties() const { return GameSessionProperties; }
-
-	FGameLiftGameSessionConfig()
+	void SetGameProperties(TMap<FString, FString> Value)
 	{
-		MaxPlayers = 0;
-		AliasID = "";
-	}	
+		this->GameProperties = Value;
+	}
+
+	FORCEINLINE int GetMaxPlayerCount() const { return MaxPlayerCount; }
+	FORCEINLINE FString GetAliasId() const { return AliasId; }
+	FORCEINLINE FString GetFleetId() const { return FleetId; }
+	FORCEINLINE FString GetGameLiftLocalFleetId() const { return "fleet-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"; }
+	FORCEINLINE TMap<FString, FString> GetGameProperties() const { return GameProperties; }
+};
+
+USTRUCT(BlueprintType)
+struct FGameLiftCreateGameSessionResult
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	FString GameSessionId;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	FString GameSessionStatus;
+
+	void SetGameSessionId(FString Value) {
+		this->GameSessionId = Value;
+	}
+
+	void SetGameSessionStatus(FString Value) {
+		this->GameSessionStatus = Value;
+	}
+
+	FORCEINLINE FString GetGameSessionId() const { return GameSessionId; }
+	FORCEINLINE FString GetGameSessionStatus() const { return GameSessionStatus; }
 };

@@ -22,7 +22,7 @@ public class CognitoIdentity : ModuleRules
             if (Target.Type == TargetRules.TargetType.Client)
             {
                 PublicDefinitions.Add("WITH_COGNITOIDENTITY=1");
-                PublicLibraryPaths.Add(ThirdPartyPath);
+                //PublicLibraryPaths.Add(ThirdPartyPath);
 
                 if (Target.Platform == UnrealTargetPlatform.Linux)
                 {

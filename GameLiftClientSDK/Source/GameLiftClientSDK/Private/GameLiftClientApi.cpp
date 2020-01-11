@@ -22,13 +22,11 @@
 #include <aws/core/http/HttpRequest.h>
 #endif
 
-UGameLiftCreateGameSession* UGameLiftCreateGameSession::CreateGameSession(FString FleetId, FString AliasId, int MaxPlayerCount)
+UGameLiftCreateGameSession* UGameLiftCreateGameSession::CreateGameSession(const FGameLiftCreateGameSessionConfig& CreateGameSessionConfig)
 {
 #if WITH_GAMELIFTCLIENTSDK
 	UGameLiftCreateGameSession* Proxy = NewObject<UGameLiftCreateGameSession>();
-	Proxy->FleetId = FleetId;
-	Proxy->AliasId = AliasId;
-	Proxy->MaxPlayerCount = MaxPlayerCount;
+	Proxy->CreateGameSessionConfig = &CreateGameSessionConfig;
 	return Proxy;
 #endif
 	return nullptr;
@@ -39,6 +37,11 @@ EActivateStatus UGameLiftCreateGameSession::Activate()
 #if WITH_GAMELIFTCLIENTSDK
 	if (GameLiftClient)
 	{
+		FString FleetId = CreateGameSessionConfig->GetFleetId();
+		FString AliasId = CreateGameSessionConfig->GetAliasId();
+		int MaxPlayerCount = CreateGameSessionConfig->GetMaxPlayerCount();
+		TMap<FString, FString> GameProperties = CreateGameSessionConfig->GetGameProperties();
+
 		LOG_NORMAL("Preparing to create game session...");
 
 		if (OnCreateGameSessionSuccess.IsBound() == false)
@@ -68,16 +71,15 @@ EActivateStatus UGameLiftCreateGameSession::Activate()
 			GameSessionRequest.SetAliasId(TCHAR_TO_UTF8(*AliasId));
 		}
 
-		// TODO: REDO THE WAY PROPERTIES ARE ADDED BELOW
-		/*for (FGameLiftGameSessionServerProperties ServerSetting : SessionConfig.GetGameSessionProperties())
+		for (auto& Property : GameProperties)
 		{
 			LOG_NORMAL("********************************************************************");
 			Aws::GameLift::Model::GameProperty MapProperty;
-			MapProperty.SetKey(TCHAR_TO_UTF8(*ServerSetting.Key));
-			MapProperty.SetValue(TCHAR_TO_UTF8(*ServerSetting.Value));
+			MapProperty.SetKey(TCHAR_TO_UTF8(*Property.Key));
+			MapProperty.SetValue(TCHAR_TO_UTF8(*Property.Value));
 			GameSessionRequest.AddGameProperties(MapProperty);
-			LOG_NORMAL(FString::Printf(TEXT("New GameProperty added. Key: (%s) Value: (%s)"), *ServerSetting.Key, *ServerSetting.Value));
-		}*/
+			LOG_NORMAL(FString::Printf(TEXT("New GameProperty added. Key: (%s) Value: (%s)"), *Property.Key, *Property.Value));
+		}
 		// TODO: FIND A BETTER WAY TO PARAMETERIZE GAMELIFT LOCAL
 
 		Aws::GameLift::CreateGameSessionResponseReceivedHandler Handler;
@@ -98,11 +100,15 @@ void UGameLiftCreateGameSession::OnCreateGameSession(const Aws::GameLift::GameLi
 	if (Outcome.IsSuccess())
 	{
 		LOG_NORMAL("Received OnCreateGameSession with Success outcome.");
-		const FString GameSessionID = Outcome.GetResult().GetGameSession().GetGameSessionId().c_str();
+		FString GameSessionId = Outcome.GetResult().GetGameSession().GetGameSessionId().c_str();
 		Aws::GameLift::Model::GameSessionStatus Status = Outcome.GetResult().GetGameSession().GetStatus();
-		const FString GameSessionStatus = Aws::GameLift::Model::GameSessionStatusMapper::GetNameForGameSessionStatus(Status).c_str();
+		FString GameSessionStatus = Aws::GameLift::Model::GameSessionStatusMapper::GetNameForGameSessionStatus(Status).c_str();
 
-		OnCreateGameSessionSuccess.Broadcast(GameSessionID, GameSessionStatus);
+		FGameLiftCreateGameSessionResult CreateGameSessionResult;
+		CreateGameSessionResult.SetGameSessionId(GameSessionId);
+		CreateGameSessionResult.SetGameSessionStatus(GameSessionStatus);
+
+		OnCreateGameSessionSuccess.Broadcast(CreateGameSessionResult);
 	}
 	else
 	{

@@ -29,7 +29,7 @@ enum class EActivateStatus : uint8
 	ACTIVATE_NoFailCallback			UMETA(DisplayName = "Failed Delegate not bound")
 };
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnCreateGameSessionSuccess, const FString&, GameSessionId, const FString&, Status);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCreateGameSessionSuccess, const FGameLiftCreateGameSessionResult&, GameSessionId);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCreateGameSessionFailed, const FString&, ErrorMessage);
 UCLASS()
 class GAMELIFTCLIENTSDK_API UGameLiftCreateGameSession : public UObject
@@ -47,11 +47,9 @@ public:
 
 private:
 	Aws::GameLift::GameLiftClient* GameLiftClient;
-	FString FleetId;
-	FString AliasId;
-	int MaxPlayerCount;
+	const FGameLiftCreateGameSessionConfig* CreateGameSessionConfig;
 
-	static UGameLiftCreateGameSession* CreateGameSession(FString FleetId, FString AliasId, int MaxPlayerCount);
+	static UGameLiftCreateGameSession* CreateGameSession(const FGameLiftCreateGameSessionConfig& CreateGameSessionConfig);
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "GameLift CreateGameSession")
