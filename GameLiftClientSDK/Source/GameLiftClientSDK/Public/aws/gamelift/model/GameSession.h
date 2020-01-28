@@ -18,6 +18,7 @@
 #include <aws/core/utils/memory/stl/AWSString.h>
 #include <aws/core/utils/DateTime.h>
 #include <aws/gamelift/model/GameSessionStatus.h>
+#include <aws/gamelift/model/GameSessionStatusReason.h>
 #include <aws/core/utils/memory/stl/AWSVector.h>
 #include <aws/gamelift/model/PlayerSessionCreationPolicy.h>
 #include <aws/gamelift/model/GameProperty.h>
@@ -30,6 +31,7 @@ namespace Utils
 namespace Json
 {
   class JsonValue;
+  class JsonView;
 } // namespace Json
 } // namespace Utils
 namespace GameLift
@@ -42,8 +44,7 @@ namespace Model
    * can host players. When a game session ends, its status is set to
    * <code>TERMINATED</code>. </p> <p>Once the session ends, the game session object
    * is retained for 30 days. This means you can reuse idempotency token values after
-   * this time. Game session logs are retained for 14 days.</p>
-   * <p>Game-session-related operations include:</p> <ul> <li> <p>
+   * this time. Game session logs are retained for 14 days.</p> <ul> <li> <p>
    * <a>CreateGameSession</a> </p> </li> <li> <p> <a>DescribeGameSessions</a> </p>
    * </li> <li> <p> <a>DescribeGameSessionDetails</a> </p> </li> <li> <p>
    * <a>SearchGameSessions</a> </p> </li> <li> <p> <a>UpdateGameSession</a> </p>
@@ -59,138 +60,213 @@ namespace Model
   {
   public:
     GameSession();
-    GameSession(const Aws::Utils::Json::JsonValue& jsonValue);
-    GameSession& operator=(const Aws::Utils::Json::JsonValue& jsonValue);
+    GameSession(Aws::Utils::Json::JsonView jsonValue);
+    GameSession& operator=(Aws::Utils::Json::JsonView jsonValue);
     Aws::Utils::Json::JsonValue Jsonize() const;
 
 
     /**
-     * <p>Unique identifier for the game session. A game session ARN has the following
-     * format: <code>arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet
+     * <p>A unique identifier for the game session. A game session ARN has the
+     * following format: <code>arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet
      * ID&gt;/&lt;custom ID string or idempotency token&gt;</code>.</p>
      */
     inline const Aws::String& GetGameSessionId() const{ return m_gameSessionId; }
 
     /**
-     * <p>Unique identifier for the game session. A game session ARN has the following
-     * format: <code>arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet
+     * <p>A unique identifier for the game session. A game session ARN has the
+     * following format: <code>arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet
+     * ID&gt;/&lt;custom ID string or idempotency token&gt;</code>.</p>
+     */
+    inline bool GameSessionIdHasBeenSet() const { return m_gameSessionIdHasBeenSet; }
+
+    /**
+     * <p>A unique identifier for the game session. A game session ARN has the
+     * following format: <code>arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet
      * ID&gt;/&lt;custom ID string or idempotency token&gt;</code>.</p>
      */
     inline void SetGameSessionId(const Aws::String& value) { m_gameSessionIdHasBeenSet = true; m_gameSessionId = value; }
 
     /**
-     * <p>Unique identifier for the game session. A game session ARN has the following
-     * format: <code>arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet
+     * <p>A unique identifier for the game session. A game session ARN has the
+     * following format: <code>arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet
      * ID&gt;/&lt;custom ID string or idempotency token&gt;</code>.</p>
      */
     inline void SetGameSessionId(Aws::String&& value) { m_gameSessionIdHasBeenSet = true; m_gameSessionId = std::move(value); }
 
     /**
-     * <p>Unique identifier for the game session. A game session ARN has the following
-     * format: <code>arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet
+     * <p>A unique identifier for the game session. A game session ARN has the
+     * following format: <code>arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet
      * ID&gt;/&lt;custom ID string or idempotency token&gt;</code>.</p>
      */
     inline void SetGameSessionId(const char* value) { m_gameSessionIdHasBeenSet = true; m_gameSessionId.assign(value); }
 
     /**
-     * <p>Unique identifier for the game session. A game session ARN has the following
-     * format: <code>arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet
+     * <p>A unique identifier for the game session. A game session ARN has the
+     * following format: <code>arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet
      * ID&gt;/&lt;custom ID string or idempotency token&gt;</code>.</p>
      */
     inline GameSession& WithGameSessionId(const Aws::String& value) { SetGameSessionId(value); return *this;}
 
     /**
-     * <p>Unique identifier for the game session. A game session ARN has the following
-     * format: <code>arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet
+     * <p>A unique identifier for the game session. A game session ARN has the
+     * following format: <code>arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet
      * ID&gt;/&lt;custom ID string or idempotency token&gt;</code>.</p>
      */
     inline GameSession& WithGameSessionId(Aws::String&& value) { SetGameSessionId(std::move(value)); return *this;}
 
     /**
-     * <p>Unique identifier for the game session. A game session ARN has the following
-     * format: <code>arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet
+     * <p>A unique identifier for the game session. A game session ARN has the
+     * following format: <code>arn:aws:gamelift:&lt;region&gt;::gamesession/&lt;fleet
      * ID&gt;/&lt;custom ID string or idempotency token&gt;</code>.</p>
      */
     inline GameSession& WithGameSessionId(const char* value) { SetGameSessionId(value); return *this;}
 
 
     /**
-     * <p>Descriptive label that is associated with a game session. Session names do
+     * <p>A descriptive label that is associated with a game session. Session names do
      * not need to be unique.</p>
      */
     inline const Aws::String& GetName() const{ return m_name; }
 
     /**
-     * <p>Descriptive label that is associated with a game session. Session names do
+     * <p>A descriptive label that is associated with a game session. Session names do
+     * not need to be unique.</p>
+     */
+    inline bool NameHasBeenSet() const { return m_nameHasBeenSet; }
+
+    /**
+     * <p>A descriptive label that is associated with a game session. Session names do
      * not need to be unique.</p>
      */
     inline void SetName(const Aws::String& value) { m_nameHasBeenSet = true; m_name = value; }
 
     /**
-     * <p>Descriptive label that is associated with a game session. Session names do
+     * <p>A descriptive label that is associated with a game session. Session names do
      * not need to be unique.</p>
      */
     inline void SetName(Aws::String&& value) { m_nameHasBeenSet = true; m_name = std::move(value); }
 
     /**
-     * <p>Descriptive label that is associated with a game session. Session names do
+     * <p>A descriptive label that is associated with a game session. Session names do
      * not need to be unique.</p>
      */
     inline void SetName(const char* value) { m_nameHasBeenSet = true; m_name.assign(value); }
 
     /**
-     * <p>Descriptive label that is associated with a game session. Session names do
+     * <p>A descriptive label that is associated with a game session. Session names do
      * not need to be unique.</p>
      */
     inline GameSession& WithName(const Aws::String& value) { SetName(value); return *this;}
 
     /**
-     * <p>Descriptive label that is associated with a game session. Session names do
+     * <p>A descriptive label that is associated with a game session. Session names do
      * not need to be unique.</p>
      */
     inline GameSession& WithName(Aws::String&& value) { SetName(std::move(value)); return *this;}
 
     /**
-     * <p>Descriptive label that is associated with a game session. Session names do
+     * <p>A descriptive label that is associated with a game session. Session names do
      * not need to be unique.</p>
      */
     inline GameSession& WithName(const char* value) { SetName(value); return *this;}
 
 
     /**
-     * <p>Unique identifier for a fleet that the game session is running on.</p>
+     * <p>A unique identifier for a fleet that the game session is running on.</p>
      */
     inline const Aws::String& GetFleetId() const{ return m_fleetId; }
 
     /**
-     * <p>Unique identifier for a fleet that the game session is running on.</p>
+     * <p>A unique identifier for a fleet that the game session is running on.</p>
+     */
+    inline bool FleetIdHasBeenSet() const { return m_fleetIdHasBeenSet; }
+
+    /**
+     * <p>A unique identifier for a fleet that the game session is running on.</p>
      */
     inline void SetFleetId(const Aws::String& value) { m_fleetIdHasBeenSet = true; m_fleetId = value; }
 
     /**
-     * <p>Unique identifier for a fleet that the game session is running on.</p>
+     * <p>A unique identifier for a fleet that the game session is running on.</p>
      */
     inline void SetFleetId(Aws::String&& value) { m_fleetIdHasBeenSet = true; m_fleetId = std::move(value); }
 
     /**
-     * <p>Unique identifier for a fleet that the game session is running on.</p>
+     * <p>A unique identifier for a fleet that the game session is running on.</p>
      */
     inline void SetFleetId(const char* value) { m_fleetIdHasBeenSet = true; m_fleetId.assign(value); }
 
     /**
-     * <p>Unique identifier for a fleet that the game session is running on.</p>
+     * <p>A unique identifier for a fleet that the game session is running on.</p>
      */
     inline GameSession& WithFleetId(const Aws::String& value) { SetFleetId(value); return *this;}
 
     /**
-     * <p>Unique identifier for a fleet that the game session is running on.</p>
+     * <p>A unique identifier for a fleet that the game session is running on.</p>
      */
     inline GameSession& WithFleetId(Aws::String&& value) { SetFleetId(std::move(value)); return *this;}
 
     /**
-     * <p>Unique identifier for a fleet that the game session is running on.</p>
+     * <p>A unique identifier for a fleet that the game session is running on.</p>
      */
     inline GameSession& WithFleetId(const char* value) { SetFleetId(value); return *this;}
+
+
+    /**
+     * <p> The Amazon Resource Name (<a
+     * href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a>)
+     * associated with the GameLift fleet that this game session is running on. </p>
+     */
+    inline const Aws::String& GetFleetArn() const{ return m_fleetArn; }
+
+    /**
+     * <p> The Amazon Resource Name (<a
+     * href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a>)
+     * associated with the GameLift fleet that this game session is running on. </p>
+     */
+    inline bool FleetArnHasBeenSet() const { return m_fleetArnHasBeenSet; }
+
+    /**
+     * <p> The Amazon Resource Name (<a
+     * href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a>)
+     * associated with the GameLift fleet that this game session is running on. </p>
+     */
+    inline void SetFleetArn(const Aws::String& value) { m_fleetArnHasBeenSet = true; m_fleetArn = value; }
+
+    /**
+     * <p> The Amazon Resource Name (<a
+     * href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a>)
+     * associated with the GameLift fleet that this game session is running on. </p>
+     */
+    inline void SetFleetArn(Aws::String&& value) { m_fleetArnHasBeenSet = true; m_fleetArn = std::move(value); }
+
+    /**
+     * <p> The Amazon Resource Name (<a
+     * href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a>)
+     * associated with the GameLift fleet that this game session is running on. </p>
+     */
+    inline void SetFleetArn(const char* value) { m_fleetArnHasBeenSet = true; m_fleetArn.assign(value); }
+
+    /**
+     * <p> The Amazon Resource Name (<a
+     * href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a>)
+     * associated with the GameLift fleet that this game session is running on. </p>
+     */
+    inline GameSession& WithFleetArn(const Aws::String& value) { SetFleetArn(value); return *this;}
+
+    /**
+     * <p> The Amazon Resource Name (<a
+     * href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a>)
+     * associated with the GameLift fleet that this game session is running on. </p>
+     */
+    inline GameSession& WithFleetArn(Aws::String&& value) { SetFleetArn(std::move(value)); return *this;}
+
+    /**
+     * <p> The Amazon Resource Name (<a
+     * href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a>)
+     * associated with the GameLift fleet that this game session is running on. </p>
+     */
+    inline GameSession& WithFleetArn(const char* value) { SetFleetArn(value); return *this;}
 
 
     /**
@@ -198,6 +274,12 @@ namespace Model
      * expressed in Unix time as milliseconds (for example "1469498468.057").</p>
      */
     inline const Aws::Utils::DateTime& GetCreationTime() const{ return m_creationTime; }
+
+    /**
+     * <p>Time stamp indicating when this data object was created. Format is a number
+     * expressed in Unix time as milliseconds (for example "1469498468.057").</p>
+     */
+    inline bool CreationTimeHasBeenSet() const { return m_creationTimeHasBeenSet; }
 
     /**
      * <p>Time stamp indicating when this data object was created. Format is a number
@@ -236,6 +318,13 @@ namespace Model
      * number expressed in Unix time as milliseconds (for example
      * "1469498468.057").</p>
      */
+    inline bool TerminationTimeHasBeenSet() const { return m_terminationTimeHasBeenSet; }
+
+    /**
+     * <p>Time stamp indicating when this data object was terminated. Format is a
+     * number expressed in Unix time as milliseconds (for example
+     * "1469498468.057").</p>
+     */
     inline void SetTerminationTime(const Aws::Utils::DateTime& value) { m_terminationTimeHasBeenSet = true; m_terminationTime = value; }
 
     /**
@@ -268,6 +357,11 @@ namespace Model
     /**
      * <p>Number of players currently in the game session.</p>
      */
+    inline bool CurrentPlayerSessionCountHasBeenSet() const { return m_currentPlayerSessionCountHasBeenSet; }
+
+    /**
+     * <p>Number of players currently in the game session.</p>
+     */
     inline void SetCurrentPlayerSessionCount(int value) { m_currentPlayerSessionCountHasBeenSet = true; m_currentPlayerSessionCount = value; }
 
     /**
@@ -277,20 +371,26 @@ namespace Model
 
 
     /**
-     * <p>Maximum number of players that can be connected simultaneously to the game
-     * session.</p>
+     * <p>The maximum number of players that can be connected simultaneously to the
+     * game session.</p>
      */
     inline int GetMaximumPlayerSessionCount() const{ return m_maximumPlayerSessionCount; }
 
     /**
-     * <p>Maximum number of players that can be connected simultaneously to the game
-     * session.</p>
+     * <p>The maximum number of players that can be connected simultaneously to the
+     * game session.</p>
+     */
+    inline bool MaximumPlayerSessionCountHasBeenSet() const { return m_maximumPlayerSessionCountHasBeenSet; }
+
+    /**
+     * <p>The maximum number of players that can be connected simultaneously to the
+     * game session.</p>
      */
     inline void SetMaximumPlayerSessionCount(int value) { m_maximumPlayerSessionCountHasBeenSet = true; m_maximumPlayerSessionCount = value; }
 
     /**
-     * <p>Maximum number of players that can be connected simultaneously to the game
-     * session.</p>
+     * <p>The maximum number of players that can be connected simultaneously to the
+     * game session.</p>
      */
     inline GameSession& WithMaximumPlayerSessionCount(int value) { SetMaximumPlayerSessionCount(value); return *this;}
 
@@ -300,6 +400,12 @@ namespace Model
      * <code>ACTIVE</code> status to have player sessions.</p>
      */
     inline const GameSessionStatus& GetStatus() const{ return m_status; }
+
+    /**
+     * <p>Current status of the game session. A game session must have an
+     * <code>ACTIVE</code> status to have player sessions.</p>
+     */
+    inline bool StatusHasBeenSet() const { return m_statusHasBeenSet; }
 
     /**
      * <p>Current status of the game session. A game session must have an
@@ -327,117 +433,303 @@ namespace Model
 
 
     /**
-     * <p>Set of developer-defined properties for a game session, formatted as a set of
-     * type:value pairs. These properties are included in the <a>GameSession</a>
-     * object, which is passed to the game server with a request to start a new game
-     * session (see <a
-     * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
-     * a Game Session</a>).</p>
+     * <p>Provides additional information about game session status.
+     * <code>INTERRUPTED</code> indicates that the game session was hosted on a spot
+     * instance that was reclaimed, causing the active game session to be
+     * terminated.</p>
+     */
+    inline const GameSessionStatusReason& GetStatusReason() const{ return m_statusReason; }
+
+    /**
+     * <p>Provides additional information about game session status.
+     * <code>INTERRUPTED</code> indicates that the game session was hosted on a spot
+     * instance that was reclaimed, causing the active game session to be
+     * terminated.</p>
+     */
+    inline bool StatusReasonHasBeenSet() const { return m_statusReasonHasBeenSet; }
+
+    /**
+     * <p>Provides additional information about game session status.
+     * <code>INTERRUPTED</code> indicates that the game session was hosted on a spot
+     * instance that was reclaimed, causing the active game session to be
+     * terminated.</p>
+     */
+    inline void SetStatusReason(const GameSessionStatusReason& value) { m_statusReasonHasBeenSet = true; m_statusReason = value; }
+
+    /**
+     * <p>Provides additional information about game session status.
+     * <code>INTERRUPTED</code> indicates that the game session was hosted on a spot
+     * instance that was reclaimed, causing the active game session to be
+     * terminated.</p>
+     */
+    inline void SetStatusReason(GameSessionStatusReason&& value) { m_statusReasonHasBeenSet = true; m_statusReason = std::move(value); }
+
+    /**
+     * <p>Provides additional information about game session status.
+     * <code>INTERRUPTED</code> indicates that the game session was hosted on a spot
+     * instance that was reclaimed, causing the active game session to be
+     * terminated.</p>
+     */
+    inline GameSession& WithStatusReason(const GameSessionStatusReason& value) { SetStatusReason(value); return *this;}
+
+    /**
+     * <p>Provides additional information about game session status.
+     * <code>INTERRUPTED</code> indicates that the game session was hosted on a spot
+     * instance that was reclaimed, causing the active game session to be
+     * terminated.</p>
+     */
+    inline GameSession& WithStatusReason(GameSessionStatusReason&& value) { SetStatusReason(std::move(value)); return *this;}
+
+
+    /**
+     * <p>Set of custom properties for a game session, formatted as key:value pairs.
+     * These properties are passed to a game server process in the <a>GameSession</a>
+     * object with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * a Game Session</a>). You can search for active game sessions based on this
+     * custom data with <a>SearchGameSessions</a>.</p>
      */
     inline const Aws::Vector<GameProperty>& GetGameProperties() const{ return m_gameProperties; }
 
     /**
-     * <p>Set of developer-defined properties for a game session, formatted as a set of
-     * type:value pairs. These properties are included in the <a>GameSession</a>
-     * object, which is passed to the game server with a request to start a new game
-     * session (see <a
-     * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
-     * a Game Session</a>).</p>
+     * <p>Set of custom properties for a game session, formatted as key:value pairs.
+     * These properties are passed to a game server process in the <a>GameSession</a>
+     * object with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * a Game Session</a>). You can search for active game sessions based on this
+     * custom data with <a>SearchGameSessions</a>.</p>
+     */
+    inline bool GamePropertiesHasBeenSet() const { return m_gamePropertiesHasBeenSet; }
+
+    /**
+     * <p>Set of custom properties for a game session, formatted as key:value pairs.
+     * These properties are passed to a game server process in the <a>GameSession</a>
+     * object with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * a Game Session</a>). You can search for active game sessions based on this
+     * custom data with <a>SearchGameSessions</a>.</p>
      */
     inline void SetGameProperties(const Aws::Vector<GameProperty>& value) { m_gamePropertiesHasBeenSet = true; m_gameProperties = value; }
 
     /**
-     * <p>Set of developer-defined properties for a game session, formatted as a set of
-     * type:value pairs. These properties are included in the <a>GameSession</a>
-     * object, which is passed to the game server with a request to start a new game
-     * session (see <a
-     * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
-     * a Game Session</a>).</p>
+     * <p>Set of custom properties for a game session, formatted as key:value pairs.
+     * These properties are passed to a game server process in the <a>GameSession</a>
+     * object with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * a Game Session</a>). You can search for active game sessions based on this
+     * custom data with <a>SearchGameSessions</a>.</p>
      */
     inline void SetGameProperties(Aws::Vector<GameProperty>&& value) { m_gamePropertiesHasBeenSet = true; m_gameProperties = std::move(value); }
 
     /**
-     * <p>Set of developer-defined properties for a game session, formatted as a set of
-     * type:value pairs. These properties are included in the <a>GameSession</a>
-     * object, which is passed to the game server with a request to start a new game
-     * session (see <a
-     * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
-     * a Game Session</a>).</p>
+     * <p>Set of custom properties for a game session, formatted as key:value pairs.
+     * These properties are passed to a game server process in the <a>GameSession</a>
+     * object with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * a Game Session</a>). You can search for active game sessions based on this
+     * custom data with <a>SearchGameSessions</a>.</p>
      */
     inline GameSession& WithGameProperties(const Aws::Vector<GameProperty>& value) { SetGameProperties(value); return *this;}
 
     /**
-     * <p>Set of developer-defined properties for a game session, formatted as a set of
-     * type:value pairs. These properties are included in the <a>GameSession</a>
-     * object, which is passed to the game server with a request to start a new game
-     * session (see <a
-     * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
-     * a Game Session</a>).</p>
+     * <p>Set of custom properties for a game session, formatted as key:value pairs.
+     * These properties are passed to a game server process in the <a>GameSession</a>
+     * object with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * a Game Session</a>). You can search for active game sessions based on this
+     * custom data with <a>SearchGameSessions</a>.</p>
      */
     inline GameSession& WithGameProperties(Aws::Vector<GameProperty>&& value) { SetGameProperties(std::move(value)); return *this;}
 
     /**
-     * <p>Set of developer-defined properties for a game session, formatted as a set of
-     * type:value pairs. These properties are included in the <a>GameSession</a>
-     * object, which is passed to the game server with a request to start a new game
-     * session (see <a
-     * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
-     * a Game Session</a>).</p>
+     * <p>Set of custom properties for a game session, formatted as key:value pairs.
+     * These properties are passed to a game server process in the <a>GameSession</a>
+     * object with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * a Game Session</a>). You can search for active game sessions based on this
+     * custom data with <a>SearchGameSessions</a>.</p>
      */
     inline GameSession& AddGameProperties(const GameProperty& value) { m_gamePropertiesHasBeenSet = true; m_gameProperties.push_back(value); return *this; }
 
     /**
-     * <p>Set of developer-defined properties for a game session, formatted as a set of
-     * type:value pairs. These properties are included in the <a>GameSession</a>
-     * object, which is passed to the game server with a request to start a new game
-     * session (see <a
-     * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
-     * a Game Session</a>).</p>
+     * <p>Set of custom properties for a game session, formatted as key:value pairs.
+     * These properties are passed to a game server process in the <a>GameSession</a>
+     * object with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * a Game Session</a>). You can search for active game sessions based on this
+     * custom data with <a>SearchGameSessions</a>.</p>
      */
     inline GameSession& AddGameProperties(GameProperty&& value) { m_gamePropertiesHasBeenSet = true; m_gameProperties.push_back(std::move(value)); return *this; }
 
 
     /**
-     * <p>IP address of the game session. To connect to a Amazon GameLift game server,
-     * an app needs both the IP address and port number.</p>
+     * <p>IP address of the instance that is running the game session. When connecting
+     * to a Amazon GameLift game server, a client needs to reference an IP address (or
+     * DNS name) and port number.</p>
      */
     inline const Aws::String& GetIpAddress() const{ return m_ipAddress; }
 
     /**
-     * <p>IP address of the game session. To connect to a Amazon GameLift game server,
-     * an app needs both the IP address and port number.</p>
+     * <p>IP address of the instance that is running the game session. When connecting
+     * to a Amazon GameLift game server, a client needs to reference an IP address (or
+     * DNS name) and port number.</p>
+     */
+    inline bool IpAddressHasBeenSet() const { return m_ipAddressHasBeenSet; }
+
+    /**
+     * <p>IP address of the instance that is running the game session. When connecting
+     * to a Amazon GameLift game server, a client needs to reference an IP address (or
+     * DNS name) and port number.</p>
      */
     inline void SetIpAddress(const Aws::String& value) { m_ipAddressHasBeenSet = true; m_ipAddress = value; }
 
     /**
-     * <p>IP address of the game session. To connect to a Amazon GameLift game server,
-     * an app needs both the IP address and port number.</p>
+     * <p>IP address of the instance that is running the game session. When connecting
+     * to a Amazon GameLift game server, a client needs to reference an IP address (or
+     * DNS name) and port number.</p>
      */
     inline void SetIpAddress(Aws::String&& value) { m_ipAddressHasBeenSet = true; m_ipAddress = std::move(value); }
 
     /**
-     * <p>IP address of the game session. To connect to a Amazon GameLift game server,
-     * an app needs both the IP address and port number.</p>
+     * <p>IP address of the instance that is running the game session. When connecting
+     * to a Amazon GameLift game server, a client needs to reference an IP address (or
+     * DNS name) and port number.</p>
      */
     inline void SetIpAddress(const char* value) { m_ipAddressHasBeenSet = true; m_ipAddress.assign(value); }
 
     /**
-     * <p>IP address of the game session. To connect to a Amazon GameLift game server,
-     * an app needs both the IP address and port number.</p>
+     * <p>IP address of the instance that is running the game session. When connecting
+     * to a Amazon GameLift game server, a client needs to reference an IP address (or
+     * DNS name) and port number.</p>
      */
     inline GameSession& WithIpAddress(const Aws::String& value) { SetIpAddress(value); return *this;}
 
     /**
-     * <p>IP address of the game session. To connect to a Amazon GameLift game server,
-     * an app needs both the IP address and port number.</p>
+     * <p>IP address of the instance that is running the game session. When connecting
+     * to a Amazon GameLift game server, a client needs to reference an IP address (or
+     * DNS name) and port number.</p>
      */
     inline GameSession& WithIpAddress(Aws::String&& value) { SetIpAddress(std::move(value)); return *this;}
 
     /**
-     * <p>IP address of the game session. To connect to a Amazon GameLift game server,
-     * an app needs both the IP address and port number.</p>
+     * <p>IP address of the instance that is running the game session. When connecting
+     * to a Amazon GameLift game server, a client needs to reference an IP address (or
+     * DNS name) and port number.</p>
      */
     inline GameSession& WithIpAddress(const char* value) { SetIpAddress(value); return *this;}
+
+
+    /**
+     * <p>DNS identifier assigned to the instance that is running the game session.
+     * Values have the following format:</p> <ul> <li> <p>TLS-enabled fleets:
+     * <code>&lt;unique identifier&gt;.&lt;region
+     * identifier&gt;.amazongamelift.com</code>.</p> </li> <li> <p>Non-TLS-enabled
+     * fleets: <code>ec2-&lt;unique identifier&gt;.compute.amazonaws.com</code>. (See
+     * <a
+     * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses">Amazon
+     * EC2 Instance IP Addressing</a>.)</p> </li> </ul> <p>When connecting to a game
+     * session that is running on a TLS-enabled fleet, you must use the DNS name, not
+     * the IP address.</p>
+     */
+    inline const Aws::String& GetDnsName() const{ return m_dnsName; }
+
+    /**
+     * <p>DNS identifier assigned to the instance that is running the game session.
+     * Values have the following format:</p> <ul> <li> <p>TLS-enabled fleets:
+     * <code>&lt;unique identifier&gt;.&lt;region
+     * identifier&gt;.amazongamelift.com</code>.</p> </li> <li> <p>Non-TLS-enabled
+     * fleets: <code>ec2-&lt;unique identifier&gt;.compute.amazonaws.com</code>. (See
+     * <a
+     * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses">Amazon
+     * EC2 Instance IP Addressing</a>.)</p> </li> </ul> <p>When connecting to a game
+     * session that is running on a TLS-enabled fleet, you must use the DNS name, not
+     * the IP address.</p>
+     */
+    inline bool DnsNameHasBeenSet() const { return m_dnsNameHasBeenSet; }
+
+    /**
+     * <p>DNS identifier assigned to the instance that is running the game session.
+     * Values have the following format:</p> <ul> <li> <p>TLS-enabled fleets:
+     * <code>&lt;unique identifier&gt;.&lt;region
+     * identifier&gt;.amazongamelift.com</code>.</p> </li> <li> <p>Non-TLS-enabled
+     * fleets: <code>ec2-&lt;unique identifier&gt;.compute.amazonaws.com</code>. (See
+     * <a
+     * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses">Amazon
+     * EC2 Instance IP Addressing</a>.)</p> </li> </ul> <p>When connecting to a game
+     * session that is running on a TLS-enabled fleet, you must use the DNS name, not
+     * the IP address.</p>
+     */
+    inline void SetDnsName(const Aws::String& value) { m_dnsNameHasBeenSet = true; m_dnsName = value; }
+
+    /**
+     * <p>DNS identifier assigned to the instance that is running the game session.
+     * Values have the following format:</p> <ul> <li> <p>TLS-enabled fleets:
+     * <code>&lt;unique identifier&gt;.&lt;region
+     * identifier&gt;.amazongamelift.com</code>.</p> </li> <li> <p>Non-TLS-enabled
+     * fleets: <code>ec2-&lt;unique identifier&gt;.compute.amazonaws.com</code>. (See
+     * <a
+     * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses">Amazon
+     * EC2 Instance IP Addressing</a>.)</p> </li> </ul> <p>When connecting to a game
+     * session that is running on a TLS-enabled fleet, you must use the DNS name, not
+     * the IP address.</p>
+     */
+    inline void SetDnsName(Aws::String&& value) { m_dnsNameHasBeenSet = true; m_dnsName = std::move(value); }
+
+    /**
+     * <p>DNS identifier assigned to the instance that is running the game session.
+     * Values have the following format:</p> <ul> <li> <p>TLS-enabled fleets:
+     * <code>&lt;unique identifier&gt;.&lt;region
+     * identifier&gt;.amazongamelift.com</code>.</p> </li> <li> <p>Non-TLS-enabled
+     * fleets: <code>ec2-&lt;unique identifier&gt;.compute.amazonaws.com</code>. (See
+     * <a
+     * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses">Amazon
+     * EC2 Instance IP Addressing</a>.)</p> </li> </ul> <p>When connecting to a game
+     * session that is running on a TLS-enabled fleet, you must use the DNS name, not
+     * the IP address.</p>
+     */
+    inline void SetDnsName(const char* value) { m_dnsNameHasBeenSet = true; m_dnsName.assign(value); }
+
+    /**
+     * <p>DNS identifier assigned to the instance that is running the game session.
+     * Values have the following format:</p> <ul> <li> <p>TLS-enabled fleets:
+     * <code>&lt;unique identifier&gt;.&lt;region
+     * identifier&gt;.amazongamelift.com</code>.</p> </li> <li> <p>Non-TLS-enabled
+     * fleets: <code>ec2-&lt;unique identifier&gt;.compute.amazonaws.com</code>. (See
+     * <a
+     * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses">Amazon
+     * EC2 Instance IP Addressing</a>.)</p> </li> </ul> <p>When connecting to a game
+     * session that is running on a TLS-enabled fleet, you must use the DNS name, not
+     * the IP address.</p>
+     */
+    inline GameSession& WithDnsName(const Aws::String& value) { SetDnsName(value); return *this;}
+
+    /**
+     * <p>DNS identifier assigned to the instance that is running the game session.
+     * Values have the following format:</p> <ul> <li> <p>TLS-enabled fleets:
+     * <code>&lt;unique identifier&gt;.&lt;region
+     * identifier&gt;.amazongamelift.com</code>.</p> </li> <li> <p>Non-TLS-enabled
+     * fleets: <code>ec2-&lt;unique identifier&gt;.compute.amazonaws.com</code>. (See
+     * <a
+     * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses">Amazon
+     * EC2 Instance IP Addressing</a>.)</p> </li> </ul> <p>When connecting to a game
+     * session that is running on a TLS-enabled fleet, you must use the DNS name, not
+     * the IP address.</p>
+     */
+    inline GameSession& WithDnsName(Aws::String&& value) { SetDnsName(std::move(value)); return *this;}
+
+    /**
+     * <p>DNS identifier assigned to the instance that is running the game session.
+     * Values have the following format:</p> <ul> <li> <p>TLS-enabled fleets:
+     * <code>&lt;unique identifier&gt;.&lt;region
+     * identifier&gt;.amazongamelift.com</code>.</p> </li> <li> <p>Non-TLS-enabled
+     * fleets: <code>ec2-&lt;unique identifier&gt;.compute.amazonaws.com</code>. (See
+     * <a
+     * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses">Amazon
+     * EC2 Instance IP Addressing</a>.)</p> </li> </ul> <p>When connecting to a game
+     * session that is running on a TLS-enabled fleet, you must use the DNS name, not
+     * the IP address.</p>
+     */
+    inline GameSession& WithDnsName(const char* value) { SetDnsName(value); return *this;}
 
 
     /**
@@ -445,6 +737,12 @@ namespace Model
      * server, an app needs both the IP address and port number.</p>
      */
     inline int GetPort() const{ return m_port; }
+
+    /**
+     * <p>Port number for the game session. To connect to a Amazon GameLift game
+     * server, an app needs both the IP address and port number.</p>
+     */
+    inline bool PortHasBeenSet() const { return m_portHasBeenSet; }
 
     /**
      * <p>Port number for the game session. To connect to a Amazon GameLift game
@@ -463,6 +761,11 @@ namespace Model
      * <p>Indicates whether or not the game session is accepting new players.</p>
      */
     inline const PlayerSessionCreationPolicy& GetPlayerSessionCreationPolicy() const{ return m_playerSessionCreationPolicy; }
+
+    /**
+     * <p>Indicates whether or not the game session is accepting new players.</p>
+     */
+    inline bool PlayerSessionCreationPolicyHasBeenSet() const { return m_playerSessionCreationPolicyHasBeenSet; }
 
     /**
      * <p>Indicates whether or not the game session is accepting new players.</p>
@@ -486,49 +789,56 @@ namespace Model
 
 
     /**
-     * <p>Unique identifier for a player. This ID is used to enforce a resource
+     * <p>A unique identifier for a player. This ID is used to enforce a resource
      * protection policy (if one exists), that limits the number of game sessions a
      * player can create.</p>
      */
     inline const Aws::String& GetCreatorId() const{ return m_creatorId; }
 
     /**
-     * <p>Unique identifier for a player. This ID is used to enforce a resource
+     * <p>A unique identifier for a player. This ID is used to enforce a resource
+     * protection policy (if one exists), that limits the number of game sessions a
+     * player can create.</p>
+     */
+    inline bool CreatorIdHasBeenSet() const { return m_creatorIdHasBeenSet; }
+
+    /**
+     * <p>A unique identifier for a player. This ID is used to enforce a resource
      * protection policy (if one exists), that limits the number of game sessions a
      * player can create.</p>
      */
     inline void SetCreatorId(const Aws::String& value) { m_creatorIdHasBeenSet = true; m_creatorId = value; }
 
     /**
-     * <p>Unique identifier for a player. This ID is used to enforce a resource
+     * <p>A unique identifier for a player. This ID is used to enforce a resource
      * protection policy (if one exists), that limits the number of game sessions a
      * player can create.</p>
      */
     inline void SetCreatorId(Aws::String&& value) { m_creatorIdHasBeenSet = true; m_creatorId = std::move(value); }
 
     /**
-     * <p>Unique identifier for a player. This ID is used to enforce a resource
+     * <p>A unique identifier for a player. This ID is used to enforce a resource
      * protection policy (if one exists), that limits the number of game sessions a
      * player can create.</p>
      */
     inline void SetCreatorId(const char* value) { m_creatorIdHasBeenSet = true; m_creatorId.assign(value); }
 
     /**
-     * <p>Unique identifier for a player. This ID is used to enforce a resource
+     * <p>A unique identifier for a player. This ID is used to enforce a resource
      * protection policy (if one exists), that limits the number of game sessions a
      * player can create.</p>
      */
     inline GameSession& WithCreatorId(const Aws::String& value) { SetCreatorId(value); return *this;}
 
     /**
-     * <p>Unique identifier for a player. This ID is used to enforce a resource
+     * <p>A unique identifier for a player. This ID is used to enforce a resource
      * protection policy (if one exists), that limits the number of game sessions a
      * player can create.</p>
      */
     inline GameSession& WithCreatorId(Aws::String&& value) { SetCreatorId(std::move(value)); return *this;}
 
     /**
-     * <p>Unique identifier for a player. This ID is used to enforce a resource
+     * <p>A unique identifier for a player. This ID is used to enforce a resource
      * protection policy (if one exists), that limits the number of game sessions a
      * player can create.</p>
      */
@@ -536,67 +846,181 @@ namespace Model
 
 
     /**
-     * <p>Set of developer-defined game session properties, formatted as a single
-     * string value. This data is included in the <a>GameSession</a> object, which is
-     * passed to the game server with a request to start a new game session (see <a
-     * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * <p>Set of custom game session properties, formatted as a single string value.
+     * This data is passed to a game server process in the <a>GameSession</a> object
+     * with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
      * a Game Session</a>).</p>
      */
     inline const Aws::String& GetGameSessionData() const{ return m_gameSessionData; }
 
     /**
-     * <p>Set of developer-defined game session properties, formatted as a single
-     * string value. This data is included in the <a>GameSession</a> object, which is
-     * passed to the game server with a request to start a new game session (see <a
-     * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * <p>Set of custom game session properties, formatted as a single string value.
+     * This data is passed to a game server process in the <a>GameSession</a> object
+     * with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * a Game Session</a>).</p>
+     */
+    inline bool GameSessionDataHasBeenSet() const { return m_gameSessionDataHasBeenSet; }
+
+    /**
+     * <p>Set of custom game session properties, formatted as a single string value.
+     * This data is passed to a game server process in the <a>GameSession</a> object
+     * with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
      * a Game Session</a>).</p>
      */
     inline void SetGameSessionData(const Aws::String& value) { m_gameSessionDataHasBeenSet = true; m_gameSessionData = value; }
 
     /**
-     * <p>Set of developer-defined game session properties, formatted as a single
-     * string value. This data is included in the <a>GameSession</a> object, which is
-     * passed to the game server with a request to start a new game session (see <a
-     * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * <p>Set of custom game session properties, formatted as a single string value.
+     * This data is passed to a game server process in the <a>GameSession</a> object
+     * with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
      * a Game Session</a>).</p>
      */
     inline void SetGameSessionData(Aws::String&& value) { m_gameSessionDataHasBeenSet = true; m_gameSessionData = std::move(value); }
 
     /**
-     * <p>Set of developer-defined game session properties, formatted as a single
-     * string value. This data is included in the <a>GameSession</a> object, which is
-     * passed to the game server with a request to start a new game session (see <a
-     * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * <p>Set of custom game session properties, formatted as a single string value.
+     * This data is passed to a game server process in the <a>GameSession</a> object
+     * with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
      * a Game Session</a>).</p>
      */
     inline void SetGameSessionData(const char* value) { m_gameSessionDataHasBeenSet = true; m_gameSessionData.assign(value); }
 
     /**
-     * <p>Set of developer-defined game session properties, formatted as a single
-     * string value. This data is included in the <a>GameSession</a> object, which is
-     * passed to the game server with a request to start a new game session (see <a
-     * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * <p>Set of custom game session properties, formatted as a single string value.
+     * This data is passed to a game server process in the <a>GameSession</a> object
+     * with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
      * a Game Session</a>).</p>
      */
     inline GameSession& WithGameSessionData(const Aws::String& value) { SetGameSessionData(value); return *this;}
 
     /**
-     * <p>Set of developer-defined game session properties, formatted as a single
-     * string value. This data is included in the <a>GameSession</a> object, which is
-     * passed to the game server with a request to start a new game session (see <a
-     * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * <p>Set of custom game session properties, formatted as a single string value.
+     * This data is passed to a game server process in the <a>GameSession</a> object
+     * with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
      * a Game Session</a>).</p>
      */
     inline GameSession& WithGameSessionData(Aws::String&& value) { SetGameSessionData(std::move(value)); return *this;}
 
     /**
-     * <p>Set of developer-defined game session properties, formatted as a single
-     * string value. This data is included in the <a>GameSession</a> object, which is
-     * passed to the game server with a request to start a new game session (see <a
-     * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
+     * <p>Set of custom game session properties, formatted as a single string value.
+     * This data is passed to a game server process in the <a>GameSession</a> object
+     * with a request to start a new game session (see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession">Start
      * a Game Session</a>).</p>
      */
     inline GameSession& WithGameSessionData(const char* value) { SetGameSessionData(value); return *this;}
+
+
+    /**
+     * <p>Information about the matchmaking process that was used to create the game
+     * session. It is in JSON syntax, formatted as a string. In addition the
+     * matchmaking configuration used, it contains data on all players assigned to the
+     * match, including player attributes and team assignments. For more details on
+     * matchmaker data, see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data">Match
+     * Data</a>. Matchmaker data is useful when requesting match backfills, and is
+     * updated whenever new players are added during a successful backfill (see
+     * <a>StartMatchBackfill</a>). </p>
+     */
+    inline const Aws::String& GetMatchmakerData() const{ return m_matchmakerData; }
+
+    /**
+     * <p>Information about the matchmaking process that was used to create the game
+     * session. It is in JSON syntax, formatted as a string. In addition the
+     * matchmaking configuration used, it contains data on all players assigned to the
+     * match, including player attributes and team assignments. For more details on
+     * matchmaker data, see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data">Match
+     * Data</a>. Matchmaker data is useful when requesting match backfills, and is
+     * updated whenever new players are added during a successful backfill (see
+     * <a>StartMatchBackfill</a>). </p>
+     */
+    inline bool MatchmakerDataHasBeenSet() const { return m_matchmakerDataHasBeenSet; }
+
+    /**
+     * <p>Information about the matchmaking process that was used to create the game
+     * session. It is in JSON syntax, formatted as a string. In addition the
+     * matchmaking configuration used, it contains data on all players assigned to the
+     * match, including player attributes and team assignments. For more details on
+     * matchmaker data, see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data">Match
+     * Data</a>. Matchmaker data is useful when requesting match backfills, and is
+     * updated whenever new players are added during a successful backfill (see
+     * <a>StartMatchBackfill</a>). </p>
+     */
+    inline void SetMatchmakerData(const Aws::String& value) { m_matchmakerDataHasBeenSet = true; m_matchmakerData = value; }
+
+    /**
+     * <p>Information about the matchmaking process that was used to create the game
+     * session. It is in JSON syntax, formatted as a string. In addition the
+     * matchmaking configuration used, it contains data on all players assigned to the
+     * match, including player attributes and team assignments. For more details on
+     * matchmaker data, see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data">Match
+     * Data</a>. Matchmaker data is useful when requesting match backfills, and is
+     * updated whenever new players are added during a successful backfill (see
+     * <a>StartMatchBackfill</a>). </p>
+     */
+    inline void SetMatchmakerData(Aws::String&& value) { m_matchmakerDataHasBeenSet = true; m_matchmakerData = std::move(value); }
+
+    /**
+     * <p>Information about the matchmaking process that was used to create the game
+     * session. It is in JSON syntax, formatted as a string. In addition the
+     * matchmaking configuration used, it contains data on all players assigned to the
+     * match, including player attributes and team assignments. For more details on
+     * matchmaker data, see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data">Match
+     * Data</a>. Matchmaker data is useful when requesting match backfills, and is
+     * updated whenever new players are added during a successful backfill (see
+     * <a>StartMatchBackfill</a>). </p>
+     */
+    inline void SetMatchmakerData(const char* value) { m_matchmakerDataHasBeenSet = true; m_matchmakerData.assign(value); }
+
+    /**
+     * <p>Information about the matchmaking process that was used to create the game
+     * session. It is in JSON syntax, formatted as a string. In addition the
+     * matchmaking configuration used, it contains data on all players assigned to the
+     * match, including player attributes and team assignments. For more details on
+     * matchmaker data, see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data">Match
+     * Data</a>. Matchmaker data is useful when requesting match backfills, and is
+     * updated whenever new players are added during a successful backfill (see
+     * <a>StartMatchBackfill</a>). </p>
+     */
+    inline GameSession& WithMatchmakerData(const Aws::String& value) { SetMatchmakerData(value); return *this;}
+
+    /**
+     * <p>Information about the matchmaking process that was used to create the game
+     * session. It is in JSON syntax, formatted as a string. In addition the
+     * matchmaking configuration used, it contains data on all players assigned to the
+     * match, including player attributes and team assignments. For more details on
+     * matchmaker data, see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data">Match
+     * Data</a>. Matchmaker data is useful when requesting match backfills, and is
+     * updated whenever new players are added during a successful backfill (see
+     * <a>StartMatchBackfill</a>). </p>
+     */
+    inline GameSession& WithMatchmakerData(Aws::String&& value) { SetMatchmakerData(std::move(value)); return *this;}
+
+    /**
+     * <p>Information about the matchmaking process that was used to create the game
+     * session. It is in JSON syntax, formatted as a string. In addition the
+     * matchmaking configuration used, it contains data on all players assigned to the
+     * match, including player attributes and team assignments. For more details on
+     * matchmaker data, see <a
+     * href="https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data">Match
+     * Data</a>. Matchmaker data is useful when requesting match backfills, and is
+     * updated whenever new players are added during a successful backfill (see
+     * <a>StartMatchBackfill</a>). </p>
+     */
+    inline GameSession& WithMatchmakerData(const char* value) { SetMatchmakerData(value); return *this;}
 
   private:
 
@@ -608,6 +1032,9 @@ namespace Model
 
     Aws::String m_fleetId;
     bool m_fleetIdHasBeenSet;
+
+    Aws::String m_fleetArn;
+    bool m_fleetArnHasBeenSet;
 
     Aws::Utils::DateTime m_creationTime;
     bool m_creationTimeHasBeenSet;
@@ -624,11 +1051,17 @@ namespace Model
     GameSessionStatus m_status;
     bool m_statusHasBeenSet;
 
+    GameSessionStatusReason m_statusReason;
+    bool m_statusReasonHasBeenSet;
+
     Aws::Vector<GameProperty> m_gameProperties;
     bool m_gamePropertiesHasBeenSet;
 
     Aws::String m_ipAddress;
     bool m_ipAddressHasBeenSet;
+
+    Aws::String m_dnsName;
+    bool m_dnsNameHasBeenSet;
 
     int m_port;
     bool m_portHasBeenSet;
@@ -641,6 +1074,9 @@ namespace Model
 
     Aws::String m_gameSessionData;
     bool m_gameSessionDataHasBeenSet;
+
+    Aws::String m_matchmakerData;
+    bool m_matchmakerDataHasBeenSet;
   };
 
 } // namespace Model

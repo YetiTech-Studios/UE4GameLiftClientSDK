@@ -35,7 +35,7 @@ namespace Model
   {
   public:
     DescribeAliasRequest();
-    
+
     // Service request name is the Operation name which will send this request out,
     // each operation should has unique request name, so that we can get operation's name from this request.
     // Note: this is not true for response, multiple operations may have the same response name,
@@ -48,44 +48,50 @@ namespace Model
 
 
     /**
-     * <p>Unique identifier for a fleet alias. Specify the alias you want to
-     * retrieve.</p>
+     * <p>The unique identifier for the fleet alias that you want to retrieve. You can
+     * use either the alias ID or ARN value. </p>
      */
     inline const Aws::String& GetAliasId() const{ return m_aliasId; }
 
     /**
-     * <p>Unique identifier for a fleet alias. Specify the alias you want to
-     * retrieve.</p>
+     * <p>The unique identifier for the fleet alias that you want to retrieve. You can
+     * use either the alias ID or ARN value. </p>
+     */
+    inline bool AliasIdHasBeenSet() const { return m_aliasIdHasBeenSet; }
+
+    /**
+     * <p>The unique identifier for the fleet alias that you want to retrieve. You can
+     * use either the alias ID or ARN value. </p>
      */
     inline void SetAliasId(const Aws::String& value) { m_aliasIdHasBeenSet = true; m_aliasId = value; }
 
     /**
-     * <p>Unique identifier for a fleet alias. Specify the alias you want to
-     * retrieve.</p>
+     * <p>The unique identifier for the fleet alias that you want to retrieve. You can
+     * use either the alias ID or ARN value. </p>
      */
     inline void SetAliasId(Aws::String&& value) { m_aliasIdHasBeenSet = true; m_aliasId = std::move(value); }
 
     /**
-     * <p>Unique identifier for a fleet alias. Specify the alias you want to
-     * retrieve.</p>
+     * <p>The unique identifier for the fleet alias that you want to retrieve. You can
+     * use either the alias ID or ARN value. </p>
      */
     inline void SetAliasId(const char* value) { m_aliasIdHasBeenSet = true; m_aliasId.assign(value); }
 
     /**
-     * <p>Unique identifier for a fleet alias. Specify the alias you want to
-     * retrieve.</p>
+     * <p>The unique identifier for the fleet alias that you want to retrieve. You can
+     * use either the alias ID or ARN value. </p>
      */
     inline DescribeAliasRequest& WithAliasId(const Aws::String& value) { SetAliasId(value); return *this;}
 
     /**
-     * <p>Unique identifier for a fleet alias. Specify the alias you want to
-     * retrieve.</p>
+     * <p>The unique identifier for the fleet alias that you want to retrieve. You can
+     * use either the alias ID or ARN value. </p>
      */
     inline DescribeAliasRequest& WithAliasId(Aws::String&& value) { SetAliasId(std::move(value)); return *this;}
 
     /**
-     * <p>Unique identifier for a fleet alias. Specify the alias you want to
-     * retrieve.</p>
+     * <p>The unique identifier for the fleet alias that you want to retrieve. You can
+     * use either the alias ID or ARN value. </p>
      */
     inline DescribeAliasRequest& WithAliasId(const char* value) { SetAliasId(value); return *this;}
 

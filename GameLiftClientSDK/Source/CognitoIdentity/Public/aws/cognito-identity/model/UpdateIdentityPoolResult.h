@@ -140,6 +140,34 @@ namespace Model
 
 
     /**
+     * <p>Enables or disables the Basic (Classic) authentication flow. For more
+     * information, see <a
+     * href="https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html">Identity
+     * Pools (Federated Identities) Authentication Flow</a> in the <i>Amazon Cognito
+     * Developer Guide</i>.</p>
+     */
+    inline bool GetAllowClassicFlow() const{ return m_allowClassicFlow; }
+
+    /**
+     * <p>Enables or disables the Basic (Classic) authentication flow. For more
+     * information, see <a
+     * href="https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html">Identity
+     * Pools (Federated Identities) Authentication Flow</a> in the <i>Amazon Cognito
+     * Developer Guide</i>.</p>
+     */
+    inline void SetAllowClassicFlow(bool value) { m_allowClassicFlow = value; }
+
+    /**
+     * <p>Enables or disables the Basic (Classic) authentication flow. For more
+     * information, see <a
+     * href="https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html">Identity
+     * Pools (Federated Identities) Authentication Flow</a> in the <i>Amazon Cognito
+     * Developer Guide</i>.</p>
+     */
+    inline UpdateIdentityPoolResult& WithAllowClassicFlow(bool value) { SetAllowClassicFlow(value); return *this;}
+
+
+    /**
      * <p>Optional key:value pairs mapping provider names to provider app IDs.</p>
      */
     inline const Aws::Map<Aws::String, Aws::String>& GetSupportedLoginProviders() const{ return m_supportedLoginProviders; }
@@ -278,44 +306,37 @@ namespace Model
 
 
     /**
-     * <p>A list representing an Amazon Cognito Identity User Pool and its client
-     * ID.</p>
+     * <p>A list representing an Amazon Cognito user pool and its client ID.</p>
      */
     inline const Aws::Vector<CognitoIdentityProvider>& GetCognitoIdentityProviders() const{ return m_cognitoIdentityProviders; }
 
     /**
-     * <p>A list representing an Amazon Cognito Identity User Pool and its client
-     * ID.</p>
+     * <p>A list representing an Amazon Cognito user pool and its client ID.</p>
      */
     inline void SetCognitoIdentityProviders(const Aws::Vector<CognitoIdentityProvider>& value) { m_cognitoIdentityProviders = value; }
 
     /**
-     * <p>A list representing an Amazon Cognito Identity User Pool and its client
-     * ID.</p>
+     * <p>A list representing an Amazon Cognito user pool and its client ID.</p>
      */
     inline void SetCognitoIdentityProviders(Aws::Vector<CognitoIdentityProvider>&& value) { m_cognitoIdentityProviders = std::move(value); }
 
     /**
-     * <p>A list representing an Amazon Cognito Identity User Pool and its client
-     * ID.</p>
+     * <p>A list representing an Amazon Cognito user pool and its client ID.</p>
      */
     inline UpdateIdentityPoolResult& WithCognitoIdentityProviders(const Aws::Vector<CognitoIdentityProvider>& value) { SetCognitoIdentityProviders(value); return *this;}
 
     /**
-     * <p>A list representing an Amazon Cognito Identity User Pool and its client
-     * ID.</p>
+     * <p>A list representing an Amazon Cognito user pool and its client ID.</p>
      */
     inline UpdateIdentityPoolResult& WithCognitoIdentityProviders(Aws::Vector<CognitoIdentityProvider>&& value) { SetCognitoIdentityProviders(std::move(value)); return *this;}
 
     /**
-     * <p>A list representing an Amazon Cognito Identity User Pool and its client
-     * ID.</p>
+     * <p>A list representing an Amazon Cognito user pool and its client ID.</p>
      */
     inline UpdateIdentityPoolResult& AddCognitoIdentityProviders(const CognitoIdentityProvider& value) { m_cognitoIdentityProviders.push_back(value); return *this; }
 
     /**
-     * <p>A list representing an Amazon Cognito Identity User Pool and its client
-     * ID.</p>
+     * <p>A list representing an Amazon Cognito user pool and its client ID.</p>
      */
     inline UpdateIdentityPoolResult& AddCognitoIdentityProviders(CognitoIdentityProvider&& value) { m_cognitoIdentityProviders.push_back(std::move(value)); return *this; }
 
@@ -368,6 +389,91 @@ namespace Model
      */
     inline UpdateIdentityPoolResult& AddSamlProviderARNs(const char* value) { m_samlProviderARNs.push_back(value); return *this; }
 
+
+    /**
+     * <p>The tags that are assigned to the identity pool. A tag is a label that you
+     * can apply to identity pools to categorize and manage them in different ways,
+     * such as by purpose, owner, environment, or other criteria.</p>
+     */
+    inline const Aws::Map<Aws::String, Aws::String>& GetIdentityPoolTags() const{ return m_identityPoolTags; }
+
+    /**
+     * <p>The tags that are assigned to the identity pool. A tag is a label that you
+     * can apply to identity pools to categorize and manage them in different ways,
+     * such as by purpose, owner, environment, or other criteria.</p>
+     */
+    inline void SetIdentityPoolTags(const Aws::Map<Aws::String, Aws::String>& value) { m_identityPoolTags = value; }
+
+    /**
+     * <p>The tags that are assigned to the identity pool. A tag is a label that you
+     * can apply to identity pools to categorize and manage them in different ways,
+     * such as by purpose, owner, environment, or other criteria.</p>
+     */
+    inline void SetIdentityPoolTags(Aws::Map<Aws::String, Aws::String>&& value) { m_identityPoolTags = std::move(value); }
+
+    /**
+     * <p>The tags that are assigned to the identity pool. A tag is a label that you
+     * can apply to identity pools to categorize and manage them in different ways,
+     * such as by purpose, owner, environment, or other criteria.</p>
+     */
+    inline UpdateIdentityPoolResult& WithIdentityPoolTags(const Aws::Map<Aws::String, Aws::String>& value) { SetIdentityPoolTags(value); return *this;}
+
+    /**
+     * <p>The tags that are assigned to the identity pool. A tag is a label that you
+     * can apply to identity pools to categorize and manage them in different ways,
+     * such as by purpose, owner, environment, or other criteria.</p>
+     */
+    inline UpdateIdentityPoolResult& WithIdentityPoolTags(Aws::Map<Aws::String, Aws::String>&& value) { SetIdentityPoolTags(std::move(value)); return *this;}
+
+    /**
+     * <p>The tags that are assigned to the identity pool. A tag is a label that you
+     * can apply to identity pools to categorize and manage them in different ways,
+     * such as by purpose, owner, environment, or other criteria.</p>
+     */
+    inline UpdateIdentityPoolResult& AddIdentityPoolTags(const Aws::String& key, const Aws::String& value) { m_identityPoolTags.emplace(key, value); return *this; }
+
+    /**
+     * <p>The tags that are assigned to the identity pool. A tag is a label that you
+     * can apply to identity pools to categorize and manage them in different ways,
+     * such as by purpose, owner, environment, or other criteria.</p>
+     */
+    inline UpdateIdentityPoolResult& AddIdentityPoolTags(Aws::String&& key, const Aws::String& value) { m_identityPoolTags.emplace(std::move(key), value); return *this; }
+
+    /**
+     * <p>The tags that are assigned to the identity pool. A tag is a label that you
+     * can apply to identity pools to categorize and manage them in different ways,
+     * such as by purpose, owner, environment, or other criteria.</p>
+     */
+    inline UpdateIdentityPoolResult& AddIdentityPoolTags(const Aws::String& key, Aws::String&& value) { m_identityPoolTags.emplace(key, std::move(value)); return *this; }
+
+    /**
+     * <p>The tags that are assigned to the identity pool. A tag is a label that you
+     * can apply to identity pools to categorize and manage them in different ways,
+     * such as by purpose, owner, environment, or other criteria.</p>
+     */
+    inline UpdateIdentityPoolResult& AddIdentityPoolTags(Aws::String&& key, Aws::String&& value) { m_identityPoolTags.emplace(std::move(key), std::move(value)); return *this; }
+
+    /**
+     * <p>The tags that are assigned to the identity pool. A tag is a label that you
+     * can apply to identity pools to categorize and manage them in different ways,
+     * such as by purpose, owner, environment, or other criteria.</p>
+     */
+    inline UpdateIdentityPoolResult& AddIdentityPoolTags(const char* key, Aws::String&& value) { m_identityPoolTags.emplace(key, std::move(value)); return *this; }
+
+    /**
+     * <p>The tags that are assigned to the identity pool. A tag is a label that you
+     * can apply to identity pools to categorize and manage them in different ways,
+     * such as by purpose, owner, environment, or other criteria.</p>
+     */
+    inline UpdateIdentityPoolResult& AddIdentityPoolTags(Aws::String&& key, const char* value) { m_identityPoolTags.emplace(std::move(key), value); return *this; }
+
+    /**
+     * <p>The tags that are assigned to the identity pool. A tag is a label that you
+     * can apply to identity pools to categorize and manage them in different ways,
+     * such as by purpose, owner, environment, or other criteria.</p>
+     */
+    inline UpdateIdentityPoolResult& AddIdentityPoolTags(const char* key, const char* value) { m_identityPoolTags.emplace(key, value); return *this; }
+
   private:
 
     Aws::String m_identityPoolId;
@@ -375,6 +481,8 @@ namespace Model
     Aws::String m_identityPoolName;
 
     bool m_allowUnauthenticatedIdentities;
+
+    bool m_allowClassicFlow;
 
     Aws::Map<Aws::String, Aws::String> m_supportedLoginProviders;
 
@@ -385,6 +493,8 @@ namespace Model
     Aws::Vector<CognitoIdentityProvider> m_cognitoIdentityProviders;
 
     Aws::Vector<Aws::String> m_samlProviderARNs;
+
+    Aws::Map<Aws::String, Aws::String> m_identityPoolTags;
   };
 
 } // namespace Model

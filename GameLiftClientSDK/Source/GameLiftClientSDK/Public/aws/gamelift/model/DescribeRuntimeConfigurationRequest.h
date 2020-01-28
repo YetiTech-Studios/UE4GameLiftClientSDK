@@ -35,7 +35,7 @@ namespace Model
   {
   public:
     DescribeRuntimeConfigurationRequest();
-    
+
     // Service request name is the Operation name which will send this request out,
     // each operation should has unique request name, so that we can get operation's name from this request.
     // Note: this is not true for response, multiple operations may have the same response name,
@@ -48,37 +48,50 @@ namespace Model
 
 
     /**
-     * <p>Unique identifier for a fleet to get the run-time configuration for.</p>
+     * <p>A unique identifier for a fleet to get the runtime configuration for. You can
+     * use either the fleet ID or ARN value.</p>
      */
     inline const Aws::String& GetFleetId() const{ return m_fleetId; }
 
     /**
-     * <p>Unique identifier for a fleet to get the run-time configuration for.</p>
+     * <p>A unique identifier for a fleet to get the runtime configuration for. You can
+     * use either the fleet ID or ARN value.</p>
+     */
+    inline bool FleetIdHasBeenSet() const { return m_fleetIdHasBeenSet; }
+
+    /**
+     * <p>A unique identifier for a fleet to get the runtime configuration for. You can
+     * use either the fleet ID or ARN value.</p>
      */
     inline void SetFleetId(const Aws::String& value) { m_fleetIdHasBeenSet = true; m_fleetId = value; }
 
     /**
-     * <p>Unique identifier for a fleet to get the run-time configuration for.</p>
+     * <p>A unique identifier for a fleet to get the runtime configuration for. You can
+     * use either the fleet ID or ARN value.</p>
      */
     inline void SetFleetId(Aws::String&& value) { m_fleetIdHasBeenSet = true; m_fleetId = std::move(value); }
 
     /**
-     * <p>Unique identifier for a fleet to get the run-time configuration for.</p>
+     * <p>A unique identifier for a fleet to get the runtime configuration for. You can
+     * use either the fleet ID or ARN value.</p>
      */
     inline void SetFleetId(const char* value) { m_fleetIdHasBeenSet = true; m_fleetId.assign(value); }
 
     /**
-     * <p>Unique identifier for a fleet to get the run-time configuration for.</p>
+     * <p>A unique identifier for a fleet to get the runtime configuration for. You can
+     * use either the fleet ID or ARN value.</p>
      */
     inline DescribeRuntimeConfigurationRequest& WithFleetId(const Aws::String& value) { SetFleetId(value); return *this;}
 
     /**
-     * <p>Unique identifier for a fleet to get the run-time configuration for.</p>
+     * <p>A unique identifier for a fleet to get the runtime configuration for. You can
+     * use either the fleet ID or ARN value.</p>
      */
     inline DescribeRuntimeConfigurationRequest& WithFleetId(Aws::String&& value) { SetFleetId(std::move(value)); return *this;}
 
     /**
-     * <p>Unique identifier for a fleet to get the run-time configuration for.</p>
+     * <p>A unique identifier for a fleet to get the runtime configuration for. You can
+     * use either the fleet ID or ARN value.</p>
      */
     inline DescribeRuntimeConfigurationRequest& WithFleetId(const char* value) { SetFleetId(value); return *this;}
 

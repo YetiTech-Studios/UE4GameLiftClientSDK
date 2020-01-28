@@ -35,7 +35,7 @@ namespace Model
   {
   public:
     SearchGameSessionsRequest();
-    
+
     // Service request name is the Operation name which will send this request out,
     // each operation should has unique request name, so that we can get operation's name from this request.
     // Note: this is not true for response, multiple operations may have the same response name,
@@ -48,94 +48,115 @@ namespace Model
 
 
     /**
-     * <p>Unique identifier for a fleet to search for active game sessions. Each
-     * request must reference either a fleet ID or alias ID, but not both.</p>
+     * <p>A unique identifier for a fleet to search for active game sessions. You can
+     * use either the fleet ID or ARN value. Each request must reference either a fleet
+     * ID or alias ID, but not both.</p>
      */
     inline const Aws::String& GetFleetId() const{ return m_fleetId; }
 
     /**
-     * <p>Unique identifier for a fleet to search for active game sessions. Each
-     * request must reference either a fleet ID or alias ID, but not both.</p>
+     * <p>A unique identifier for a fleet to search for active game sessions. You can
+     * use either the fleet ID or ARN value. Each request must reference either a fleet
+     * ID or alias ID, but not both.</p>
+     */
+    inline bool FleetIdHasBeenSet() const { return m_fleetIdHasBeenSet; }
+
+    /**
+     * <p>A unique identifier for a fleet to search for active game sessions. You can
+     * use either the fleet ID or ARN value. Each request must reference either a fleet
+     * ID or alias ID, but not both.</p>
      */
     inline void SetFleetId(const Aws::String& value) { m_fleetIdHasBeenSet = true; m_fleetId = value; }
 
     /**
-     * <p>Unique identifier for a fleet to search for active game sessions. Each
-     * request must reference either a fleet ID or alias ID, but not both.</p>
+     * <p>A unique identifier for a fleet to search for active game sessions. You can
+     * use either the fleet ID or ARN value. Each request must reference either a fleet
+     * ID or alias ID, but not both.</p>
      */
     inline void SetFleetId(Aws::String&& value) { m_fleetIdHasBeenSet = true; m_fleetId = std::move(value); }
 
     /**
-     * <p>Unique identifier for a fleet to search for active game sessions. Each
-     * request must reference either a fleet ID or alias ID, but not both.</p>
+     * <p>A unique identifier for a fleet to search for active game sessions. You can
+     * use either the fleet ID or ARN value. Each request must reference either a fleet
+     * ID or alias ID, but not both.</p>
      */
     inline void SetFleetId(const char* value) { m_fleetIdHasBeenSet = true; m_fleetId.assign(value); }
 
     /**
-     * <p>Unique identifier for a fleet to search for active game sessions. Each
-     * request must reference either a fleet ID or alias ID, but not both.</p>
+     * <p>A unique identifier for a fleet to search for active game sessions. You can
+     * use either the fleet ID or ARN value. Each request must reference either a fleet
+     * ID or alias ID, but not both.</p>
      */
     inline SearchGameSessionsRequest& WithFleetId(const Aws::String& value) { SetFleetId(value); return *this;}
 
     /**
-     * <p>Unique identifier for a fleet to search for active game sessions. Each
-     * request must reference either a fleet ID or alias ID, but not both.</p>
+     * <p>A unique identifier for a fleet to search for active game sessions. You can
+     * use either the fleet ID or ARN value. Each request must reference either a fleet
+     * ID or alias ID, but not both.</p>
      */
     inline SearchGameSessionsRequest& WithFleetId(Aws::String&& value) { SetFleetId(std::move(value)); return *this;}
 
     /**
-     * <p>Unique identifier for a fleet to search for active game sessions. Each
-     * request must reference either a fleet ID or alias ID, but not both.</p>
+     * <p>A unique identifier for a fleet to search for active game sessions. You can
+     * use either the fleet ID or ARN value. Each request must reference either a fleet
+     * ID or alias ID, but not both.</p>
      */
     inline SearchGameSessionsRequest& WithFleetId(const char* value) { SetFleetId(value); return *this;}
 
 
     /**
-     * <p>Unique identifier for an alias associated with the fleet to search for active
-     * game sessions. Each request must reference either a fleet ID or alias ID, but
-     * not both.</p>
+     * <p>A unique identifier for an alias associated with the fleet to search for
+     * active game sessions. You can use either the alias ID or ARN value. Each request
+     * must reference either a fleet ID or alias ID, but not both.</p>
      */
     inline const Aws::String& GetAliasId() const{ return m_aliasId; }
 
     /**
-     * <p>Unique identifier for an alias associated with the fleet to search for active
-     * game sessions. Each request must reference either a fleet ID or alias ID, but
-     * not both.</p>
+     * <p>A unique identifier for an alias associated with the fleet to search for
+     * active game sessions. You can use either the alias ID or ARN value. Each request
+     * must reference either a fleet ID or alias ID, but not both.</p>
+     */
+    inline bool AliasIdHasBeenSet() const { return m_aliasIdHasBeenSet; }
+
+    /**
+     * <p>A unique identifier for an alias associated with the fleet to search for
+     * active game sessions. You can use either the alias ID or ARN value. Each request
+     * must reference either a fleet ID or alias ID, but not both.</p>
      */
     inline void SetAliasId(const Aws::String& value) { m_aliasIdHasBeenSet = true; m_aliasId = value; }
 
     /**
-     * <p>Unique identifier for an alias associated with the fleet to search for active
-     * game sessions. Each request must reference either a fleet ID or alias ID, but
-     * not both.</p>
+     * <p>A unique identifier for an alias associated with the fleet to search for
+     * active game sessions. You can use either the alias ID or ARN value. Each request
+     * must reference either a fleet ID or alias ID, but not both.</p>
      */
     inline void SetAliasId(Aws::String&& value) { m_aliasIdHasBeenSet = true; m_aliasId = std::move(value); }
 
     /**
-     * <p>Unique identifier for an alias associated with the fleet to search for active
-     * game sessions. Each request must reference either a fleet ID or alias ID, but
-     * not both.</p>
+     * <p>A unique identifier for an alias associated with the fleet to search for
+     * active game sessions. You can use either the alias ID or ARN value. Each request
+     * must reference either a fleet ID or alias ID, but not both.</p>
      */
     inline void SetAliasId(const char* value) { m_aliasIdHasBeenSet = true; m_aliasId.assign(value); }
 
     /**
-     * <p>Unique identifier for an alias associated with the fleet to search for active
-     * game sessions. Each request must reference either a fleet ID or alias ID, but
-     * not both.</p>
+     * <p>A unique identifier for an alias associated with the fleet to search for
+     * active game sessions. You can use either the alias ID or ARN value. Each request
+     * must reference either a fleet ID or alias ID, but not both.</p>
      */
     inline SearchGameSessionsRequest& WithAliasId(const Aws::String& value) { SetAliasId(value); return *this;}
 
     /**
-     * <p>Unique identifier for an alias associated with the fleet to search for active
-     * game sessions. Each request must reference either a fleet ID or alias ID, but
-     * not both.</p>
+     * <p>A unique identifier for an alias associated with the fleet to search for
+     * active game sessions. You can use either the alias ID or ARN value. Each request
+     * must reference either a fleet ID or alias ID, but not both.</p>
      */
     inline SearchGameSessionsRequest& WithAliasId(Aws::String&& value) { SetAliasId(std::move(value)); return *this;}
 
     /**
-     * <p>Unique identifier for an alias associated with the fleet to search for active
-     * game sessions. Each request must reference either a fleet ID or alias ID, but
-     * not both.</p>
+     * <p>A unique identifier for an alias associated with the fleet to search for
+     * active game sessions. You can use either the alias ID or ARN value. Each request
+     * must reference either a fleet ID or alias ID, but not both.</p>
      */
     inline SearchGameSessionsRequest& WithAliasId(const char* value) { SetAliasId(value); return *this;}
 
@@ -147,13 +168,14 @@ namespace Model
      * contain one or multiple conditions. Each condition consists of the
      * following:</p> <ul> <li> <p> <b>Operand</b> -- Name of a game session attribute.
      * Valid values are <code>gameSessionName</code>, <code>gameSessionId</code>,
+     * <code>gameSessionProperties</code>, <code>maximumSessions</code>,
      * <code>creationTimeMillis</code>, <code>playerSessionCount</code>,
-     * <code>maximumSessions</code>, <code>hasAvailablePlayerSessions</code>.</p> </li>
-     * <li> <p> <b>Comparator</b> -- Valid comparators are: <code>=</code>,
-     * <code>&lt;&gt;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
-     * <code>&gt;=</code>. </p> </li> <li> <p> <b>Value</b> -- Value to be searched
-     * for. Values can be numbers, boolean values (true/false) or strings. String
-     * values are case sensitive, enclosed in single quotes. Special characters must be
+     * <code>hasAvailablePlayerSessions</code>.</p> </li> <li> <p> <b>Comparator</b> --
+     * Valid comparators are: <code>=</code>, <code>&lt;&gt;</code>, <code>&lt;</code>,
+     * <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>. </p> </li> <li> <p>
+     * <b>Value</b> -- Value to be searched for. Values may be numbers, boolean values
+     * (true/false) or strings depending on the operand. String values are case
+     * sensitive and must be enclosed in single quotes. Special characters must be
      * escaped. Boolean and string values can only be used with the comparators
      * <code>=</code> and <code>&lt;&gt;</code>. For example, the following filter
      * expression searches on <code>gameSessionName</code>: "<code>FilterExpression":
@@ -179,13 +201,47 @@ namespace Model
      * contain one or multiple conditions. Each condition consists of the
      * following:</p> <ul> <li> <p> <b>Operand</b> -- Name of a game session attribute.
      * Valid values are <code>gameSessionName</code>, <code>gameSessionId</code>,
+     * <code>gameSessionProperties</code>, <code>maximumSessions</code>,
      * <code>creationTimeMillis</code>, <code>playerSessionCount</code>,
-     * <code>maximumSessions</code>, <code>hasAvailablePlayerSessions</code>.</p> </li>
-     * <li> <p> <b>Comparator</b> -- Valid comparators are: <code>=</code>,
+     * <code>hasAvailablePlayerSessions</code>.</p> </li> <li> <p> <b>Comparator</b> --
+     * Valid comparators are: <code>=</code>, <code>&lt;&gt;</code>, <code>&lt;</code>,
+     * <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>. </p> </li> <li> <p>
+     * <b>Value</b> -- Value to be searched for. Values may be numbers, boolean values
+     * (true/false) or strings depending on the operand. String values are case
+     * sensitive and must be enclosed in single quotes. Special characters must be
+     * escaped. Boolean and string values can only be used with the comparators
+     * <code>=</code> and <code>&lt;&gt;</code>. For example, the following filter
+     * expression searches on <code>gameSessionName</code>: "<code>FilterExpression":
+     * "gameSessionName = 'Matt\\'s Awesome Game 1'"</code>. </p> </li> </ul> <p>To
+     * chain multiple conditions in a single expression, use the logical keywords
+     * <code>AND</code>, <code>OR</code>, and <code>NOT</code> and parentheses as
+     * needed. For example: <code>x AND y AND NOT z</code>, <code>NOT (x OR
+     * y)</code>.</p> <p>Session search evaluates conditions from left to right using
+     * the following precedence rules:</p> <ol> <li> <p> <code>=</code>,
      * <code>&lt;&gt;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
-     * <code>&gt;=</code>. </p> </li> <li> <p> <b>Value</b> -- Value to be searched
-     * for. Values can be numbers, boolean values (true/false) or strings. String
-     * values are case sensitive, enclosed in single quotes. Special characters must be
+     * <code>&gt;=</code> </p> </li> <li> <p>Parentheses</p> </li> <li> <p>NOT</p>
+     * </li> <li> <p>AND</p> </li> <li> <p>OR</p> </li> </ol> <p>For example, this
+     * filter expression retrieves game sessions hosting at least ten players that have
+     * an open player slot: <code>"maximumSessions&gt;=10 AND
+     * hasAvailablePlayerSessions=true"</code>. </p>
+     */
+    inline bool FilterExpressionHasBeenSet() const { return m_filterExpressionHasBeenSet; }
+
+    /**
+     * <p>String containing the search criteria for the session search. If no filter
+     * expression is included, the request returns results for all game sessions in the
+     * fleet that are in <code>ACTIVE</code> status.</p> <p>A filter expression can
+     * contain one or multiple conditions. Each condition consists of the
+     * following:</p> <ul> <li> <p> <b>Operand</b> -- Name of a game session attribute.
+     * Valid values are <code>gameSessionName</code>, <code>gameSessionId</code>,
+     * <code>gameSessionProperties</code>, <code>maximumSessions</code>,
+     * <code>creationTimeMillis</code>, <code>playerSessionCount</code>,
+     * <code>hasAvailablePlayerSessions</code>.</p> </li> <li> <p> <b>Comparator</b> --
+     * Valid comparators are: <code>=</code>, <code>&lt;&gt;</code>, <code>&lt;</code>,
+     * <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>. </p> </li> <li> <p>
+     * <b>Value</b> -- Value to be searched for. Values may be numbers, boolean values
+     * (true/false) or strings depending on the operand. String values are case
+     * sensitive and must be enclosed in single quotes. Special characters must be
      * escaped. Boolean and string values can only be used with the comparators
      * <code>=</code> and <code>&lt;&gt;</code>. For example, the following filter
      * expression searches on <code>gameSessionName</code>: "<code>FilterExpression":
@@ -211,13 +267,14 @@ namespace Model
      * contain one or multiple conditions. Each condition consists of the
      * following:</p> <ul> <li> <p> <b>Operand</b> -- Name of a game session attribute.
      * Valid values are <code>gameSessionName</code>, <code>gameSessionId</code>,
+     * <code>gameSessionProperties</code>, <code>maximumSessions</code>,
      * <code>creationTimeMillis</code>, <code>playerSessionCount</code>,
-     * <code>maximumSessions</code>, <code>hasAvailablePlayerSessions</code>.</p> </li>
-     * <li> <p> <b>Comparator</b> -- Valid comparators are: <code>=</code>,
-     * <code>&lt;&gt;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
-     * <code>&gt;=</code>. </p> </li> <li> <p> <b>Value</b> -- Value to be searched
-     * for. Values can be numbers, boolean values (true/false) or strings. String
-     * values are case sensitive, enclosed in single quotes. Special characters must be
+     * <code>hasAvailablePlayerSessions</code>.</p> </li> <li> <p> <b>Comparator</b> --
+     * Valid comparators are: <code>=</code>, <code>&lt;&gt;</code>, <code>&lt;</code>,
+     * <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>. </p> </li> <li> <p>
+     * <b>Value</b> -- Value to be searched for. Values may be numbers, boolean values
+     * (true/false) or strings depending on the operand. String values are case
+     * sensitive and must be enclosed in single quotes. Special characters must be
      * escaped. Boolean and string values can only be used with the comparators
      * <code>=</code> and <code>&lt;&gt;</code>. For example, the following filter
      * expression searches on <code>gameSessionName</code>: "<code>FilterExpression":
@@ -243,13 +300,14 @@ namespace Model
      * contain one or multiple conditions. Each condition consists of the
      * following:</p> <ul> <li> <p> <b>Operand</b> -- Name of a game session attribute.
      * Valid values are <code>gameSessionName</code>, <code>gameSessionId</code>,
+     * <code>gameSessionProperties</code>, <code>maximumSessions</code>,
      * <code>creationTimeMillis</code>, <code>playerSessionCount</code>,
-     * <code>maximumSessions</code>, <code>hasAvailablePlayerSessions</code>.</p> </li>
-     * <li> <p> <b>Comparator</b> -- Valid comparators are: <code>=</code>,
-     * <code>&lt;&gt;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
-     * <code>&gt;=</code>. </p> </li> <li> <p> <b>Value</b> -- Value to be searched
-     * for. Values can be numbers, boolean values (true/false) or strings. String
-     * values are case sensitive, enclosed in single quotes. Special characters must be
+     * <code>hasAvailablePlayerSessions</code>.</p> </li> <li> <p> <b>Comparator</b> --
+     * Valid comparators are: <code>=</code>, <code>&lt;&gt;</code>, <code>&lt;</code>,
+     * <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>. </p> </li> <li> <p>
+     * <b>Value</b> -- Value to be searched for. Values may be numbers, boolean values
+     * (true/false) or strings depending on the operand. String values are case
+     * sensitive and must be enclosed in single quotes. Special characters must be
      * escaped. Boolean and string values can only be used with the comparators
      * <code>=</code> and <code>&lt;&gt;</code>. For example, the following filter
      * expression searches on <code>gameSessionName</code>: "<code>FilterExpression":
@@ -275,13 +333,14 @@ namespace Model
      * contain one or multiple conditions. Each condition consists of the
      * following:</p> <ul> <li> <p> <b>Operand</b> -- Name of a game session attribute.
      * Valid values are <code>gameSessionName</code>, <code>gameSessionId</code>,
+     * <code>gameSessionProperties</code>, <code>maximumSessions</code>,
      * <code>creationTimeMillis</code>, <code>playerSessionCount</code>,
-     * <code>maximumSessions</code>, <code>hasAvailablePlayerSessions</code>.</p> </li>
-     * <li> <p> <b>Comparator</b> -- Valid comparators are: <code>=</code>,
-     * <code>&lt;&gt;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
-     * <code>&gt;=</code>. </p> </li> <li> <p> <b>Value</b> -- Value to be searched
-     * for. Values can be numbers, boolean values (true/false) or strings. String
-     * values are case sensitive, enclosed in single quotes. Special characters must be
+     * <code>hasAvailablePlayerSessions</code>.</p> </li> <li> <p> <b>Comparator</b> --
+     * Valid comparators are: <code>=</code>, <code>&lt;&gt;</code>, <code>&lt;</code>,
+     * <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>. </p> </li> <li> <p>
+     * <b>Value</b> -- Value to be searched for. Values may be numbers, boolean values
+     * (true/false) or strings depending on the operand. String values are case
+     * sensitive and must be enclosed in single quotes. Special characters must be
      * escaped. Boolean and string values can only be used with the comparators
      * <code>=</code> and <code>&lt;&gt;</code>. For example, the following filter
      * expression searches on <code>gameSessionName</code>: "<code>FilterExpression":
@@ -307,13 +366,14 @@ namespace Model
      * contain one or multiple conditions. Each condition consists of the
      * following:</p> <ul> <li> <p> <b>Operand</b> -- Name of a game session attribute.
      * Valid values are <code>gameSessionName</code>, <code>gameSessionId</code>,
+     * <code>gameSessionProperties</code>, <code>maximumSessions</code>,
      * <code>creationTimeMillis</code>, <code>playerSessionCount</code>,
-     * <code>maximumSessions</code>, <code>hasAvailablePlayerSessions</code>.</p> </li>
-     * <li> <p> <b>Comparator</b> -- Valid comparators are: <code>=</code>,
-     * <code>&lt;&gt;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
-     * <code>&gt;=</code>. </p> </li> <li> <p> <b>Value</b> -- Value to be searched
-     * for. Values can be numbers, boolean values (true/false) or strings. String
-     * values are case sensitive, enclosed in single quotes. Special characters must be
+     * <code>hasAvailablePlayerSessions</code>.</p> </li> <li> <p> <b>Comparator</b> --
+     * Valid comparators are: <code>=</code>, <code>&lt;&gt;</code>, <code>&lt;</code>,
+     * <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>. </p> </li> <li> <p>
+     * <b>Value</b> -- Value to be searched for. Values may be numbers, boolean values
+     * (true/false) or strings depending on the operand. String values are case
+     * sensitive and must be enclosed in single quotes. Special characters must be
      * escaped. Boolean and string values can only be used with the comparators
      * <code>=</code> and <code>&lt;&gt;</code>. For example, the following filter
      * expression searches on <code>gameSessionName</code>: "<code>FilterExpression":
@@ -339,13 +399,14 @@ namespace Model
      * contain one or multiple conditions. Each condition consists of the
      * following:</p> <ul> <li> <p> <b>Operand</b> -- Name of a game session attribute.
      * Valid values are <code>gameSessionName</code>, <code>gameSessionId</code>,
+     * <code>gameSessionProperties</code>, <code>maximumSessions</code>,
      * <code>creationTimeMillis</code>, <code>playerSessionCount</code>,
-     * <code>maximumSessions</code>, <code>hasAvailablePlayerSessions</code>.</p> </li>
-     * <li> <p> <b>Comparator</b> -- Valid comparators are: <code>=</code>,
-     * <code>&lt;&gt;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
-     * <code>&gt;=</code>. </p> </li> <li> <p> <b>Value</b> -- Value to be searched
-     * for. Values can be numbers, boolean values (true/false) or strings. String
-     * values are case sensitive, enclosed in single quotes. Special characters must be
+     * <code>hasAvailablePlayerSessions</code>.</p> </li> <li> <p> <b>Comparator</b> --
+     * Valid comparators are: <code>=</code>, <code>&lt;&gt;</code>, <code>&lt;</code>,
+     * <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>. </p> </li> <li> <p>
+     * <b>Value</b> -- Value to be searched for. Values may be numbers, boolean values
+     * (true/false) or strings depending on the operand. String values are case
+     * sensitive and must be enclosed in single quotes. Special characters must be
      * escaped. Boolean and string values can only be used with the comparators
      * <code>=</code> and <code>&lt;&gt;</code>. For example, the following filter
      * expression searches on <code>gameSessionName</code>: "<code>FilterExpression":
@@ -370,14 +431,14 @@ namespace Model
      * included, the request returns results in random order. A sort expression
      * consists of the following elements:</p> <ul> <li> <p> <b>Operand</b> -- Name of
      * a game session attribute. Valid values are <code>gameSessionName</code>,
-     * <code>gameSessionId</code>, <code>creationTimeMillis</code>,
-     * <code>playerSessionCount</code>, <code>maximumSessions</code>,
-     * <code>hasAvailablePlayerSessions</code>.</p> </li> <li> <p> <b>Order</b> --
-     * Valid sort orders are <code>ASC</code> (ascending) and <code>DESC</code>
-     * (descending).</p> </li> </ul> <p>For example, this sort expression returns the
-     * oldest active sessions first: <code>"SortExpression": "creationTimeMillis
-     * ASC"</code>. Results with a null value for the sort operand are returned at the
-     * end of the list.</p>
+     * <code>gameSessionId</code>, <code>gameSessionProperties</code>,
+     * <code>maximumSessions</code>, <code>creationTimeMillis</code>,
+     * <code>playerSessionCount</code>, <code>hasAvailablePlayerSessions</code>.</p>
+     * </li> <li> <p> <b>Order</b> -- Valid sort orders are <code>ASC</code>
+     * (ascending) and <code>DESC</code> (descending).</p> </li> </ul> <p>For example,
+     * this sort expression returns the oldest active sessions first:
+     * <code>"SortExpression": "creationTimeMillis ASC"</code>. Results with a null
+     * value for the sort operand are returned at the end of the list.</p>
      */
     inline const Aws::String& GetSortExpression() const{ return m_sortExpression; }
 
@@ -386,14 +447,30 @@ namespace Model
      * included, the request returns results in random order. A sort expression
      * consists of the following elements:</p> <ul> <li> <p> <b>Operand</b> -- Name of
      * a game session attribute. Valid values are <code>gameSessionName</code>,
-     * <code>gameSessionId</code>, <code>creationTimeMillis</code>,
-     * <code>playerSessionCount</code>, <code>maximumSessions</code>,
-     * <code>hasAvailablePlayerSessions</code>.</p> </li> <li> <p> <b>Order</b> --
-     * Valid sort orders are <code>ASC</code> (ascending) and <code>DESC</code>
-     * (descending).</p> </li> </ul> <p>For example, this sort expression returns the
-     * oldest active sessions first: <code>"SortExpression": "creationTimeMillis
-     * ASC"</code>. Results with a null value for the sort operand are returned at the
-     * end of the list.</p>
+     * <code>gameSessionId</code>, <code>gameSessionProperties</code>,
+     * <code>maximumSessions</code>, <code>creationTimeMillis</code>,
+     * <code>playerSessionCount</code>, <code>hasAvailablePlayerSessions</code>.</p>
+     * </li> <li> <p> <b>Order</b> -- Valid sort orders are <code>ASC</code>
+     * (ascending) and <code>DESC</code> (descending).</p> </li> </ul> <p>For example,
+     * this sort expression returns the oldest active sessions first:
+     * <code>"SortExpression": "creationTimeMillis ASC"</code>. Results with a null
+     * value for the sort operand are returned at the end of the list.</p>
+     */
+    inline bool SortExpressionHasBeenSet() const { return m_sortExpressionHasBeenSet; }
+
+    /**
+     * <p>Instructions on how to sort the search results. If no sort expression is
+     * included, the request returns results in random order. A sort expression
+     * consists of the following elements:</p> <ul> <li> <p> <b>Operand</b> -- Name of
+     * a game session attribute. Valid values are <code>gameSessionName</code>,
+     * <code>gameSessionId</code>, <code>gameSessionProperties</code>,
+     * <code>maximumSessions</code>, <code>creationTimeMillis</code>,
+     * <code>playerSessionCount</code>, <code>hasAvailablePlayerSessions</code>.</p>
+     * </li> <li> <p> <b>Order</b> -- Valid sort orders are <code>ASC</code>
+     * (ascending) and <code>DESC</code> (descending).</p> </li> </ul> <p>For example,
+     * this sort expression returns the oldest active sessions first:
+     * <code>"SortExpression": "creationTimeMillis ASC"</code>. Results with a null
+     * value for the sort operand are returned at the end of the list.</p>
      */
     inline void SetSortExpression(const Aws::String& value) { m_sortExpressionHasBeenSet = true; m_sortExpression = value; }
 
@@ -402,14 +479,14 @@ namespace Model
      * included, the request returns results in random order. A sort expression
      * consists of the following elements:</p> <ul> <li> <p> <b>Operand</b> -- Name of
      * a game session attribute. Valid values are <code>gameSessionName</code>,
-     * <code>gameSessionId</code>, <code>creationTimeMillis</code>,
-     * <code>playerSessionCount</code>, <code>maximumSessions</code>,
-     * <code>hasAvailablePlayerSessions</code>.</p> </li> <li> <p> <b>Order</b> --
-     * Valid sort orders are <code>ASC</code> (ascending) and <code>DESC</code>
-     * (descending).</p> </li> </ul> <p>For example, this sort expression returns the
-     * oldest active sessions first: <code>"SortExpression": "creationTimeMillis
-     * ASC"</code>. Results with a null value for the sort operand are returned at the
-     * end of the list.</p>
+     * <code>gameSessionId</code>, <code>gameSessionProperties</code>,
+     * <code>maximumSessions</code>, <code>creationTimeMillis</code>,
+     * <code>playerSessionCount</code>, <code>hasAvailablePlayerSessions</code>.</p>
+     * </li> <li> <p> <b>Order</b> -- Valid sort orders are <code>ASC</code>
+     * (ascending) and <code>DESC</code> (descending).</p> </li> </ul> <p>For example,
+     * this sort expression returns the oldest active sessions first:
+     * <code>"SortExpression": "creationTimeMillis ASC"</code>. Results with a null
+     * value for the sort operand are returned at the end of the list.</p>
      */
     inline void SetSortExpression(Aws::String&& value) { m_sortExpressionHasBeenSet = true; m_sortExpression = std::move(value); }
 
@@ -418,14 +495,14 @@ namespace Model
      * included, the request returns results in random order. A sort expression
      * consists of the following elements:</p> <ul> <li> <p> <b>Operand</b> -- Name of
      * a game session attribute. Valid values are <code>gameSessionName</code>,
-     * <code>gameSessionId</code>, <code>creationTimeMillis</code>,
-     * <code>playerSessionCount</code>, <code>maximumSessions</code>,
-     * <code>hasAvailablePlayerSessions</code>.</p> </li> <li> <p> <b>Order</b> --
-     * Valid sort orders are <code>ASC</code> (ascending) and <code>DESC</code>
-     * (descending).</p> </li> </ul> <p>For example, this sort expression returns the
-     * oldest active sessions first: <code>"SortExpression": "creationTimeMillis
-     * ASC"</code>. Results with a null value for the sort operand are returned at the
-     * end of the list.</p>
+     * <code>gameSessionId</code>, <code>gameSessionProperties</code>,
+     * <code>maximumSessions</code>, <code>creationTimeMillis</code>,
+     * <code>playerSessionCount</code>, <code>hasAvailablePlayerSessions</code>.</p>
+     * </li> <li> <p> <b>Order</b> -- Valid sort orders are <code>ASC</code>
+     * (ascending) and <code>DESC</code> (descending).</p> </li> </ul> <p>For example,
+     * this sort expression returns the oldest active sessions first:
+     * <code>"SortExpression": "creationTimeMillis ASC"</code>. Results with a null
+     * value for the sort operand are returned at the end of the list.</p>
      */
     inline void SetSortExpression(const char* value) { m_sortExpressionHasBeenSet = true; m_sortExpression.assign(value); }
 
@@ -434,14 +511,14 @@ namespace Model
      * included, the request returns results in random order. A sort expression
      * consists of the following elements:</p> <ul> <li> <p> <b>Operand</b> -- Name of
      * a game session attribute. Valid values are <code>gameSessionName</code>,
-     * <code>gameSessionId</code>, <code>creationTimeMillis</code>,
-     * <code>playerSessionCount</code>, <code>maximumSessions</code>,
-     * <code>hasAvailablePlayerSessions</code>.</p> </li> <li> <p> <b>Order</b> --
-     * Valid sort orders are <code>ASC</code> (ascending) and <code>DESC</code>
-     * (descending).</p> </li> </ul> <p>For example, this sort expression returns the
-     * oldest active sessions first: <code>"SortExpression": "creationTimeMillis
-     * ASC"</code>. Results with a null value for the sort operand are returned at the
-     * end of the list.</p>
+     * <code>gameSessionId</code>, <code>gameSessionProperties</code>,
+     * <code>maximumSessions</code>, <code>creationTimeMillis</code>,
+     * <code>playerSessionCount</code>, <code>hasAvailablePlayerSessions</code>.</p>
+     * </li> <li> <p> <b>Order</b> -- Valid sort orders are <code>ASC</code>
+     * (ascending) and <code>DESC</code> (descending).</p> </li> </ul> <p>For example,
+     * this sort expression returns the oldest active sessions first:
+     * <code>"SortExpression": "creationTimeMillis ASC"</code>. Results with a null
+     * value for the sort operand are returned at the end of the list.</p>
      */
     inline SearchGameSessionsRequest& WithSortExpression(const Aws::String& value) { SetSortExpression(value); return *this;}
 
@@ -450,14 +527,14 @@ namespace Model
      * included, the request returns results in random order. A sort expression
      * consists of the following elements:</p> <ul> <li> <p> <b>Operand</b> -- Name of
      * a game session attribute. Valid values are <code>gameSessionName</code>,
-     * <code>gameSessionId</code>, <code>creationTimeMillis</code>,
-     * <code>playerSessionCount</code>, <code>maximumSessions</code>,
-     * <code>hasAvailablePlayerSessions</code>.</p> </li> <li> <p> <b>Order</b> --
-     * Valid sort orders are <code>ASC</code> (ascending) and <code>DESC</code>
-     * (descending).</p> </li> </ul> <p>For example, this sort expression returns the
-     * oldest active sessions first: <code>"SortExpression": "creationTimeMillis
-     * ASC"</code>. Results with a null value for the sort operand are returned at the
-     * end of the list.</p>
+     * <code>gameSessionId</code>, <code>gameSessionProperties</code>,
+     * <code>maximumSessions</code>, <code>creationTimeMillis</code>,
+     * <code>playerSessionCount</code>, <code>hasAvailablePlayerSessions</code>.</p>
+     * </li> <li> <p> <b>Order</b> -- Valid sort orders are <code>ASC</code>
+     * (ascending) and <code>DESC</code> (descending).</p> </li> </ul> <p>For example,
+     * this sort expression returns the oldest active sessions first:
+     * <code>"SortExpression": "creationTimeMillis ASC"</code>. Results with a null
+     * value for the sort operand are returned at the end of the list.</p>
      */
     inline SearchGameSessionsRequest& WithSortExpression(Aws::String&& value) { SetSortExpression(std::move(value)); return *this;}
 
@@ -466,20 +543,20 @@ namespace Model
      * included, the request returns results in random order. A sort expression
      * consists of the following elements:</p> <ul> <li> <p> <b>Operand</b> -- Name of
      * a game session attribute. Valid values are <code>gameSessionName</code>,
-     * <code>gameSessionId</code>, <code>creationTimeMillis</code>,
-     * <code>playerSessionCount</code>, <code>maximumSessions</code>,
-     * <code>hasAvailablePlayerSessions</code>.</p> </li> <li> <p> <b>Order</b> --
-     * Valid sort orders are <code>ASC</code> (ascending) and <code>DESC</code>
-     * (descending).</p> </li> </ul> <p>For example, this sort expression returns the
-     * oldest active sessions first: <code>"SortExpression": "creationTimeMillis
-     * ASC"</code>. Results with a null value for the sort operand are returned at the
-     * end of the list.</p>
+     * <code>gameSessionId</code>, <code>gameSessionProperties</code>,
+     * <code>maximumSessions</code>, <code>creationTimeMillis</code>,
+     * <code>playerSessionCount</code>, <code>hasAvailablePlayerSessions</code>.</p>
+     * </li> <li> <p> <b>Order</b> -- Valid sort orders are <code>ASC</code>
+     * (ascending) and <code>DESC</code> (descending).</p> </li> </ul> <p>For example,
+     * this sort expression returns the oldest active sessions first:
+     * <code>"SortExpression": "creationTimeMillis ASC"</code>. Results with a null
+     * value for the sort operand are returned at the end of the list.</p>
      */
     inline SearchGameSessionsRequest& WithSortExpression(const char* value) { SetSortExpression(value); return *this;}
 
 
     /**
-     * <p>Maximum number of results to return. Use this parameter with
+     * <p>The maximum number of results to return. Use this parameter with
      * <code>NextToken</code> to get results as a set of sequential pages. The maximum
      * number of results returned is 20, even if this value is not set or is set higher
      * than 20. </p>
@@ -487,7 +564,15 @@ namespace Model
     inline int GetLimit() const{ return m_limit; }
 
     /**
-     * <p>Maximum number of results to return. Use this parameter with
+     * <p>The maximum number of results to return. Use this parameter with
+     * <code>NextToken</code> to get results as a set of sequential pages. The maximum
+     * number of results returned is 20, even if this value is not set or is set higher
+     * than 20. </p>
+     */
+    inline bool LimitHasBeenSet() const { return m_limitHasBeenSet; }
+
+    /**
+     * <p>The maximum number of results to return. Use this parameter with
      * <code>NextToken</code> to get results as a set of sequential pages. The maximum
      * number of results returned is 20, even if this value is not set or is set higher
      * than 20. </p>
@@ -495,7 +580,7 @@ namespace Model
     inline void SetLimit(int value) { m_limitHasBeenSet = true; m_limit = value; }
 
     /**
-     * <p>Maximum number of results to return. Use this parameter with
+     * <p>The maximum number of results to return. Use this parameter with
      * <code>NextToken</code> to get results as a set of sequential pages. The maximum
      * number of results returned is 20, even if this value is not set or is set higher
      * than 20. </p>
@@ -509,6 +594,13 @@ namespace Model
      * beginning of the result set, do not specify a value.</p>
      */
     inline const Aws::String& GetNextToken() const{ return m_nextToken; }
+
+    /**
+     * <p>Token that indicates the start of the next sequential page of results. Use
+     * the token that is returned with a previous call to this action. To start at the
+     * beginning of the result set, do not specify a value.</p>
+     */
+    inline bool NextTokenHasBeenSet() const { return m_nextTokenHasBeenSet; }
 
     /**
      * <p>Token that indicates the start of the next sequential page of results. Use

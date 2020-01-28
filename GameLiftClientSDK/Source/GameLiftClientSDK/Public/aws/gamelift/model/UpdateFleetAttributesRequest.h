@@ -38,7 +38,7 @@ namespace Model
   {
   public:
     UpdateFleetAttributesRequest();
-    
+
     // Service request name is the Operation name which will send this request out,
     // each operation should has unique request name, so that we can get operation's name from this request.
     // Note: this is not true for response, multiple operations may have the same response name,
@@ -51,80 +51,99 @@ namespace Model
 
 
     /**
-     * <p>Unique identifier for a fleet to update attribute metadata for.</p>
+     * <p>A unique identifier for a fleet to update attribute metadata for. You can use
+     * either the fleet ID or ARN value.</p>
      */
     inline const Aws::String& GetFleetId() const{ return m_fleetId; }
 
     /**
-     * <p>Unique identifier for a fleet to update attribute metadata for.</p>
+     * <p>A unique identifier for a fleet to update attribute metadata for. You can use
+     * either the fleet ID or ARN value.</p>
+     */
+    inline bool FleetIdHasBeenSet() const { return m_fleetIdHasBeenSet; }
+
+    /**
+     * <p>A unique identifier for a fleet to update attribute metadata for. You can use
+     * either the fleet ID or ARN value.</p>
      */
     inline void SetFleetId(const Aws::String& value) { m_fleetIdHasBeenSet = true; m_fleetId = value; }
 
     /**
-     * <p>Unique identifier for a fleet to update attribute metadata for.</p>
+     * <p>A unique identifier for a fleet to update attribute metadata for. You can use
+     * either the fleet ID or ARN value.</p>
      */
     inline void SetFleetId(Aws::String&& value) { m_fleetIdHasBeenSet = true; m_fleetId = std::move(value); }
 
     /**
-     * <p>Unique identifier for a fleet to update attribute metadata for.</p>
+     * <p>A unique identifier for a fleet to update attribute metadata for. You can use
+     * either the fleet ID or ARN value.</p>
      */
     inline void SetFleetId(const char* value) { m_fleetIdHasBeenSet = true; m_fleetId.assign(value); }
 
     /**
-     * <p>Unique identifier for a fleet to update attribute metadata for.</p>
+     * <p>A unique identifier for a fleet to update attribute metadata for. You can use
+     * either the fleet ID or ARN value.</p>
      */
     inline UpdateFleetAttributesRequest& WithFleetId(const Aws::String& value) { SetFleetId(value); return *this;}
 
     /**
-     * <p>Unique identifier for a fleet to update attribute metadata for.</p>
+     * <p>A unique identifier for a fleet to update attribute metadata for. You can use
+     * either the fleet ID or ARN value.</p>
      */
     inline UpdateFleetAttributesRequest& WithFleetId(Aws::String&& value) { SetFleetId(std::move(value)); return *this;}
 
     /**
-     * <p>Unique identifier for a fleet to update attribute metadata for.</p>
+     * <p>A unique identifier for a fleet to update attribute metadata for. You can use
+     * either the fleet ID or ARN value.</p>
      */
     inline UpdateFleetAttributesRequest& WithFleetId(const char* value) { SetFleetId(value); return *this;}
 
 
     /**
-     * <p>Descriptive label that is associated with a fleet. Fleet names do not need to
-     * be unique.</p>
+     * <p>A descriptive label that is associated with a fleet. Fleet names do not need
+     * to be unique.</p>
      */
     inline const Aws::String& GetName() const{ return m_name; }
 
     /**
-     * <p>Descriptive label that is associated with a fleet. Fleet names do not need to
-     * be unique.</p>
+     * <p>A descriptive label that is associated with a fleet. Fleet names do not need
+     * to be unique.</p>
+     */
+    inline bool NameHasBeenSet() const { return m_nameHasBeenSet; }
+
+    /**
+     * <p>A descriptive label that is associated with a fleet. Fleet names do not need
+     * to be unique.</p>
      */
     inline void SetName(const Aws::String& value) { m_nameHasBeenSet = true; m_name = value; }
 
     /**
-     * <p>Descriptive label that is associated with a fleet. Fleet names do not need to
-     * be unique.</p>
+     * <p>A descriptive label that is associated with a fleet. Fleet names do not need
+     * to be unique.</p>
      */
     inline void SetName(Aws::String&& value) { m_nameHasBeenSet = true; m_name = std::move(value); }
 
     /**
-     * <p>Descriptive label that is associated with a fleet. Fleet names do not need to
-     * be unique.</p>
+     * <p>A descriptive label that is associated with a fleet. Fleet names do not need
+     * to be unique.</p>
      */
     inline void SetName(const char* value) { m_nameHasBeenSet = true; m_name.assign(value); }
 
     /**
-     * <p>Descriptive label that is associated with a fleet. Fleet names do not need to
-     * be unique.</p>
+     * <p>A descriptive label that is associated with a fleet. Fleet names do not need
+     * to be unique.</p>
      */
     inline UpdateFleetAttributesRequest& WithName(const Aws::String& value) { SetName(value); return *this;}
 
     /**
-     * <p>Descriptive label that is associated with a fleet. Fleet names do not need to
-     * be unique.</p>
+     * <p>A descriptive label that is associated with a fleet. Fleet names do not need
+     * to be unique.</p>
      */
     inline UpdateFleetAttributesRequest& WithName(Aws::String&& value) { SetName(std::move(value)); return *this;}
 
     /**
-     * <p>Descriptive label that is associated with a fleet. Fleet names do not need to
-     * be unique.</p>
+     * <p>A descriptive label that is associated with a fleet. Fleet names do not need
+     * to be unique.</p>
      */
     inline UpdateFleetAttributesRequest& WithName(const char* value) { SetName(value); return *this;}
 
@@ -133,6 +152,11 @@ namespace Model
      * <p>Human-readable description of a fleet.</p>
      */
     inline const Aws::String& GetDescription() const{ return m_description; }
+
+    /**
+     * <p>Human-readable description of a fleet.</p>
+     */
+    inline bool DescriptionHasBeenSet() const { return m_descriptionHasBeenSet; }
 
     /**
      * <p>Human-readable description of a fleet.</p>
@@ -175,6 +199,17 @@ namespace Model
      * event.</p> </li> </ul>
      */
     inline const ProtectionPolicy& GetNewGameSessionProtectionPolicy() const{ return m_newGameSessionProtectionPolicy; }
+
+    /**
+     * <p>Game session protection policy to apply to all new instances created in this
+     * fleet. Instances that already exist are not affected. You can set protection for
+     * individual instances using <a>UpdateGameSession</a>.</p> <ul> <li> <p>
+     * <b>NoProtection</b> -- The game session can be terminated during a scale-down
+     * event.</p> </li> <li> <p> <b>FullProtection</b> -- If the game session is in an
+     * <code>ACTIVE</code> status, it cannot be terminated during a scale-down
+     * event.</p> </li> </ul>
+     */
+    inline bool NewGameSessionProtectionPolicyHasBeenSet() const { return m_newGameSessionProtectionPolicyHasBeenSet; }
 
     /**
      * <p>Game session protection policy to apply to all new instances created in this
@@ -231,6 +266,12 @@ namespace Model
      * <p>Policy that limits the number of game sessions an individual player can
      * create over a span of time. </p>
      */
+    inline bool ResourceCreationLimitPolicyHasBeenSet() const { return m_resourceCreationLimitPolicyHasBeenSet; }
+
+    /**
+     * <p>Policy that limits the number of game sessions an individual player can
+     * create over a span of time. </p>
+     */
     inline void SetResourceCreationLimitPolicy(const ResourceCreationLimitPolicy& value) { m_resourceCreationLimitPolicyHasBeenSet = true; m_resourceCreationLimitPolicy = value; }
 
     /**
@@ -260,6 +301,15 @@ namespace Model
      * time.</p>
      */
     inline const Aws::Vector<Aws::String>& GetMetricGroups() const{ return m_metricGroups; }
+
+    /**
+     * <p>Names of metric groups to include this fleet in. Amazon CloudWatch uses a
+     * fleet metric group is to aggregate metrics from multiple fleets. Use an existing
+     * metric group name to add this fleet to the group. Or use a new name to create a
+     * new metric group. A fleet can only be included in one metric group at a
+     * time.</p>
+     */
+    inline bool MetricGroupsHasBeenSet() const { return m_metricGroupsHasBeenSet; }
 
     /**
      * <p>Names of metric groups to include this fleet in. Amazon CloudWatch uses a

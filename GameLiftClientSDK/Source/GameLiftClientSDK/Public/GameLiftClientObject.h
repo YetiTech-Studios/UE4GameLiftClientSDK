@@ -46,43 +46,42 @@ public:
 	* This action creates a game session record and assigns an available server process in the specified fleet to host the game session. 
 	* A fleet must have an ACTIVE status before a game session can be created in it.
 	* From the return value first bind both success and fail events and then call Activate to create game session.
-	* @param GameSessionProperties [FGameLiftGameSessionConfig] Settings for the game session you want to create.
+	* @param CreateGameSessionConfig [FGameLiftCreateGameSessionConfig] Settings for the game session you want to create.
 	* @return [UGameLiftCreateGameSession*] Returns UGameLiftCreateGameSession* Object.
 	**/
 	UFUNCTION(BlueprintCallable, Category = "GameLift Client Object")	
-	UGameLiftCreateGameSession* CreateGameSession(FGameLiftGameSessionConfig GameSessionProperties);
+	UGameLiftCreateGameSession* CreateGameSession(const FGameLiftCreateGameSessionConfig& CreateGameSessionConfig);
 
 	/**
-	* public UGameLiftClientObject::DescribeGameSession
+	* public UGameLiftClientObject::DescribeGameSessionDetails
 	* Retrieves the given game session.
 	* From the return value first bind both success and fail events and then call Activate to describe game session.
-	* @param GameSessionID [FString] Game Session ID. This can be obtained after a successful create game session.
-	* @return [UGameLiftDescribeGameSession*] Returns UGameLiftDescribeGameSession* Object.
+	* @param DescribeGameSessionDetailsConfig [FGameLiftDescribeGameSessionDetailsConfig] Settings for the game session you want to check the status of.
+	* @return [UGameLiftDescribeGameSessionDetails*] Returns UGameLiftDescribeGameSessionDetails* Object.
 	**/
 	UFUNCTION(BlueprintCallable, Category = "GameLift Client Object")	
-	UGameLiftDescribeGameSession* DescribeGameSession(FString GameSessionID);
+	UGameLiftDescribeGameSessionDetails* DescribeGameSessionDetails(const FGameLiftDescribeGameSessionDetailsConfig& DescribeGameSessionDetailsConfig);
 
 	/**
 	* public UGameLiftClientObject::CreatePlayerSession
 	* Adds a player to a game session and creates a player session record. 
 	* Before a player can be added, a game session must have an ACTIVE status, have a creation policy of ALLOW_ALL, and have an open player slot.	
 	* From the return value first bind both success and fail events and then call Activate to create player session.
-	* @param GameSessionID [FString] Unique identifier for the game session to add a player to.
-	* @param UniquePlayerID [FString] Unique identifier for a player. Player IDs are developer-defined.
+	* @param CreatePlayerSessionConfig [FGameLiftCreatePlayerSessionConfig] Settings for the player session you want to create
 	* @return [UGameLiftCreatePlayerSession*] Returns UGameLiftCreatePlayerSession* Object.
 	**/
 	UFUNCTION(BlueprintCallable, Category = "GameLift Client Object")	
-	UGameLiftCreatePlayerSession* CreatePlayerSession(FString GameSessionID, FString UniquePlayerID);
+	UGameLiftCreatePlayerSession* CreatePlayerSession(const FGameLiftCreatePlayerSessionConfig& CreatePlayerSessionConfig);
 	
 	UFUNCTION(BlueprintCallable, Category = "GameLift Client Object")
-	UGameLiftDescribeGameSessionQueues* DescribeGameSessionQueues(FString QueueName);
+	UGameLiftDescribeGameSessionQueues* DescribeGameSessionQueues(const FGameLiftDescribeGameSessionQueuesConfig& DescribeGameSessionQueuesConfig);
 
 	UFUNCTION(BlueprintCallable, Category = "GameLift Client Object")
-	UGameLiftSearchGameSessions* SearchGameSessions(FString FleetId, FString AliasId, FString FilterExpression, FString SortExpression);
+	UGameLiftSearchGameSessions* SearchGameSessions(const FGameLiftSearchGameSessionsConfig& SearchGameSessionsConfig);
 
 	UFUNCTION(BlueprintCallable, Category = "GameLift Client Object")
-	UGameLiftStartGameSessionPlacement* StartGameSessionPlacement(FString QueueName, int MaxPlayerCount, FString PlacementId);
+	UGameLiftStartGameSessionPlacement* StartGameSessionPlacement(const FGameLiftStartGameSessionPlacementConfig& StartGameSessionPlacementConfig);
 
 	UFUNCTION(BlueprintCallable, Category = "GameLift Client Object")
-	UGameLiftDescribeGameSessionPlacement* DescribeGameSessionPlacement(FString GameSessionPlacementId);
+	UGameLiftDescribeGameSessionPlacement* DescribeGameSessionPlacement(const FGameLiftDescribeGameSessionPlacementConfig& DescribeGameSessionPlacementConfig);
 };

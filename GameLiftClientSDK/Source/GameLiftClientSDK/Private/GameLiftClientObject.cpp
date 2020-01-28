@@ -1,6 +1,8 @@
 // Created by YetiTech Studios.
 
 #include "GameLiftClientObject.h"
+#include "GameLiftClientApi.h"
+#include "GameLiftClientGlobals.h"
 #include "aws/core/client/ClientConfiguration.h"
 
 
@@ -41,70 +43,70 @@ UGameLiftClientObject* UGameLiftClientObject::CreateGameLiftObject(const FString
 	return nullptr;
 }
 
-UGameLiftCreateGameSession* UGameLiftClientObject::CreateGameSession(FGameLiftGameSessionConfig GameSessionProperties)
+UGameLiftCreateGameSession* UGameLiftClientObject::CreateGameSession(const FGameLiftCreateGameSessionConfig& CreateGameSessionConfig)
 {
 #if WITH_GAMELIFTCLIENTSDK
-	UGameLiftCreateGameSession* Proxy = UGameLiftCreateGameSession::CreateGameSession(GameSessionProperties, bIsUsingGameLiftLocal);
+	UGameLiftCreateGameSession* Proxy = UGameLiftCreateGameSession::CreateGameSession(CreateGameSessionConfig);
 	Proxy->GameLiftClient = GameLiftClient;
 	return Proxy;
 #endif
 	return nullptr;
 }
 
-UGameLiftDescribeGameSession* UGameLiftClientObject::DescribeGameSession(FString GameSessionID)
+UGameLiftDescribeGameSessionDetails* UGameLiftClientObject::DescribeGameSessionDetails(const FGameLiftDescribeGameSessionDetailsConfig& DescribeGameSessionDetailsConfig)
 {
 #if WITH_GAMELIFTCLIENTSDK
-	UGameLiftDescribeGameSession* Proxy = UGameLiftDescribeGameSession::DescribeGameSession(GameSessionID);
+	UGameLiftDescribeGameSessionDetails* Proxy = UGameLiftDescribeGameSessionDetails::DescribeGameSessionDetails(DescribeGameSessionDetailsConfig);
 	Proxy->GameLiftClient = GameLiftClient;
 	return Proxy;
 #endif
 	return nullptr;
 }
 
-UGameLiftCreatePlayerSession* UGameLiftClientObject::CreatePlayerSession(FString GameSessionID, FString UniquePlayerID)
+UGameLiftCreatePlayerSession* UGameLiftClientObject::CreatePlayerSession(const FGameLiftCreatePlayerSessionConfig& CreatePlayerSessionConfig)
 {
 #if WITH_GAMELIFTCLIENTSDK
-	UGameLiftCreatePlayerSession* Proxy = UGameLiftCreatePlayerSession::CreatePlayerSession(GameSessionID, UniquePlayerID);
+	UGameLiftCreatePlayerSession* Proxy = UGameLiftCreatePlayerSession::CreatePlayerSession(CreatePlayerSessionConfig);
 	Proxy->GameLiftClient = GameLiftClient;
 	return Proxy;
 #endif
 	return nullptr;
 }
 
-UGameLiftDescribeGameSessionQueues* UGameLiftClientObject::DescribeGameSessionQueues(FString QueueName)
+UGameLiftDescribeGameSessionQueues* UGameLiftClientObject::DescribeGameSessionQueues(const FGameLiftDescribeGameSessionQueuesConfig& DescribeGameSessionQueuesConfig)
 {
 #if WITH_GAMELIFTCLIENTSDK
-	UGameLiftDescribeGameSessionQueues* Proxy = UGameLiftDescribeGameSessionQueues::DescribeGameSessionQueues(QueueName);
+	UGameLiftDescribeGameSessionQueues* Proxy = UGameLiftDescribeGameSessionQueues::DescribeGameSessionQueues(DescribeGameSessionQueuesConfig);
 	Proxy->GameLiftClient = GameLiftClient;
 	return Proxy;
 #endif
 	return nullptr;
 }
 
-UGameLiftSearchGameSessions* UGameLiftClientObject::SearchGameSessions(FString FleetId, FString AliasId, FString FilterExpression, FString SortExpression)
+UGameLiftSearchGameSessions* UGameLiftClientObject::SearchGameSessions(const FGameLiftSearchGameSessionsConfig& SearchGameSessionsConfig)
 {
 #if WITH_GAMELIFTCLIENTSDK
-	UGameLiftSearchGameSessions* Proxy = UGameLiftSearchGameSessions::SearchGameSessions(FleetId, AliasId, FilterExpression, SortExpression);
+	UGameLiftSearchGameSessions* Proxy = UGameLiftSearchGameSessions::SearchGameSessions(SearchGameSessionsConfig);
 	Proxy->GameLiftClient = GameLiftClient;
 	return Proxy;
 #endif
 	return nullptr;
 }
 
-UGameLiftStartGameSessionPlacement* UGameLiftClientObject::StartGameSessionPlacement(FString QueueName, int MaxPlayerCount, FString PlacementId)
+UGameLiftStartGameSessionPlacement* UGameLiftClientObject::StartGameSessionPlacement(const FGameLiftStartGameSessionPlacementConfig& StartGameSessionPlacementConfig)
 {
 #if WITH_GAMELIFTCLIENTSDK
-	UGameLiftStartGameSessionPlacement* Proxy = UGameLiftStartGameSessionPlacement::StartGameSessionPlacement(QueueName, MaxPlayerCount, PlacementId);
+	UGameLiftStartGameSessionPlacement* Proxy = UGameLiftStartGameSessionPlacement::StartGameSessionPlacement(StartGameSessionPlacementConfig);
 	Proxy->GameLiftClient = GameLiftClient;
 	return Proxy;
 #endif
 	return nullptr;
 }
 
-UGameLiftDescribeGameSessionPlacement* UGameLiftClientObject::DescribeGameSessionPlacement(FString GameSessionPlacementId)
+UGameLiftDescribeGameSessionPlacement* UGameLiftClientObject::DescribeGameSessionPlacement(const FGameLiftDescribeGameSessionPlacementConfig& DescribeGameSessionPlacementConfig)
 {
 #if WITH_GAMELIFTCLIENTSDK
-	UGameLiftDescribeGameSessionPlacement* Proxy = UGameLiftDescribeGameSessionPlacement::DescribeGameSessionPlacement(GameSessionPlacementId);
+	UGameLiftDescribeGameSessionPlacement* Proxy = UGameLiftDescribeGameSessionPlacement::DescribeGameSessionPlacement(DescribeGameSessionPlacementConfig);
 	Proxy->GameLiftClient = GameLiftClient;
 	return Proxy;
 #endif

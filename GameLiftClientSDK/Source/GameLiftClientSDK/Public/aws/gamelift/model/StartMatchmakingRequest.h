@@ -37,7 +37,7 @@ namespace Model
   {
   public:
     StartMatchmakingRequest();
-    
+
     // Service request name is the Operation name which will send this request out,
     // each operation should has unique request name, so that we can get operation's name from this request.
     // Note: this is not true for response, multiple operations may have the same response name,
@@ -50,87 +50,123 @@ namespace Model
 
 
     /**
-     * <p>Unique identifier for a matchmaking ticket. Use this identifier to track the
-     * matchmaking ticket status and retrieve match results.</p>
+     * <p>A unique identifier for a matchmaking ticket. If no ticket ID is specified
+     * here, Amazon GameLift will generate one in the form of a UUID. Use this
+     * identifier to track the matchmaking ticket status and retrieve match
+     * results.</p>
      */
     inline const Aws::String& GetTicketId() const{ return m_ticketId; }
 
     /**
-     * <p>Unique identifier for a matchmaking ticket. Use this identifier to track the
-     * matchmaking ticket status and retrieve match results.</p>
+     * <p>A unique identifier for a matchmaking ticket. If no ticket ID is specified
+     * here, Amazon GameLift will generate one in the form of a UUID. Use this
+     * identifier to track the matchmaking ticket status and retrieve match
+     * results.</p>
+     */
+    inline bool TicketIdHasBeenSet() const { return m_ticketIdHasBeenSet; }
+
+    /**
+     * <p>A unique identifier for a matchmaking ticket. If no ticket ID is specified
+     * here, Amazon GameLift will generate one in the form of a UUID. Use this
+     * identifier to track the matchmaking ticket status and retrieve match
+     * results.</p>
      */
     inline void SetTicketId(const Aws::String& value) { m_ticketIdHasBeenSet = true; m_ticketId = value; }
 
     /**
-     * <p>Unique identifier for a matchmaking ticket. Use this identifier to track the
-     * matchmaking ticket status and retrieve match results.</p>
+     * <p>A unique identifier for a matchmaking ticket. If no ticket ID is specified
+     * here, Amazon GameLift will generate one in the form of a UUID. Use this
+     * identifier to track the matchmaking ticket status and retrieve match
+     * results.</p>
      */
     inline void SetTicketId(Aws::String&& value) { m_ticketIdHasBeenSet = true; m_ticketId = std::move(value); }
 
     /**
-     * <p>Unique identifier for a matchmaking ticket. Use this identifier to track the
-     * matchmaking ticket status and retrieve match results.</p>
+     * <p>A unique identifier for a matchmaking ticket. If no ticket ID is specified
+     * here, Amazon GameLift will generate one in the form of a UUID. Use this
+     * identifier to track the matchmaking ticket status and retrieve match
+     * results.</p>
      */
     inline void SetTicketId(const char* value) { m_ticketIdHasBeenSet = true; m_ticketId.assign(value); }
 
     /**
-     * <p>Unique identifier for a matchmaking ticket. Use this identifier to track the
-     * matchmaking ticket status and retrieve match results.</p>
+     * <p>A unique identifier for a matchmaking ticket. If no ticket ID is specified
+     * here, Amazon GameLift will generate one in the form of a UUID. Use this
+     * identifier to track the matchmaking ticket status and retrieve match
+     * results.</p>
      */
     inline StartMatchmakingRequest& WithTicketId(const Aws::String& value) { SetTicketId(value); return *this;}
 
     /**
-     * <p>Unique identifier for a matchmaking ticket. Use this identifier to track the
-     * matchmaking ticket status and retrieve match results.</p>
+     * <p>A unique identifier for a matchmaking ticket. If no ticket ID is specified
+     * here, Amazon GameLift will generate one in the form of a UUID. Use this
+     * identifier to track the matchmaking ticket status and retrieve match
+     * results.</p>
      */
     inline StartMatchmakingRequest& WithTicketId(Aws::String&& value) { SetTicketId(std::move(value)); return *this;}
 
     /**
-     * <p>Unique identifier for a matchmaking ticket. Use this identifier to track the
-     * matchmaking ticket status and retrieve match results.</p>
+     * <p>A unique identifier for a matchmaking ticket. If no ticket ID is specified
+     * here, Amazon GameLift will generate one in the form of a UUID. Use this
+     * identifier to track the matchmaking ticket status and retrieve match
+     * results.</p>
      */
     inline StartMatchmakingRequest& WithTicketId(const char* value) { SetTicketId(value); return *this;}
 
 
     /**
      * <p>Name of the matchmaking configuration to use for this request. Matchmaking
-     * configurations must exist in the same region as this request.</p>
+     * configurations must exist in the same Region as this request. You can use either
+     * the configuration name or ARN value.</p>
      */
     inline const Aws::String& GetConfigurationName() const{ return m_configurationName; }
 
     /**
      * <p>Name of the matchmaking configuration to use for this request. Matchmaking
-     * configurations must exist in the same region as this request.</p>
+     * configurations must exist in the same Region as this request. You can use either
+     * the configuration name or ARN value.</p>
+     */
+    inline bool ConfigurationNameHasBeenSet() const { return m_configurationNameHasBeenSet; }
+
+    /**
+     * <p>Name of the matchmaking configuration to use for this request. Matchmaking
+     * configurations must exist in the same Region as this request. You can use either
+     * the configuration name or ARN value.</p>
      */
     inline void SetConfigurationName(const Aws::String& value) { m_configurationNameHasBeenSet = true; m_configurationName = value; }
 
     /**
      * <p>Name of the matchmaking configuration to use for this request. Matchmaking
-     * configurations must exist in the same region as this request.</p>
+     * configurations must exist in the same Region as this request. You can use either
+     * the configuration name or ARN value.</p>
      */
     inline void SetConfigurationName(Aws::String&& value) { m_configurationNameHasBeenSet = true; m_configurationName = std::move(value); }
 
     /**
      * <p>Name of the matchmaking configuration to use for this request. Matchmaking
-     * configurations must exist in the same region as this request.</p>
+     * configurations must exist in the same Region as this request. You can use either
+     * the configuration name or ARN value.</p>
      */
     inline void SetConfigurationName(const char* value) { m_configurationNameHasBeenSet = true; m_configurationName.assign(value); }
 
     /**
      * <p>Name of the matchmaking configuration to use for this request. Matchmaking
-     * configurations must exist in the same region as this request.</p>
+     * configurations must exist in the same Region as this request. You can use either
+     * the configuration name or ARN value.</p>
      */
     inline StartMatchmakingRequest& WithConfigurationName(const Aws::String& value) { SetConfigurationName(value); return *this;}
 
     /**
      * <p>Name of the matchmaking configuration to use for this request. Matchmaking
-     * configurations must exist in the same region as this request.</p>
+     * configurations must exist in the same Region as this request. You can use either
+     * the configuration name or ARN value.</p>
      */
     inline StartMatchmakingRequest& WithConfigurationName(Aws::String&& value) { SetConfigurationName(std::move(value)); return *this;}
 
     /**
      * <p>Name of the matchmaking configuration to use for this request. Matchmaking
-     * configurations must exist in the same region as this request.</p>
+     * configurations must exist in the same Region as this request. You can use either
+     * the configuration name or ARN value.</p>
      */
     inline StartMatchmakingRequest& WithConfigurationName(const char* value) { SetConfigurationName(value); return *this;}
 
@@ -142,6 +178,14 @@ namespace Model
      * contain the name of the team the player is assigned to.</p>
      */
     inline const Aws::Vector<Player>& GetPlayers() const{ return m_players; }
+
+    /**
+     * <p>Information on each player to be matched. This information must include a
+     * player ID, and may contain player attributes and latency data to be used in the
+     * matchmaking process. After a successful match, <code>Player</code> objects
+     * contain the name of the team the player is assigned to.</p>
+     */
+    inline bool PlayersHasBeenSet() const { return m_playersHasBeenSet; }
 
     /**
      * <p>Information on each player to be matched. This information must include a

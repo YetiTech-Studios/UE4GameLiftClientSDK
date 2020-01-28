@@ -23,6 +23,7 @@ namespace Utils
 namespace Json
 {
   class JsonValue;
+  class JsonView;
 } // namespace Json
 } // namespace Utils
 namespace GameLift
@@ -35,23 +36,12 @@ namespace Model
    * or be in the process of matching the number of desired instances. Pending and
    * terminating counts are non-zero only if fleet capacity is adjusting to an
    * <a>UpdateFleetCapacity</a> request, or if access to resources is temporarily
-   * affected.</p> <p>Fleet-related operations include:</p> <ul> <li> <p>
-   * <a>CreateFleet</a> </p> </li> <li> <p> <a>ListFleets</a> </p> </li> <li>
-   * <p>Describe fleets:</p> <ul> <li> <p> <a>DescribeFleetAttributes</a> </p> </li>
-   * <li> <p> <a>DescribeFleetPortSettings</a> </p> </li> <li> <p>
-   * <a>DescribeFleetUtilization</a> </p> </li> <li> <p>
-   * <a>DescribeRuntimeConfiguration</a> </p> </li> <li> <p>
-   * <a>DescribeFleetEvents</a> </p> </li> </ul> </li> <li> <p>Update fleets:</p>
-   * <ul> <li> <p> <a>UpdateFleetAttributes</a> </p> </li> <li> <p>
-   * <a>UpdateFleetCapacity</a> </p> </li> <li> <p> <a>UpdateFleetPortSettings</a>
-   * </p> </li> <li> <p> <a>UpdateRuntimeConfiguration</a> </p> </li> </ul> </li>
-   * <li> <p>Manage fleet capacity:</p> <ul> <li> <p> <a>DescribeFleetCapacity</a>
-   * </p> </li> <li> <p> <a>UpdateFleetCapacity</a> </p> </li> <li> <p>
-   * <a>PutScalingPolicy</a> (automatic scaling)</p> </li> <li> <p>
-   * <a>DescribeScalingPolicies</a> (automatic scaling)</p> </li> <li> <p>
-   * <a>DeleteScalingPolicy</a> (automatic scaling)</p> </li> <li> <p>
-   * <a>DescribeEC2InstanceLimits</a> </p> </li> </ul> </li> <li> <p>
-   * <a>DeleteFleet</a> </p> </li> </ul><p><h3>See Also:</h3>   <a
+   * affected.</p> <ul> <li> <p> <a>CreateFleet</a> </p> </li> <li> <p>
+   * <a>ListFleets</a> </p> </li> <li> <p> <a>DeleteFleet</a> </p> </li> <li> <p>
+   * <a>DescribeFleetAttributes</a> </p> </li> <li> <p> <a>UpdateFleetAttributes</a>
+   * </p> </li> <li> <p>Manage fleet actions:</p> <ul> <li> <p>
+   * <a>StartFleetActions</a> </p> </li> <li> <p> <a>StopFleetActions</a> </p> </li>
+   * </ul> </li> </ul><p><h3>See Also:</h3>   <a
    * href="http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/EC2InstanceCounts">AWS
    * API Reference</a></p>
    */
@@ -59,8 +49,8 @@ namespace Model
   {
   public:
     EC2InstanceCounts();
-    EC2InstanceCounts(const Aws::Utils::Json::JsonValue& jsonValue);
-    EC2InstanceCounts& operator=(const Aws::Utils::Json::JsonValue& jsonValue);
+    EC2InstanceCounts(Aws::Utils::Json::JsonView jsonValue);
+    EC2InstanceCounts& operator=(Aws::Utils::Json::JsonView jsonValue);
     Aws::Utils::Json::JsonValue Jsonize() const;
 
 
@@ -68,6 +58,11 @@ namespace Model
      * <p>Ideal number of active instances in the fleet.</p>
      */
     inline int GetDESIRED() const{ return m_dESIRED; }
+
+    /**
+     * <p>Ideal number of active instances in the fleet.</p>
+     */
+    inline bool DESIREDHasBeenSet() const { return m_dESIREDHasBeenSet; }
 
     /**
      * <p>Ideal number of active instances in the fleet.</p>
@@ -81,33 +76,43 @@ namespace Model
 
 
     /**
-     * <p>Minimum value allowed for the fleet's instance count.</p>
+     * <p>The minimum value allowed for the fleet's instance count.</p>
      */
     inline int GetMINIMUM() const{ return m_mINIMUM; }
 
     /**
-     * <p>Minimum value allowed for the fleet's instance count.</p>
+     * <p>The minimum value allowed for the fleet's instance count.</p>
+     */
+    inline bool MINIMUMHasBeenSet() const { return m_mINIMUMHasBeenSet; }
+
+    /**
+     * <p>The minimum value allowed for the fleet's instance count.</p>
      */
     inline void SetMINIMUM(int value) { m_mINIMUMHasBeenSet = true; m_mINIMUM = value; }
 
     /**
-     * <p>Minimum value allowed for the fleet's instance count.</p>
+     * <p>The minimum value allowed for the fleet's instance count.</p>
      */
     inline EC2InstanceCounts& WithMINIMUM(int value) { SetMINIMUM(value); return *this;}
 
 
     /**
-     * <p>Maximum value allowed for the fleet's instance count.</p>
+     * <p>The maximum value allowed for the fleet's instance count.</p>
      */
     inline int GetMAXIMUM() const{ return m_mAXIMUM; }
 
     /**
-     * <p>Maximum value allowed for the fleet's instance count.</p>
+     * <p>The maximum value allowed for the fleet's instance count.</p>
+     */
+    inline bool MAXIMUMHasBeenSet() const { return m_mAXIMUMHasBeenSet; }
+
+    /**
+     * <p>The maximum value allowed for the fleet's instance count.</p>
      */
     inline void SetMAXIMUM(int value) { m_mAXIMUMHasBeenSet = true; m_mAXIMUM = value; }
 
     /**
-     * <p>Maximum value allowed for the fleet's instance count.</p>
+     * <p>The maximum value allowed for the fleet's instance count.</p>
      */
     inline EC2InstanceCounts& WithMAXIMUM(int value) { SetMAXIMUM(value); return *this;}
 
@@ -116,6 +121,11 @@ namespace Model
      * <p>Number of instances in the fleet that are starting but not yet active.</p>
      */
     inline int GetPENDING() const{ return m_pENDING; }
+
+    /**
+     * <p>Number of instances in the fleet that are starting but not yet active.</p>
+     */
+    inline bool PENDINGHasBeenSet() const { return m_pENDINGHasBeenSet; }
 
     /**
      * <p>Number of instances in the fleet that are starting but not yet active.</p>
@@ -132,6 +142,11 @@ namespace Model
      * <p>Actual number of active instances in the fleet.</p>
      */
     inline int GetACTIVE() const{ return m_aCTIVE; }
+
+    /**
+     * <p>Actual number of active instances in the fleet.</p>
+     */
+    inline bool ACTIVEHasBeenSet() const { return m_aCTIVEHasBeenSet; }
 
     /**
      * <p>Actual number of active instances in the fleet.</p>
@@ -154,6 +169,12 @@ namespace Model
      * <p>Number of active instances in the fleet that are not currently hosting a game
      * session.</p>
      */
+    inline bool IDLEHasBeenSet() const { return m_iDLEHasBeenSet; }
+
+    /**
+     * <p>Number of active instances in the fleet that are not currently hosting a game
+     * session.</p>
+     */
     inline void SetIDLE(int value) { m_iDLEHasBeenSet = true; m_iDLE = value; }
 
     /**
@@ -168,6 +189,12 @@ namespace Model
      * been terminated.</p>
      */
     inline int GetTERMINATING() const{ return m_tERMINATING; }
+
+    /**
+     * <p>Number of instances in the fleet that are no longer active but haven't yet
+     * been terminated.</p>
+     */
+    inline bool TERMINATINGHasBeenSet() const { return m_tERMINATINGHasBeenSet; }
 
     /**
      * <p>Number of instances in the fleet that are no longer active but haven't yet
